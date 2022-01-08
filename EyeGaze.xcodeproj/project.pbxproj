@@ -8,10 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		8C31BF4B278888DA00EE3359 /* EinTraum.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8C31BF49278888DA00EE3359 /* EinTraum.pdf */; };
-		8C31BF4C278888DA00EE3359 /* Vainement, ma bien-aimée, Le Roi D’ys.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8C31BF4A278888DA00EE3359 /* Vainement, ma bien-aimée, Le Roi D’ys.pdf */; };
+		8C31BF4E2788927900EE3359 /* PDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31BF4D2788927900EE3359 /* PDF.swift */; };
+		8C31BF502788AA9900EE3359 /* PDFListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31BF4F2788AA9900EE3359 /* PDFListCell.swift */; };
+		8C31BF522788AF4F00EE3359 /* PDFListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31BF512788AF4F00EE3359 /* PDFListDataSource.swift */; };
+		8C31BF542788B5DF00EE3359 /* Vainement,mabien-aimee.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8C31BF532788B5DF00EE3359 /* Vainement,mabien-aimee.pdf */; };
+		8C31BF562788F19E00EE3359 /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31BF552788F19E00EE3359 /* PDFViewController.swift */; };
 		8CB4CEF22771F4C200E20DC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4CEF12771F4C200E20DC2 /* AppDelegate.swift */; };
 		8CB4CEF42771F4C200E20DC2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4CEF32771F4C200E20DC2 /* SceneDelegate.swift */; };
-		8CB4CEF62771F4C200E20DC2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4CEF52771F4C200E20DC2 /* ViewController.swift */; };
+		8CB4CEF62771F4C200E20DC2 /* PDFListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4CEF52771F4C200E20DC2 /* PDFListViewController.swift */; };
 		8CB4CEF92771F4C200E20DC2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CB4CEF72771F4C200E20DC2 /* Main.storyboard */; };
 		8CB4CEFB2771F4C600E20DC2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CB4CEFA2771F4C600E20DC2 /* Assets.xcassets */; };
 		8CB4CEFE2771F4C600E20DC2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CB4CEFC2771F4C600E20DC2 /* LaunchScreen.storyboard */; };
@@ -39,11 +43,15 @@
 
 /* Begin PBXFileReference section */
 		8C31BF49278888DA00EE3359 /* EinTraum.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EinTraum.pdf; sourceTree = "<group>"; };
-		8C31BF4A278888DA00EE3359 /* Vainement, ma bien-aimée, Le Roi D’ys.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Vainement, ma bien-aimée, Le Roi D’ys.pdf"; sourceTree = "<group>"; };
+		8C31BF4D2788927900EE3359 /* PDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDF.swift; sourceTree = "<group>"; };
+		8C31BF4F2788AA9900EE3359 /* PDFListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFListCell.swift; sourceTree = "<group>"; };
+		8C31BF512788AF4F00EE3359 /* PDFListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFListDataSource.swift; sourceTree = "<group>"; };
+		8C31BF532788B5DF00EE3359 /* Vainement,mabien-aimee.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Vainement,mabien-aimee.pdf"; sourceTree = "<group>"; };
+		8C31BF552788F19E00EE3359 /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
 		8CB4CEEE2771F4C200E20DC2 /* EyeGaze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EyeGaze.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CB4CEF12771F4C200E20DC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CB4CEF32771F4C200E20DC2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		8CB4CEF52771F4C200E20DC2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8CB4CEF52771F4C200E20DC2 /* PDFListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFListViewController.swift; sourceTree = "<group>"; };
 		8CB4CEF82771F4C200E20DC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8CB4CEFA2771F4C600E20DC2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8CB4CEFD2771F4C600E20DC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -104,14 +112,18 @@
 			isa = PBXGroup;
 			children = (
 				8C31BF49278888DA00EE3359 /* EinTraum.pdf */,
-				8C31BF4A278888DA00EE3359 /* Vainement, ma bien-aimée, Le Roi D’ys.pdf */,
+				8C31BF532788B5DF00EE3359 /* Vainement,mabien-aimee.pdf */,
 				8CB4CEF12771F4C200E20DC2 /* AppDelegate.swift */,
 				8CB4CEF32771F4C200E20DC2 /* SceneDelegate.swift */,
-				8CB4CEF52771F4C200E20DC2 /* ViewController.swift */,
 				8CB4CEF72771F4C200E20DC2 /* Main.storyboard */,
 				8CB4CEFA2771F4C600E20DC2 /* Assets.xcassets */,
 				8CB4CEFC2771F4C600E20DC2 /* LaunchScreen.storyboard */,
 				8CB4CEFF2771F4C600E20DC2 /* Info.plist */,
+				8CB4CEF52771F4C200E20DC2 /* PDFListViewController.swift */,
+				8C31BF4D2788927900EE3359 /* PDF.swift */,
+				8C31BF4F2788AA9900EE3359 /* PDFListCell.swift */,
+				8C31BF512788AF4F00EE3359 /* PDFListDataSource.swift */,
+				8C31BF552788F19E00EE3359 /* PDFViewController.swift */,
 			);
 			path = EyeGaze;
 			sourceTree = "<group>";
@@ -239,9 +251,9 @@
 			files = (
 				8CB4CEFE2771F4C600E20DC2 /* LaunchScreen.storyboard in Resources */,
 				8C31BF4B278888DA00EE3359 /* EinTraum.pdf in Resources */,
+				8C31BF542788B5DF00EE3359 /* Vainement,mabien-aimee.pdf in Resources */,
 				8CB4CEFB2771F4C600E20DC2 /* Assets.xcassets in Resources */,
 				8CB4CEF92771F4C200E20DC2 /* Main.storyboard in Resources */,
-				8C31BF4C278888DA00EE3359 /* Vainement, ma bien-aimée, Le Roi D’ys.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,9 +278,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CB4CEF62771F4C200E20DC2 /* ViewController.swift in Sources */,
+				8CB4CEF62771F4C200E20DC2 /* PDFListViewController.swift in Sources */,
 				8CB4CEF22771F4C200E20DC2 /* AppDelegate.swift in Sources */,
+				8C31BF4E2788927900EE3359 /* PDF.swift in Sources */,
+				8C31BF522788AF4F00EE3359 /* PDFListDataSource.swift in Sources */,
 				8CB4CEF42771F4C200E20DC2 /* SceneDelegate.swift in Sources */,
+				8C31BF562788F19E00EE3359 /* PDFViewController.swift in Sources */,
+				8C31BF502788AA9900EE3359 /* PDFListCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

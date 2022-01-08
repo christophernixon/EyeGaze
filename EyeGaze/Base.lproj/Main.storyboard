@@ -1,24 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="doW-bN-nRI">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--List View Controller-->
+        <scene sceneID="0lH-Ea-I8l">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                <tableViewController id="Hbl-lb-221" customClass="PDFListViewController" customModule="EyeGaze" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="LY5-KU-KjX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PDFListCell" rowHeight="99" id="7cU-YH-Kwf" customClass="PDFListCell" customModule="EyeGaze" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="99"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7cU-YH-Kwf" id="kkb-BI-6nh">
+                                    <rect key="frame" x="0.0" y="0.0" width="385.5" height="99"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5GG-1P-5Bl">
+                                            <rect key="frame" x="20" y="11" width="357.5" height="77"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain"/>
+                                            <connections>
+                                                <action selector="pdfTitleButtonTriggered:" destination="7cU-YH-Kwf" eventType="touchUpInside" id="csb-NO-w5T"/>
+                                                <segue destination="B0Z-i3-SZW" kind="show" identifier="ShowPDFSegue" id="SJh-d1-6WY"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="5GG-1P-5Bl" firstAttribute="leading" secondItem="kkb-BI-6nh" secondAttribute="leadingMargin" id="0pk-MN-xMc"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="5GG-1P-5Bl" secondAttribute="trailing" id="Imm-Mr-C1t"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="5GG-1P-5Bl" secondAttribute="bottom" id="Lzd-Ev-7rb"/>
+                                        <constraint firstItem="5GG-1P-5Bl" firstAttribute="top" secondItem="kkb-BI-6nh" secondAttribute="topMargin" id="mbf-cL-daK"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="pdfTitleButton" destination="5GG-1P-5Bl" id="JQj-51-0gK"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Hbl-lb-221" id="RDL-I2-yKk"/>
+                            <outlet property="delegate" destination="Hbl-lb-221" id="d22-QA-1gn"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="27n-9P-62c"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="of1-do-aan" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="968.11594202898561" y="161.38392857142856"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="GiC-4V-mvj">
+            <objects>
+                <viewController id="B0Z-i3-SZW" customClass="PDFViewController" customModule="EyeGaze" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IL8-jD-4iu">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="92j-fY-Mam"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="GE0-qM-LUN"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="elq-qH-05K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1926" y="161"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="nT2-kc-wJD">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="doW-bN-nRI" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="k9I-FO-CWg">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Hbl-lb-221" kind="relationship" relationship="rootViewController" id="31V-tD-JQW"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z2y-Mo-fgh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="57.971014492753625" y="161.38392857142856"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
