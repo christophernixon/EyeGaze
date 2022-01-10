@@ -8,7 +8,7 @@
 import PDFKit
 import UIKit
 
-class PDFViewController: UIViewController, PDFViewDelegate {
+class PDFViewController: UIViewController {
     
     // Views
     let pdfView = PDFView()
@@ -21,8 +21,8 @@ class PDFViewController: UIViewController, PDFViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = NSLocalizedString(pdf?.shortTitle ?? "View PDF", comment: "view PDF nav title")
         view.addSubview(pdfView)
-        pdfView.delegate = self
         pdfView.document = pdf?.document
     }
     

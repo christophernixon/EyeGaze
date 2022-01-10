@@ -9,6 +9,7 @@ import Foundation
 import PDFKit
 
 struct PDF {
+    var shortTitle: String
     var title: String
     var url: URL
     var document: PDFDocument
@@ -22,6 +23,7 @@ struct PDF {
             fatalError("Couldn't create PDFDocument object from url.")
         }
         
+        self.shortTitle = pdfTitle
         self.title = pdfTitle + ".pdf"
         self.url = url
         self.document = document

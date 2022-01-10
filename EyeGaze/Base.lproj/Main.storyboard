@@ -24,25 +24,23 @@
                                     <rect key="frame" x="0.0" y="0.0" width="385.5" height="99"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5GG-1P-5Bl">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MTH-SC-ftu">
                                             <rect key="frame" x="20" y="11" width="357.5" height="77"/>
-                                            <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain"/>
-                                            <connections>
-                                                <action selector="pdfTitleButtonTriggered:" destination="7cU-YH-Kwf" eventType="touchUpInside" id="csb-NO-w5T"/>
-                                                <segue destination="B0Z-i3-SZW" kind="show" identifier="ShowPDFSegue" id="SJh-d1-6WY"/>
-                                            </connections>
-                                        </button>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="5GG-1P-5Bl" firstAttribute="leading" secondItem="kkb-BI-6nh" secondAttribute="leadingMargin" id="0pk-MN-xMc"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="5GG-1P-5Bl" secondAttribute="trailing" id="Imm-Mr-C1t"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="5GG-1P-5Bl" secondAttribute="bottom" id="Lzd-Ev-7rb"/>
-                                        <constraint firstItem="5GG-1P-5Bl" firstAttribute="top" secondItem="kkb-BI-6nh" secondAttribute="topMargin" id="mbf-cL-daK"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="MTH-SC-ftu" secondAttribute="trailing" id="2g1-eJ-VNa"/>
+                                        <constraint firstItem="MTH-SC-ftu" firstAttribute="top" secondItem="kkb-BI-6nh" secondAttribute="topMargin" id="QaY-Wk-CVk"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="MTH-SC-ftu" secondAttribute="bottom" id="wdU-nn-hFV"/>
+                                        <constraint firstItem="MTH-SC-ftu" firstAttribute="leading" secondItem="kkb-BI-6nh" secondAttribute="leadingMargin" id="xge-Rw-5Ha"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="pdfTitleButton" destination="5GG-1P-5Bl" id="JQj-51-0gK"/>
+                                    <outlet property="pdfTitleLabel" destination="MTH-SC-ftu" id="76B-3F-zkc"/>
+                                    <segue destination="B0Z-i3-SZW" kind="show" identifier="ShowPDFSegue" id="tXM-6h-Tt3"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

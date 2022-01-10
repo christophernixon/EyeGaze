@@ -9,13 +9,13 @@ import UIKit
 
 class PDFListCell: UITableViewCell {
     
-    typealias PDFTitleButtonAction = () -> Void
+//    typealias PDFTitleButtonAction = () -> Void
     
-    @IBOutlet var pdfTitleButton: UIButton!
+    @IBOutlet var pdfTitleLabel: UILabel!
     
-    var pdfTitleButtonAction: PDFTitleButtonAction?
-    
-    @IBAction func pdfTitleButtonTriggered(_ sender: UIButton) {
-        pdfTitleButtonAction?()
-    }
+//    var pdfTitleButtonAction: PDFTitleButtonAction?
+//
+//    @IBAction func pdfTitleButtonTriggered(_ sender: UIButton) {
+//        pdfTitleButtonAction?()
+//    }
 }

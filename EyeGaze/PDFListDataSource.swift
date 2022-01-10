@@ -24,10 +24,7 @@ extension PDFListDataSource: UITableViewDataSource {
             fatalError("Unable to dequeue PDF list cell")
         }
         let pdf = PDF.testData[indexPath.row]
-        cell.pdfTitleButton.setTitle(pdf.title, for: .normal)
-        cell.pdfTitleButtonAction = {
-            
-        }
+        cell.pdfTitleLabel.text = pdf.title
         return cell
     }
     
