@@ -13,6 +13,8 @@ class PDFListCell: UITableViewCell {
     
     @IBOutlet var pdfTitleLabel: UILabel!
     
+    @IBOutlet var testImage: UIImageView!
+    
 //    var pdfTitleButtonAction: PDFTitleButtonAction?
 //
 //    @IBAction func pdfTitleButtonTriggered(_ sender: UIButton) {

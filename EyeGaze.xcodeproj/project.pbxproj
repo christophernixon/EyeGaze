@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C165EBB278F1EF8006DD061 /* iTracker.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8C165EBA278F1EF8006DD061 /* iTracker.mlmodel */; };
+		8C210C3D2791908700D0152B /* DetectFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C210C3C2791908700D0152B /* DetectFeatures.swift */; };
 		8C31BF4B278888DA00EE3359 /* EinTraum.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8C31BF49278888DA00EE3359 /* EinTraum.pdf */; };
 		8C31BF4E2788927900EE3359 /* PDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31BF4D2788927900EE3359 /* PDF.swift */; };
 		8C31BF502788AA9900EE3359 /* PDFListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31BF4F2788AA9900EE3359 /* PDFListCell.swift */; };
@@ -14,6 +16,7 @@
 		8C31BF542788B5DF00EE3359 /* Vainement,mabien-aimee.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8C31BF532788B5DF00EE3359 /* Vainement,mabien-aimee.pdf */; };
 		8C31BF562788F19E00EE3359 /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31BF552788F19E00EE3359 /* PDFViewController.swift */; };
 		8C31BF58278C3A4B00EE3359 /* BVLCObjectClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8C31BF57278C3A4B00EE3359 /* BVLCObjectClassifier.mlmodel */; };
+		8C402BA5278F88D400CAA1F3 /* PredictionUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C402BA4278F88D400CAA1F3 /* PredictionUtilities.swift */; };
 		8CB4CEF22771F4C200E20DC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4CEF12771F4C200E20DC2 /* AppDelegate.swift */; };
 		8CB4CEF42771F4C200E20DC2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4CEF32771F4C200E20DC2 /* SceneDelegate.swift */; };
 		8CB4CEF62771F4C200E20DC2 /* PDFListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4CEF52771F4C200E20DC2 /* PDFListViewController.swift */; };
@@ -43,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8C165EBA278F1EF8006DD061 /* iTracker.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = iTracker.mlmodel; path = ../../../Dissertation/caffeToCoreMLConversion/iTracker.mlmodel; sourceTree = "<group>"; };
+		8C210C3C2791908700D0152B /* DetectFeatures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectFeatures.swift; sourceTree = "<group>"; };
 		8C31BF49278888DA00EE3359 /* EinTraum.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EinTraum.pdf; sourceTree = "<group>"; };
 		8C31BF4D2788927900EE3359 /* PDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDF.swift; sourceTree = "<group>"; };
 		8C31BF4F2788AA9900EE3359 /* PDFListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFListCell.swift; sourceTree = "<group>"; };
@@ -50,6 +55,7 @@
 		8C31BF532788B5DF00EE3359 /* Vainement,mabien-aimee.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Vainement,mabien-aimee.pdf"; sourceTree = "<group>"; };
 		8C31BF552788F19E00EE3359 /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
 		8C31BF57278C3A4B00EE3359 /* BVLCObjectClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = BVLCObjectClassifier.mlmodel; sourceTree = "<group>"; };
+		8C402BA4278F88D400CAA1F3 /* PredictionUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionUtilities.swift; sourceTree = "<group>"; };
 		8CB4CEEE2771F4C200E20DC2 /* EyeGaze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EyeGaze.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CB4CEF12771F4C200E20DC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CB4CEF32771F4C200E20DC2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +122,7 @@
 				8C31BF49278888DA00EE3359 /* EinTraum.pdf */,
 				8C31BF532788B5DF00EE3359 /* Vainement,mabien-aimee.pdf */,
 				8C31BF57278C3A4B00EE3359 /* BVLCObjectClassifier.mlmodel */,
+				8C165EBA278F1EF8006DD061 /* iTracker.mlmodel */,
 				8CB4CEF12771F4C200E20DC2 /* AppDelegate.swift */,
 				8CB4CEF32771F4C200E20DC2 /* SceneDelegate.swift */,
 				8CB4CEF72771F4C200E20DC2 /* Main.storyboard */,
@@ -127,6 +134,8 @@
 				8C31BF4F2788AA9900EE3359 /* PDFListCell.swift */,
 				8C31BF512788AF4F00EE3359 /* PDFListDataSource.swift */,
 				8C31BF552788F19E00EE3359 /* PDFViewController.swift */,
+				8C402BA4278F88D400CAA1F3 /* PredictionUtilities.swift */,
+				8C210C3C2791908700D0152B /* DetectFeatures.swift */,
 			);
 			path = EyeGaze;
 			sourceTree = "<group>";
@@ -289,6 +298,9 @@
 				8C31BF562788F19E00EE3359 /* PDFViewController.swift in Sources */,
 				8C31BF502788AA9900EE3359 /* PDFListCell.swift in Sources */,
 				8C31BF58278C3A4B00EE3359 /* BVLCObjectClassifier.mlmodel in Sources */,
+				8C165EBB278F1EF8006DD061 /* iTracker.mlmodel in Sources */,
+				8C210C3D2791908700D0152B /* DetectFeatures.swift in Sources */,
+				8C402BA5278F88D400CAA1F3 /* PredictionUtilities.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

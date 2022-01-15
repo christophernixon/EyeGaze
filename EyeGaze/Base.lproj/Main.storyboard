@@ -16,6 +16,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <imageView key="tableFooterView" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="End-L4-6ev">
+                            <rect key="frame" x="0.0" y="166" width="414" height="396"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PDFListCell" rowHeight="99" id="7cU-YH-Kwf" customClass="PDFListCell" customModule="EyeGaze" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44.5" width="414" height="99"/>
@@ -32,9 +36,9 @@
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailingMargin" secondItem="MTH-SC-ftu" secondAttribute="trailing" id="2g1-eJ-VNa"/>
                                         <constraint firstItem="MTH-SC-ftu" firstAttribute="top" secondItem="kkb-BI-6nh" secondAttribute="topMargin" id="QaY-Wk-CVk"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="MTH-SC-ftu" secondAttribute="bottom" id="wdU-nn-hFV"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="MTH-SC-ftu" secondAttribute="trailing" id="xAm-dV-jdz"/>
                                         <constraint firstItem="MTH-SC-ftu" firstAttribute="leading" secondItem="kkb-BI-6nh" secondAttribute="leadingMargin" id="xge-Rw-5Ha"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -50,6 +54,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="27n-9P-62c"/>
+                    <connections>
+                        <outlet property="testImage" destination="End-L4-6ev" id="Gdh-4v-USp"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="of1-do-aan" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
