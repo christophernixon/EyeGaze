@@ -10,6 +10,48 @@ import CoreML
 
 class PredictionUtilities {
     
+    static func faceGridFromFaceRect(originalImage: UIImage, detectedFaceRect: CGRect, gridW: Int, gridH: Int) -> MLMultiArray {
+        let frameW = originalImage.size.width
+        let frameH = originalImage.size.height
+        let scaleX = CGFloat(gridW) / frameW
+        let scaleY = CGFloat(gridH) / frameH
+        var facegrid = [[Double]] (repeating: [Double] (repeating: 0, count: gridH), count: gridW)
+        var xLow = Float(detectedFaceRect.origin.x * CGFloat(scaleX)).toIntTruncated()
+        var yLow = Float(detectedFaceRect.origin.y * CGFloat(scaleY)).toIntTruncated()
+        let width = Float(detectedFaceRect.width * CGFloat(scaleX)).toIntTruncated()
+        let height = Float(detectedFaceRect.height * CGFloat(scaleY)).toIntTruncated()
+        var xHigh = xLow + width
+        var yHigh = yLow + height
+        
+        // Make sure all values are within correct indexing range
+        xLow = min(gridW-1, max(0, xLow))
+        yLow = min(gridH-1, max(0, yLow))
+        xHigh = min(gridW-1, max(0, xHigh))
+        yHigh = min(gridH-1, max(0, yHigh))
+        
+        for x in xLow...xHigh {
+            for y in yLow...yHigh {
+                facegrid[y][x] = 1
+            }
+        }
+        
+//        for ( _, element) in facegrid.enumerated() {
+//            print(element)
+//        }
+        
+        let facegridFlattened = facegrid.reduce([], +)
+        
+        let shape = [1, 625, 1] as [NSNumber]
+        guard let doubleMultiarray = try? MLMultiArray(shape: shape, dataType: .float) else {
+            fatalError("Couldn't initialise mlmultiarry from facegrid")
+        }
+        for (i, element) in facegridFlattened.enumerated() {
+            let key = [0, i, 0] as [NSNumber]
+            doubleMultiarray[key] = element as NSNumber
+        }
+        return doubleMultiarray
+    }
+    
     static func pixelValuesFromImage(imageRef: CGImage?) -> (pixelValues: [UInt8]?, width: Int, height: Int)
     {
         var width = 0
@@ -71,5 +113,13 @@ class PredictionUtilities {
         }
         
         return array
+    }
+}
+
+extension Float {
+    func toIntTruncated() -> Int {
+        let maxTruncated  = min(self, Float(Int.max).nextDown)
+        let bothTruncated = max(maxTruncated, Float(Int.min))
+        return Int(bothTruncated)
     }
 }

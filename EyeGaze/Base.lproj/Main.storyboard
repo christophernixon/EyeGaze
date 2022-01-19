@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="doW-bN-nRI">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="ipad11_0rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,23 +13,23 @@
             <objects>
                 <tableViewController id="Hbl-lb-221" customClass="PDFListViewController" customModule="EyeGaze" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="LY5-KU-KjX">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <imageView key="tableFooterView" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="End-L4-6ev">
-                            <rect key="frame" x="0.0" y="166" width="414" height="396"/>
+                        <imageView key="tableFooterView" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="End-L4-6ev">
+                            <rect key="frame" x="0.0" y="166" width="834" height="751"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PDFListCell" rowHeight="99" id="7cU-YH-Kwf" customClass="PDFListCell" customModule="EyeGaze" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="99"/>
+                                <rect key="frame" x="0.0" y="44.5" width="834" height="99"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7cU-YH-Kwf" id="kkb-BI-6nh">
-                                    <rect key="frame" x="0.0" y="0.0" width="385.5" height="99"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="805.5" height="99"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MTH-SC-ftu">
-                                            <rect key="frame" x="20" y="11" width="357.5" height="77"/>
+                                            <rect key="frame" x="20" y="11" width="777.5" height="77"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -56,18 +56,36 @@
                     <navigationItem key="navigationItem" id="27n-9P-62c"/>
                     <connections>
                         <outlet property="testImage" destination="End-L4-6ev" id="Gdh-4v-USp"/>
+                        <segue destination="sm1-EH-u4e" kind="show" identifier="showLiveFeedSegue" id="W5z-c0-yNg"/>
+                        <segue destination="0aH-X6-IzY" kind="show" identifier="showStaticViewSegue" id="G2X-ea-BDN"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="of1-do-aan" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="968.11594202898561" y="161.38392857142856"/>
+            <point key="canvasLocation" x="967.6258992805756" y="161.30653266331657"/>
+        </scene>
+        <!--Live Feed View-->
+        <scene sceneID="Dxg-Rh-7Ln">
+            <objects>
+                <viewController title="Live Feed View" id="sm1-EH-u4e" customClass="LiveFeedViewController" customModule="EyeGaze" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7gG-Ge-dvK">
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="HSZ-j0-qGH"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="3Pu-n4-isf"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VgQ-HS-b3J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2009" y="963"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="GiC-4V-mvj">
             <objects>
                 <viewController id="B0Z-i3-SZW" customClass="PDFViewController" customModule="EyeGaze" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IL8-jD-4iu">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="92j-fY-Mam"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -76,7 +94,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="elq-qH-05K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1926" y="161"/>
+            <point key="canvasLocation" x="2009" y="161"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="nT2-kc-wJD">
@@ -84,7 +102,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="doW-bN-nRI" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="k9I-FO-CWg">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="24" width="834" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -95,6 +113,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z2y-Mo-fgh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="57.971014492753625" y="161.38392857142856"/>
+        </scene>
+        <!--Static View Controller-->
+        <scene sceneID="rPB-sT-UaK">
+            <objects>
+                <viewController id="0aH-X6-IzY" customClass="StaticViewController" customModule="EyeGaze" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tqf-62-xVq">
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9jt-EJ-Hmg">
+                                <rect key="frame" x="0.0" y="74" width="834" height="1100"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="nC5-vY-WcP"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="9jt-EJ-Hmg" firstAttribute="leading" secondItem="nC5-vY-WcP" secondAttribute="leading" id="GPK-gg-AxD"/>
+                            <constraint firstItem="nC5-vY-WcP" firstAttribute="bottom" secondItem="9jt-EJ-Hmg" secondAttribute="bottom" id="b5O-nv-OoC"/>
+                            <constraint firstItem="9jt-EJ-Hmg" firstAttribute="top" secondItem="nC5-vY-WcP" secondAttribute="top" id="iof-so-pcY"/>
+                            <constraint firstItem="nC5-vY-WcP" firstAttribute="trailing" secondItem="9jt-EJ-Hmg" secondAttribute="trailing" id="w9m-zh-iPH"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="hUW-LE-BoL"/>
+                    <connections>
+                        <outlet property="imageView" destination="9jt-EJ-Hmg" id="rKT-9z-vG9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bpZ-ao-8H7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="968" y="1017"/>
         </scene>
     </scenes>
     <resources>

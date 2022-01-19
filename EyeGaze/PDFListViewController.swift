@@ -14,8 +14,13 @@ class PDFListViewController: UITableViewController {
     @IBOutlet var testImage: UIImageView!
     
     static let showPDFSegueIdentifier = "ShowPDFSegue"
+    static let liveFeedViewSegue = "showLiveFeedSegue"
+    static let staticViewSegue = "showStaticViewSegue"
     
     private var pdfListDataSource: PDFListDataSource?
+    
+    var faceRect: CGRect?
+    var currentGazeEstimate: (Double,Double)?
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Self.showPDFSegueIdentifier,
@@ -32,6 +37,8 @@ class PDFListViewController: UITableViewController {
         pdfListDataSource = PDFListDataSource()
         tableView.dataSource = pdfListDataSource
         navigationItem.title = NSLocalizedString("Sheet Music Library", comment: "PDFList nav title")
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(segueToLiveFeed))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(segueToStaticFeed))
         predict()
     }
     
@@ -40,9 +47,9 @@ class PDFListViewController: UITableViewController {
 //        let faceGrid = PredictionUtilities.buffer(from: faceGridInput!, isGreyscale: true)
         
         // Load eye and face images, convert to CVPixelBuffer
-        let leftEyeInput = UIImage(named: "sample4_data_left_eye")
-        let rightEyeInput = UIImage(named: "sample4_data_right_eye")
-        let faceInput = UIImage(named: "sample4_data_face")
+        let leftEyeInput = UIImage(named: "sample2_data_left_eye")
+        let rightEyeInput = UIImage(named: "sample2_data_right_eye")
+        let faceInput = UIImage(named: "sample2_data_face")
         let leftEye = PredictionUtilities.buffer(from: leftEyeInput!, isGreyscale: false)
         let rightEye = PredictionUtilities.buffer(from: rightEyeInput!, isGreyscale: false)
         let face = PredictionUtilities.buffer(from: faceInput!, isGreyscale: false)
@@ -59,13 +66,14 @@ class PDFListViewController: UITableViewController {
         }
         
         // Prediction
+        var iTrackerModel: iTracker
         do {
-            let model: iTracker = try iTracker(configuration: MLModelConfiguration())
-            guard let gazePredictionOutput = try? model.prediction(facegrid: doubleMultiarray, image_face: face!, image_left: leftEye!, image_right: rightEye!) else {
+            iTrackerModel = try iTracker(configuration: MLModelConfiguration())
+            guard let gazePredictionOutput = try? iTrackerModel.prediction(facegrid: doubleMultiarray, image_face: face!, image_left: leftEye!, image_right: rightEye!) else {
                 fatalError("Unexpected runtime error with prediction")
             }
             let result = gazePredictionOutput.fc3
-            print("Gaze prediction: [\(result[0]),\(result[1])]")
+            print("Manual Gaze Prediction: [\(result[0]),\(result[1])]")
 //            if let b = try? UnsafeBufferPointer<Double>(result) {
 //              let c = Array(b)
 //              print(c)
@@ -75,18 +83,39 @@ class PDFListViewController: UITableViewController {
         }
         
         // Detect Features
-        let imageForDetection = UIImage(named: "sample_data")
+        let imageForDetection = UIImage(named: "sample2_data")
+        // Test facegrid function
+//        PredictionUtilities.faceGridFromFaceRect(originalImage: imageForDetection, detectedFaceRect: <#T##CGRect#>, gridW: <#T##Int#>, gridH: <#T##Int#>)
+        
 //        testImage.image = imageForDetection
         let featureDetector = DetectFeatures()
-        featureDetector.detectFeatures(image: (imageForDetection?.cgImage)!) { [weak self] result in
+        featureDetector.detectFeatures(model: iTrackerModel, image: (imageForDetection?.cgImage)!) { [weak self] result in
             switch result {
-            case .success(let cgImage):
-                DispatchQueue.main.async { self?.testImage.image = UIImage(cgImage: cgImage) }
-            case .notFound, .failure( _):
+            case .success(let (xPos, yPos)):
+                DispatchQueue.main.async {
+//                    self?.testImage.image = UIImage(cgImage: cgImage[2]).resized(to: CGSize(width: 224, height: 224))
+//                    self?.faceRect = detectedFaceRect
+                    self?.currentGazeEstimate = (xPos, yPos)
+                    print(self?.currentGazeEstimate)
+                }
+            case .notFound:
+                print("Face or facial features not found")
+                DispatchQueue.main.async { self?.testImage.image = imageForDetection }
+            case .failure(let error):
+                print("Unexpected error while trying to detect face and eyes: \(error).")
                 DispatchQueue.main.async { self?.testImage.image = imageForDetection }
             }
         }
     }
     
+    @objc
+    func segueToLiveFeed() {
+        self.performSegue(withIdentifier: Self.liveFeedViewSegue, sender: self)
+    }
+    
+    @objc
+    func segueToStaticFeed() {
+        self.performSegue(withIdentifier: Self.staticViewSegue, sender: self)
+    }
 }
 
