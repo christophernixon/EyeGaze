@@ -10,6 +10,75 @@ import CoreML
 
 class PredictionUtilities {
     
+    static func predictionToScreenCoords(xPrediction: Double, yPrediction: Double, orientation: CGImagePropertyOrientation) -> (screenX: Double, screenY: Double) {
+        // Distance from camera to top-left corner of screen
+        let deviceCameraToScreenXmm = 80
+        let deviceCameraToScreenYmm = 5
+        // iPad Pro 11" dimensions according to https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/adaptivity-and-layout/
+        let deviceScreenWidthPoints: Double = 834
+        let deviceScreenHeightPoints: Double = 1194
+        
+        let deviceScreenWidthmm: Double = 160
+        let deviceScreenHeightmm: Double = 229
+        
+        let pointsPerMmX = deviceScreenWidthPoints/deviceScreenWidthmm
+        let pointsPerMmY = deviceScreenHeightPoints/deviceScreenHeightmm
+        
+        // Assuming portrait orientation, convert predictions to mm and then to points
+        let xPosRelative = (xPrediction * 10) + Double(deviceCameraToScreenXmm)
+        // Invert y axis
+        let yPosRelative = (yPrediction * 10 * -1) + Double(deviceCameraToScreenYmm)
+        
+        let screenX = xPosRelative * pointsPerMmX
+        let screenY = yPosRelative * pointsPerMmY
+        
+        return (screenX, screenY)
+    }
+    
+    static func cropParts(originalImage: CGImage, partsPoints points:[CGPoint],horizontalSpacing hPadding:CGFloat, verticalSpacing vPadding:CGFloat)->CGImage?{
+        if let Minx = points.min(by: { a,b -> Bool in
+            a.x < b.x
+        }),
+            let Miny = points.min(by: { a,b -> Bool in
+                a.y < b.y
+            }),
+            let Maxx = points.max(by: { a,b -> Bool in
+                a.x < b.x
+            }),
+            let Maxy = points.max(by: { a,b -> Bool in
+                a.y < b.y
+            }) {
+            let partsWidth =  Maxx.x - Minx.x
+            let partsHeight = Maxy.y - Miny.y
+            let originX = Minx.x
+            let originY = Miny.y
+            // 224 x 224
+            var xOffset: CGFloat
+            var yOffset: CGFloat
+            if partsWidth < 224 {
+                xOffset = ((224 - partsWidth)/2) * -1
+            } else {
+                xOffset = ((partsWidth - 224)/2)
+            }
+            if partsHeight < 224 {
+                yOffset = ((224 - partsHeight)/2) * -1
+            } else {
+                yOffset = ((partsHeight - 224)/2)
+            }
+            let gRect = CGRect(x: originX + xOffset, y: originY + yOffset, width: 223, height: 223)
+           return originalImage.cropping(to: gRect)
+        } else {
+            return nil
+        }
+    }
+    
+    // Landmark coord points are definitely normalized to the bounding box they are within.
+    static func convertCGPointToImageCoords(point: CGPoint, boundingBox: CGRect) -> CGPoint {
+        let xValue = point.x * boundingBox.width + boundingBox.origin.x
+        let yValue = (1-point.y) * boundingBox.height + boundingBox.origin.y
+        return CGPoint(x: xValue, y: yValue)
+    }
+    
     static func faceGridFromFaceRect(originalImage: UIImage, detectedFaceRect: CGRect, gridW: Int, gridH: Int) -> MLMultiArray {
         let frameW = originalImage.size.width
         let frameH = originalImage.size.height

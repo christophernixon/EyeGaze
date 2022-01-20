@@ -18,6 +18,7 @@ class PDFListViewController: UITableViewController {
     static let staticViewSegue = "showStaticViewSegue"
     
     private var pdfListDataSource: PDFListDataSource?
+    private var iTrackerModel: iTracker?
     
     var faceRect: CGRect?
     var currentGazeEstimate: (Double,Double)?
@@ -29,6 +30,9 @@ class PDFListViewController: UITableViewController {
            let indexPath = tableView.indexPath(for: cell) {
             let pdf = PDF.testData[indexPath.row]
             destination.configure(with: pdf)
+        } else if segue.identifier == Self.liveFeedViewSegue,
+                  let destination = segue.destination as? LiveFeedViewController {
+            destination.configure(with: self.iTrackerModel!)
         }
     }
     
@@ -69,6 +73,7 @@ class PDFListViewController: UITableViewController {
         var iTrackerModel: iTracker
         do {
             iTrackerModel = try iTracker(configuration: MLModelConfiguration())
+            self.iTrackerModel = iTrackerModel
             guard let gazePredictionOutput = try? iTrackerModel.prediction(facegrid: doubleMultiarray, image_face: face!, image_left: leftEye!, image_right: rightEye!) else {
                 fatalError("Unexpected runtime error with prediction")
             }

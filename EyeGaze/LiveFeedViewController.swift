@@ -7,6 +7,7 @@
 
 import AVFoundation
 import Vision
+import VideoToolbox
 import UIKit
 
 class LiveFeedViewController: UIViewController {
@@ -14,7 +15,12 @@ class LiveFeedViewController: UIViewController {
     private lazy var previewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
     private let videoDataOutput = AVCaptureVideoDataOutput()
     private var faceLayers: [CAShapeLayer] = []
-
+    private var iTrackerModel: iTracker?
+    
+    func configure(with iTrackerModel: iTracker) {
+        self.iTrackerModel = iTrackerModel
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCamera()
@@ -61,13 +67,16 @@ extension LiveFeedViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
           return
         }
+        
+        var cgImage: CGImage?
+        VTCreateCGImageFromCVPixelBuffer(imageBuffer, options: nil, imageOut: &cgImage)
 
         let faceDetectionRequest = VNDetectFaceLandmarksRequest(completionHandler: { (request: VNRequest, error: Error?) in
             DispatchQueue.main.async {
                 self.faceLayers.forEach({ drawing in drawing.removeFromSuperlayer() })
 
                 if let observations = request.results as? [VNFaceObservation] {
-                    self.handleFaceDetectionObservations(observations: observations)
+                    self.handleFaceDetectionObservations(observations: observations, image: cgImage!)
                 }
             }
         })
@@ -81,7 +90,42 @@ extension LiveFeedViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         }
     }
     
-    private func handleFaceDetectionObservations(observations: [VNFaceObservation]) {
+    private func handleFaceDetectionObservations(observations: [VNFaceObservation], image: CGImage) {
+        for observation in observations {
+            let firstResult = observation
+            let w = firstResult.boundingBox.width * CGFloat(image.width)
+            let h = firstResult.boundingBox.height * CGFloat(image.height)
+            let x = firstResult.boundingBox.origin.x * CGFloat(image.width)
+            let y = (1 - firstResult.boundingBox.origin.y) * CGFloat(image.height) - h
+            
+            let gRect = CGRect(x: x, y: y, width: w, height: h)
+        
+            guard let croppedFace = image.cropping(to: gRect) else { return }
+            
+            guard let leftEyeLandmark = firstResult.landmarks?.leftEye else { return }
+            let leftEyePoints = leftEyeLandmark.normalizedPoints.map { PredictionUtilities.convertCGPointToImageCoords(point: $0, boundingBox: gRect) }
+            guard let leftEyeImage = PredictionUtilities.cropParts(originalImage: image, partsPoints: leftEyePoints, horizontalSpacing: CGFloat(0.5), verticalSpacing: CGFloat(1)) else { return }
+            
+            guard let rightEyeLandmark = firstResult.landmarks?.rightEye else { return }
+            let rightEyePoints = rightEyeLandmark.normalizedPoints.map { PredictionUtilities.convertCGPointToImageCoords(point: $0, boundingBox: gRect) }
+            guard let rightEyeImage = PredictionUtilities.cropParts(originalImage: image, partsPoints: rightEyePoints, horizontalSpacing: 0.5, verticalSpacing: 1) else { return }
+            
+            let faceGridMultiArray = PredictionUtilities.faceGridFromFaceRect(originalImage: UIImage(cgImage: image), detectedFaceRect: gRect, gridW: 25, gridH: 25)
+            
+            let targetSize = CGSize(width: 224, height: 224)
+            let leftEye = PredictionUtilities.buffer(from: UIImage(cgImage: leftEyeImage), isGreyscale: false)
+            let rightEye = PredictionUtilities.buffer(from: UIImage(cgImage: rightEyeImage), isGreyscale: false)
+            let face = PredictionUtilities.buffer(from: UIImage(cgImage: croppedFace).resized(to: targetSize), isGreyscale: false)
+            
+            // Predict gaze
+            guard let gazePredictionOutput = try? self.iTrackerModel!.prediction(facegrid: faceGridMultiArray, image_face: face!, image_left: leftEye!, image_right: rightEye!) else {
+                fatalError("Unexpected runtime error with prediction")
+            }
+            let result = gazePredictionOutput.fc3
+            print("Automated Gaze Prediction: [\(result[0]),\(result[1])]")
+        }
+        
+        // Normal stuff
         for observation in observations {
             let faceRectConverted = self.previewLayer.layerRectConverted(fromMetadataOutputRect: observation.boundingBox)
             let faceRectanglePath = CGPath(rect: faceRectConverted, transform: nil)

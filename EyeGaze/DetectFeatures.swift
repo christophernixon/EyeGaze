@@ -209,9 +209,9 @@ extension UIImage {
         let new = CGSize(
             width: size.width * ratio, height: size.height * ratio
         )
-        let renderer = UIGraphicsImageRenderer(size: new)
+        let renderer = UIGraphicsImageRenderer(size: target)
         return renderer.image { _ in
-            self.draw(in: CGRect(origin: .zero, size: new))
+            self.draw(in: CGRect(origin: .zero, size: target))
         }
     }
 }
