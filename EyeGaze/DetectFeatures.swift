@@ -90,6 +90,8 @@ class DetectFeatures {
             var totalHeight = CGFloat(self.image!.height)
             
             let firstResult = results[0]
+            print("bounding box width: \(firstResult.boundingBox.width),Height: \(firstResult.boundingBox.height)")
+            print("Original image width: \(image.width),Height: \(image.height)")
 //            print(firstResult.boundingBox)
             let w = firstResult.boundingBox.width * CGFloat(self.image!.width)
             let h = firstResult.boundingBox.height * CGFloat(self.image!.height)
@@ -185,7 +187,7 @@ class DetectFeatures {
             let returnImages = [leftEyeImage,rightEyeImage,croppedFace]
             let duration = start.distance(to: .now())
             print(duration)
-            completion(.success((Double(result[0]), Double(result[1]))))
+            completion(.success((Double(truncating: result[0]), Double(truncating: result[1]), returnImages)))
         }
         
         faceDetectionRequest.constellation = .constellation76Points
@@ -280,7 +282,7 @@ func stringFromTimeInterval() -> String {
 //}
 
 public enum FaceCropResult {
-    case success((Double, Double))
+    case success((Double, Double, [CGImage]))
     case notFound
     case failure(Error)
 }

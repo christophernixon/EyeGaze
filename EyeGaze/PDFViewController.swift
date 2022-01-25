@@ -24,6 +24,7 @@ class PDFViewController: UIViewController {
         navigationItem.title = NSLocalizedString(pdf?.shortTitle ?? "View PDF", comment: "view PDF nav title")
         view.addSubview(pdfView)
         pdfView.document = pdf?.document
+        pdfView.autoScales = true
     }
     
     override func viewDidLayoutSubviews() {

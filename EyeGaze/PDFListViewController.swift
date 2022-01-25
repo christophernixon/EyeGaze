@@ -16,6 +16,7 @@ class PDFListViewController: UITableViewController {
     static let showPDFSegueIdentifier = "ShowPDFSegue"
     static let liveFeedViewSegue = "showLiveFeedSegue"
     static let staticViewSegue = "showStaticViewSegue"
+    static let debugViewSegue = "showDebugViewSegue"
     
     private var pdfListDataSource: PDFListDataSource?
     private var iTrackerModel: iTracker?
@@ -33,6 +34,9 @@ class PDFListViewController: UITableViewController {
         } else if segue.identifier == Self.liveFeedViewSegue,
                   let destination = segue.destination as? LiveFeedViewController {
             destination.configure(with: self.iTrackerModel!)
+        } else if segue.identifier == Self.debugViewSegue,
+                  let destination = segue.destination as? DebugViewController {
+            destination.configure(with: self.iTrackerModel!)
         }
     }
     
@@ -41,7 +45,7 @@ class PDFListViewController: UITableViewController {
         pdfListDataSource = PDFListDataSource()
         tableView.dataSource = pdfListDataSource
         navigationItem.title = NSLocalizedString("Sheet Music Library", comment: "PDFList nav title")
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(segueToLiveFeed))
+        navigationItem.leftBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(segueToLiveFeed)), UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(segueToDebugView))]
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(segueToStaticFeed))
         predict()
     }
@@ -96,9 +100,9 @@ class PDFListViewController: UITableViewController {
         let featureDetector = DetectFeatures()
         featureDetector.detectFeatures(model: iTrackerModel, image: (imageForDetection?.cgImage)!) { [weak self] result in
             switch result {
-            case .success(let (xPos, yPos)):
+            case .success(let (xPos, yPos, rawImages)):
                 DispatchQueue.main.async {
-//                    self?.testImage.image = UIImage(cgImage: cgImage[2]).resized(to: CGSize(width: 224, height: 224))
+//                    self?.testImage.image = UIImage(cgImage: rawImages[1])
 //                    self?.faceRect = detectedFaceRect
                     self?.currentGazeEstimate = (xPos, yPos)
                     print(self?.currentGazeEstimate)
@@ -121,6 +125,11 @@ class PDFListViewController: UITableViewController {
     @objc
     func segueToStaticFeed() {
         self.performSegue(withIdentifier: Self.staticViewSegue, sender: self)
+    }
+    
+    @objc
+    func segueToDebugView() {
+        self.performSegue(withIdentifier: Self.debugViewSegue, sender: self)
     }
 }
 

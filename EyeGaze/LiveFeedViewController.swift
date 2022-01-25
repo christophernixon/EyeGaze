@@ -81,7 +81,7 @@ extension LiveFeedViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
             }
         })
 
-        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: imageBuffer, orientation: .leftMirrored, options: [:])
+        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: imageBuffer, orientation: .up, options: [:])
 
         do {
             try imageRequestHandler.perform([faceDetectionRequest])
@@ -119,10 +119,21 @@ extension LiveFeedViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
             
             // Predict gaze
             guard let gazePredictionOutput = try? self.iTrackerModel!.prediction(facegrid: faceGridMultiArray, image_face: face!, image_left: leftEye!, image_right: rightEye!) else {
-                fatalError("Unexpected runtime error with prediction")
+                print("SOMETHING WENT WRONG!!!!")
+                return
             }
             let result = gazePredictionOutput.fc3
             print("Automated Gaze Prediction: [\(result[0]),\(result[1])]")
+            let (screenX, screenY) = PredictionUtilities.predictionToScreenCoords(xPrediction: Double(result[0]), yPrediction: Double(result[1]), orientation: CGImagePropertyOrientation.up)
+            let shapeLayer = CAShapeLayer()
+//            let center = view.center
+            let circulPath = UIBezierPath(arcCenter: CGPoint(x: screenX, y: screenY), radius: 12, startAngle: 0, endAngle: 2.0 * CGFloat.pi, clockwise: true)
+
+            shapeLayer.path = circulPath.cgPath
+            shapeLayer.fillColor = UIColor.green.cgColor
+            self.faceLayers.append(shapeLayer)
+            self.view.layer.addSublayer(shapeLayer)
+            
         }
         
         // Normal stuff

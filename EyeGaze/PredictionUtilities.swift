@@ -35,7 +35,54 @@ class PredictionUtilities {
         return (screenX, screenY)
     }
     
+    static func cropParts(originalImage: CGImage, partRect: CGRect, horizontalSpacing hPadding:CGFloat, verticalSpacing vPadding:CGFloat)->CGImage?{
+        let partsWidth =  partRect.width
+        let partsHeight = partRect.height
+        let gRect = CGRect(x: partRect.origin.x - (partsWidth * hPadding), y: partRect.origin.y - (partsHeight * vPadding), width: partsWidth + (partsWidth * hPadding * 2), height: partsHeight + (partsHeight * vPadding * 2))
+       return originalImage.cropping(to: gRect)
+    }
+    
     static func cropParts(originalImage: CGImage, partsPoints points:[CGPoint],horizontalSpacing hPadding:CGFloat, verticalSpacing vPadding:CGFloat)->CGImage?{
+        if let Minx = points.min(by: { a,b -> Bool in
+            a.x < b.x
+        }),
+            let Miny = points.min(by: { a,b -> Bool in
+                a.y < b.y
+            }),
+            let Maxx = points.max(by: { a,b -> Bool in
+                a.x < b.x
+            }),
+            let Maxy = points.max(by: { a,b -> Bool in
+                a.y < b.y
+            }) {
+            let partsWidth =  Maxx.x - Minx.x
+            let partsHeight = Maxy.y - Miny.y
+            let originX = Minx.x
+            let originY = Miny.y
+            let gRect = CGRect(x: originX - (partsWidth * hPadding), y: originY - (partsHeight * vPadding), width: partsWidth + (partsWidth * hPadding * 2), height: partsHeight + (partsHeight * vPadding * 2))
+            
+            // 224 x 224
+            var xOffset: CGFloat
+            var yOffset: CGFloat
+            if partsWidth < 224 {
+                xOffset = ((224 - partsWidth)/2) * -1
+            } else {
+                xOffset = ((partsWidth - 224)/2)
+            }
+            if partsHeight < 224 {
+                yOffset = ((224 - partsHeight)/2) * -1
+            } else {
+                yOffset = ((partsHeight - 224)/2)
+            }
+            
+            let gRect2 = CGRect(x: originX + xOffset, y: originY + yOffset, width: 223, height: 223)
+           return originalImage.cropping(to: gRect)
+        } else {
+            return nil
+        }
+    }
+    
+    static func cropParts244(originalImage: CGImage, partsPoints points:[CGPoint],horizontalSpacing hPadding:CGFloat, verticalSpacing vPadding:CGFloat)->CGImage?{
         if let Minx = points.min(by: { a,b -> Bool in
             a.x < b.x
         }),
