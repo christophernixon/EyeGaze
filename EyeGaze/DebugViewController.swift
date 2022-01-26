@@ -30,7 +30,7 @@ class DebugViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.predictionQueue = [(Double, Double)] (repeating: (0.0,0.0), count: 3)
+        self.predictionQueue = [(Double, Double)] (repeating: (0.0,0.0), count: 5)
         setupCamera()
         captureSession.startRunning()
     }
@@ -81,7 +81,7 @@ extension DebugViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         VTCreateCGImageFromCVPixelBuffer(imageBuffer, options: nil, imageOut: &cgImage)
 
         let faceDetectionRequest = VNDetectFaceLandmarksRequest(completionHandler: { (request: VNRequest, error: Error?) in
-            DispatchQueue.main.async {
+            DispatchQueue.main.sync {
                 self.faceLayers.forEach({ drawing in drawing.removeFromSuperlayer() })
 
                 if let observations = request.results as? [VNFaceObservation] {
@@ -138,7 +138,7 @@ extension DebugViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
             self.rightEyeImageView.image = UIImage(cgImage: rightEyeImage).resized(to: targetSize)
             
             // Predict gaze
-            guard let gazePredictionOutput = try? self.iTrackerModel!.prediction(facegrid: faceGridMultiArray, image_face: face!, image_left: leftEye!, image_right: rightEye!) else {
+            guard let gazePredictionOutput = try? self.iTrackerModel!.prediction(facegrid: faceGridMultiArray, image_face: face!, image_left: rightEye!, image_right: leftEye!) else {
                 print("SOMETHING WENT WRONG!!!!")
                 return
             }
@@ -158,32 +158,34 @@ extension DebugViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
             var lastThreeAverageX = 0.0
             var lastThreeAverageY = 0.0
 //            DispatchQueue.main.sync {
-//                var lastThreeSumX = 0.0
-//                var lastThreeSumY = 0.0
-//                for i in 0..<predictionQueue.count {
-//                    lastThreeSumX += predictionQueue[i].0
-//                    lastThreeSumY += predictionQueue[i].1
-//                }
-//                lastThreeAverageX = lastThreeSumX/3
-//                lastThreeAverageY = lastThreeSumY/3
-//
-//                // Update predictionQueue
-//                var returnQueue: [(Double,Double)] = [(Double, Double)] (repeating: (0.0,0.0), count: 3)
-//                returnQueue[0] = (predictionQueue[1])
-//                returnQueue[1] = (predictionQueue[2])
-//                returnQueue[2] = (screenX, screenY)
-//                self.predictionQueue = returnQueue
+            var lastThreeSumX = 0.0
+            var lastThreeSumY = 0.0
+            for i in 0..<predictionQueue.count {
+                lastThreeSumX += predictionQueue[i].0
+                lastThreeSumY += predictionQueue[i].1
+            }
+            lastThreeAverageX = lastThreeSumX/5
+            lastThreeAverageY = lastThreeSumY/5
+
+            // Update predictionQueue
+            var returnQueue: [(Double,Double)] = [(Double, Double)] (repeating: (0.0,0.0), count: 5)
+            returnQueue[0] = (predictionQueue[1])
+            returnQueue[1] = (predictionQueue[2])
+            returnQueue[2] = (predictionQueue[3])
+            returnQueue[3] = (predictionQueue[4])
+            returnQueue[4] = (screenX, screenY)
+            self.predictionQueue = returnQueue
 //            }
-//
-//            // Draw average dot
-//            let shapeLayer2 = CAShapeLayer()
-////            let center = view.center
-//            let circulPath2 = UIBezierPath(arcCenter: CGPoint(x: lastThreeAverageX, y: lastThreeAverageY), radius: 12, startAngle: 0, endAngle: 2.0 * CGFloat.pi, clockwise: true)
-//
-//            shapeLayer2.path = circulPath2.cgPath
-//            shapeLayer2.fillColor = UIColor.red.cgColor
-//            self.faceLayers.append(shapeLayer2)
-//            self.view.layer.addSublayer(shapeLayer2)
+
+            // Draw average dot
+            let shapeLayer2 = CAShapeLayer()
+//            let center = view.center
+            let circulPath2 = UIBezierPath(arcCenter: CGPoint(x: lastThreeAverageX, y: lastThreeAverageY), radius: 12, startAngle: 0, endAngle: 2.0 * CGFloat.pi, clockwise: true)
+
+            shapeLayer2.path = circulPath2.cgPath
+            shapeLayer2.fillColor = UIColor.red.cgColor
+            self.faceLayers.append(shapeLayer2)
+            self.view.layer.addSublayer(shapeLayer2)
             
             let duration = time.distance(to: .now())
 //            print(duration)

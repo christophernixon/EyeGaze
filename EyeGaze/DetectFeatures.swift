@@ -14,6 +14,26 @@ class DetectFeatures {
 //    static var faceDetectionRequest = VNDetectFaceRectanglesRequest(completionHandler: handleDetectedFaces)
     var image: CGImage?
     
+    func predictGaze(model: iTracker, image: CGImage) -> (Double, Double) {
+        // Create a request handler.
+        let imageRequestHandler = VNImageRequestHandler(cgImage: image, orientation: .up, options: [:])
+        let faceDetectionRequest = VNDetectFaceLandmarksRequest(completionHandler: { (request: VNRequest, error: Error?) in
+            if let observations = request.results as? [VNFaceObservation] {
+                self.handleObservations(observations: observations, image: image)
+            }
+        })
+        do {
+            try imageRequestHandler.perform([faceDetectionRequest])
+        } catch {
+          print(error.localizedDescription)
+        }
+        return (0.0, 0.0)
+    }
+    
+    func handleObservations(observations: [VNFaceObservation], image: CGImage) {
+        
+    }
+    
     func cropParts(partsPoints points:[CGPoint],horizontalSpacing hPadding:CGFloat, verticalSpacing vPadding:CGFloat)->CGImage?{
         if let Minx = points.min(by: { a,b -> Bool in
             a.x < b.x

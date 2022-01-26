@@ -29,6 +29,7 @@
 		8CB4CF132771F4C700E20DC2 /* EyeGazeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4CF122771F4C700E20DC2 /* EyeGazeUITests.swift */; };
 		8CB4CF152771F4C700E20DC2 /* EyeGazeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4CF142771F4C700E20DC2 /* EyeGazeUITestsLaunchTests.swift */; };
 		8CF2098A279DC48100B65336 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF20989279DC48100B65336 /* DebugViewController.swift */; };
+		8CF2098C27A18D4700B65336 /* PredictionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF2098B27A18D4700B65336 /* PredictionEngine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		8CB4CF122771F4C700E20DC2 /* EyeGazeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyeGazeUITests.swift; sourceTree = "<group>"; };
 		8CB4CF142771F4C700E20DC2 /* EyeGazeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyeGazeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		8CF20989279DC48100B65336 /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
+		8CF2098B27A18D4700B65336 /* PredictionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionEngine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 				8C210C3E279620E000D0152B /* LiveFeedViewController.swift */,
 				8C210C402796284300D0152B /* StaticViewController.swift */,
 				8CF20989279DC48100B65336 /* DebugViewController.swift */,
+				8CF2098B27A18D4700B65336 /* PredictionEngine.swift */,
 			);
 			path = EyeGaze;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				8C210C3F279620E100D0152B /* LiveFeedViewController.swift in Sources */,
 				8C31BF4E2788927900EE3359 /* PDF.swift in Sources */,
 				8C210C412796284400D0152B /* StaticViewController.swift in Sources */,
+				8CF2098C27A18D4700B65336 /* PredictionEngine.swift in Sources */,
 				8C31BF522788AF4F00EE3359 /* PDFListDataSource.swift in Sources */,
 				8CB4CEF42771F4C200E20DC2 /* SceneDelegate.swift in Sources */,
 				8C31BF562788F19E00EE3359 /* PDFViewController.swift in Sources */,

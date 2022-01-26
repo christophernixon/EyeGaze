@@ -92,29 +92,41 @@ class PDFListViewController: UITableViewController {
         }
         
         // Detect Features
-        let imageForDetection = UIImage(named: "sample2_data")
+        guard let imageForDetection = UIImage(named: "sample2_data") else { return }
         // Test facegrid function
 //        PredictionUtilities.faceGridFromFaceRect(originalImage: imageForDetection, detectedFaceRect: <#T##CGRect#>, gridW: <#T##Int#>, gridH: <#T##Int#>)
         
 //        testImage.image = imageForDetection
-        let featureDetector = DetectFeatures()
-        featureDetector.detectFeatures(model: iTrackerModel, image: (imageForDetection?.cgImage)!) { [weak self] result in
-            switch result {
-            case .success(let (xPos, yPos, rawImages)):
-                DispatchQueue.main.async {
-//                    self?.testImage.image = UIImage(cgImage: rawImages[1])
-//                    self?.faceRect = detectedFaceRect
-                    self?.currentGazeEstimate = (xPos, yPos)
-                    print(self?.currentGazeEstimate)
-                }
-            case .notFound:
-                print("Face or facial features not found")
-                DispatchQueue.main.async { self?.testImage.image = imageForDetection }
-            case .failure(let error):
-                print("Unexpected error while trying to detect face and eyes: \(error).")
-                DispatchQueue.main.async { self?.testImage.image = imageForDetection }
+        
+        let predictionEngine = PredictionEngine(model: iTrackerModel)
+        let gazePrediction = predictionEngine.predictGaze(image: imageForDetection.cgImage!)
+        print(gazePrediction)
+        print(predictionEngine.currentGazePredictionCM)
+        DispatchQueue.main.async {
+            if let faceCGImage = predictionEngine.faceCGImage {
+                self.testImage.image = UIImage(cgImage: faceCGImage)
+            } else {
+                self.testImage.image = imageForDetection
             }
         }
+//        let featureDetector = DetectFeatures()
+//        featureDetector.detectFeatures(model: iTrackerModel, image: (imageForDetection?.cgImage)!) { [weak self] result in
+//            switch result {
+//            case .success(let (xPos, yPos, rawImages)):
+//                DispatchQueue.main.async {
+////                    self?.testImage.image = UIImage(cgImage: rawImages[1])
+////                    self?.faceRect = detectedFaceRect
+//                    self?.currentGazeEstimate = (xPos, yPos)
+//                    print(self?.currentGazeEstimate)
+//                }
+//            case .notFound:
+//                print("Face or facial features not found")
+//                DispatchQueue.main.async { self?.testImage.image = imageForDetection }
+//            case .failure(let error):
+//                print("Unexpected error while trying to detect face and eyes: \(error).")
+//                DispatchQueue.main.async { self?.testImage.image = imageForDetection }
+//            }
+//        }
     }
     
     @objc
