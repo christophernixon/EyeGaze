@@ -45,8 +45,8 @@ class PDFListViewController: UITableViewController {
         pdfListDataSource = PDFListDataSource()
         tableView.dataSource = pdfListDataSource
         navigationItem.title = NSLocalizedString("Sheet Music Library", comment: "PDFList nav title")
-        navigationItem.leftBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(segueToLiveFeed)), UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(segueToDebugView))]
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(segueToStaticFeed))
+//        navigationItem.leftBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(segueToLiveFeed)), UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(segueToDebugView))]
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(segueToStaticFeed))
         predict()
     }
     
