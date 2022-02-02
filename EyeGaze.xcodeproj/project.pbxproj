@@ -31,6 +31,7 @@
 		8CF2098A279DC48100B65336 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF20989279DC48100B65336 /* DebugViewController.swift */; };
 		8CF2098C27A18D4700B65336 /* PredictionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF2098B27A18D4700B65336 /* PredictionEngine.swift */; };
 		8CF2098E27A2EF6600B65336 /* PathChooseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF2098D27A2EF6600B65336 /* PathChooseViewController.swift */; };
+		8CF2099027A2F2F600B65336 /* StaticTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF2098F27A2F2F600B65336 /* StaticTestViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		8CF20989279DC48100B65336 /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 		8CF2098B27A18D4700B65336 /* PredictionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionEngine.swift; sourceTree = "<group>"; };
 		8CF2098D27A2EF6600B65336 /* PathChooseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathChooseViewController.swift; sourceTree = "<group>"; };
+		8CF2098F27A2F2F600B65336 /* StaticTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticTestViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +153,7 @@
 				8CF20989279DC48100B65336 /* DebugViewController.swift */,
 				8CF2098B27A18D4700B65336 /* PredictionEngine.swift */,
 				8CF2098D27A2EF6600B65336 /* PathChooseViewController.swift */,
+				8CF2098F27A2F2F600B65336 /* StaticTestViewController.swift */,
 			);
 			path = EyeGaze;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 				8CF2098E27A2EF6600B65336 /* PathChooseViewController.swift in Sources */,
 				8C31BF522788AF4F00EE3359 /* PDFListDataSource.swift in Sources */,
 				8CB4CEF42771F4C200E20DC2 /* SceneDelegate.swift in Sources */,
+				8CF2099027A2F2F600B65336 /* StaticTestViewController.swift in Sources */,
 				8C31BF562788F19E00EE3359 /* PDFViewController.swift in Sources */,
 				8CF2098A279DC48100B65336 /* DebugViewController.swift in Sources */,
 				8C31BF502788AA9900EE3359 /* PDFListCell.swift in Sources */,

@@ -56,9 +56,6 @@
                     <navigationItem key="navigationItem" id="27n-9P-62c"/>
                     <connections>
                         <outlet property="testImage" destination="End-L4-6ev" id="Gdh-4v-USp"/>
-                        <segue destination="sm1-EH-u4e" kind="show" identifier="showLiveFeedSegue" id="W5z-c0-yNg"/>
-                        <segue destination="0aH-X6-IzY" kind="show" identifier="showStaticViewSegue" id="G2X-ea-BDN"/>
-                        <segue destination="EeJ-pc-pSC" kind="show" identifier="showDebugViewSegue" id="l5S-yR-X9L"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="of1-do-aan" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -122,7 +119,7 @@
                                     <fontDescription key="titleFontDescription" type="system" pointSize="25"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="EeJ-pc-pSC" kind="show" identifier="showDebugViewSegue2" id="48T-g4-aTg"/>
+                                    <segue destination="EeJ-pc-pSC" kind="show" identifier="showDebugViewSegue" id="48T-g4-aTg"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ltX-Z0-c0t">
@@ -131,6 +128,9 @@
                                 <buttonConfiguration key="configuration" style="filled" title="Static Gaze Test">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="25"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <segue destination="3e1-yr-Vn8" kind="show" identifier="showStaticTestViewSegue" id="Bft-SG-yyg"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="DHv-Y3-TOL"/>
@@ -208,7 +208,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9jt-EJ-Hmg">
-                                <rect key="frame" x="0.0" y="74" width="834" height="1100"/>
+                                <rect key="frame" x="0.0" y="24" width="834" height="1150"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="nC5-vY-WcP"/>
@@ -247,10 +247,23 @@
             </objects>
             <point key="canvasLocation" x="-145.32374100719426" y="160.80402010050253"/>
         </scene>
+        <!--Static Test View Controller-->
+        <scene sceneID="b6c-nh-1n5">
+            <objects>
+                <viewController id="3e1-yr-Vn8" customClass="StaticTestViewController" customModule="EyeGaze" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LPS-hb-cFh">
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="5vK-vx-guH"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="d5s-1Y-ZgS"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AzT-O9-R0u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="115" y="1023"/>
+        </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="48T-g4-aTg"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

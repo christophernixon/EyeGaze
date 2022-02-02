@@ -9,15 +9,20 @@ import Vision
 import UIKit
 
 class PathChooseViewController: UIViewController {
-    static let debugViewSegue = "showDebugViewSegue2"
+    static let debugViewSegue = "showDebugViewSegue"
+    static let staticTestViewSegue = "showStaticTestViewSegue"
     private var iTrackerModel: iTracker?
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Self.debugViewSegue,
            let destination = segue.destination as? DebugViewController {
             destination.configure(with: self.iTrackerModel!)
-          }
-      }
+        } else if segue.identifier == Self.staticTestViewSegue,
+                  let destination = segue.destination as? StaticTestViewController {
+            destination.configure(with: self.iTrackerModel!)
+        }
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

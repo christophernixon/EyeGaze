@@ -14,6 +14,7 @@ class PredictionEngine {
     
     private(set) var currentGazePrediction: (Double, Double) = (0,0)
     private(set) var currentGazePredictionCM: (Double, Double) = (0,0)
+    private(set) var currentGazePredictionRaw: (Double, Double) = (0,0)
     private var iTrackerModel: iTracker
     
     private(set) var faceCGImage: CGImage?
@@ -44,7 +45,7 @@ class PredictionEngine {
         } catch {
           print(error.localizedDescription)
         }
-        return self.currentGazePrediction
+        return self.currentGazePredictionRaw
     }
     
     func handleObservations(observations: [VNFaceObservation], image: CGImage) {
@@ -88,6 +89,7 @@ class PredictionEngine {
             
             self.currentGazePredictionCM = (predictedX, predictedY)
             self.currentGazePrediction = (screenX, screenY)
+            self.currentGazePredictionRaw = (predictedX, predictedY)
         }
     }
 }

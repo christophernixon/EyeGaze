@@ -10,7 +10,205 @@ import CoreML
 
 class PredictionUtilities {
     
-    static func predictionToScreenCoords(xPrediction: Double, yPrediction: Double, orientation: CGImagePropertyOrientation) -> (screenX: Double, screenY: Double) {
+    static func pointsToCMX(xValue: Double) -> Double {
+        // iPad Pro 11" dimensions according to https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/adaptivity-and-layout/
+        let deviceScreenWidthPoints: Double = 834
+        let deviceScreenWidthmm: Double = 160
+        let pointsPerMmX: Double = deviceScreenWidthPoints/deviceScreenWidthmm
+        return (xValue / pointsPerMmX) / 10
+    }
+    
+    static func pointsToCMY(yValue: Double) -> Double {
+        // iPad Pro 11" dimensions according to https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/adaptivity-and-layout/
+        let deviceScreenHeightPoints: Double = 1194
+        let deviceScreenHeightmm: Double = 229
+        let pointsPerMmY: Double = deviceScreenHeightPoints/deviceScreenHeightmm
+        return (yValue / pointsPerMmY) / 10
+    }
+    
+    static func avgArray(array: [CGFloat]) -> CGFloat {
+        let sumArray: CGFloat = array.reduce(0, +)
+        return sumArray / CGFloat(array.count)
+    }
+    
+    static func euclideanDistance(from: CGPoint, to: CGPoint) -> CGFloat {
+        return sqrt(pow(from.x - to.x, 2) + pow(from.y - to.y, 2))
+    }
+    
+    static func cgPointFromDoubleTuple(doubleTuple: (xValue: Double, yValue: Double)) -> CGPoint {
+        return CGPoint(x: doubleTuple.xValue, y: doubleTuple.yValue)
+    }
+    
+    static func averagePoint(pointList: [(Double, Double)]) -> (Double, Double) {
+        var sumX: Double = 0
+        var sumY: Double = 0
+        for (x, y) in pointList {
+            sumX += x
+            sumY += y
+        }
+        let averageX = sumX/Double(pointList.count)
+        let averageY = sumY/Double(pointList.count)
+        return (averageX, averageY)
+    }
+    
+    static func averageCGPoint(pointList: [(Double, Double)]) -> CGPoint {
+        let (xValue, yValue) = Self.averagePoint(pointList: pointList)
+        return CGPoint(x: xValue, y: yValue)
+    }
+    
+    // Returns points from point list with maximum X value
+    static func maxXPoint(pointList: [(xValue: Double, yValue: Double)]) -> (Double, Double)? {
+        if pointList.isEmpty {
+            return nil
+        }
+        var maxPoint: (xValue: Double, yValue: Double) = pointList[0]
+        for point in pointList {
+            if point.xValue > maxPoint.xValue {
+                maxPoint = point
+            }
+        }
+        return maxPoint
+    }
+    
+    static func maxXPoint(pointList: [CGPoint]) -> (Double, Double)? {
+        if pointList.isEmpty {
+            return nil
+        }
+        var maxPoint: CGPoint = pointList[0]
+        for point in pointList {
+            if point.x > maxPoint.x {
+                maxPoint = point
+            }
+        }
+        return (Double(maxPoint.x), Double(maxPoint.y))
+    }
+    
+    // Returns points from point list with maximum Y value
+    static func maxYPoint(pointList: [(xValue: Double, yValue: Double)]) -> (Double, Double)? {
+        if pointList.isEmpty {
+            return nil
+        }
+        var maxPoint: (xValue: Double, yValue: Double) = pointList[0]
+        for point in pointList {
+            if point.yValue > maxPoint.yValue {
+                maxPoint = point
+            }
+        }
+        return maxPoint
+    }
+    
+    static func maxYPoint(pointList: [CGPoint]) -> (Double, Double)? {
+        if pointList.isEmpty {
+            return nil
+        }
+        var maxPoint: CGPoint = pointList[0]
+        for point in pointList {
+            if point.y > maxPoint.y {
+                maxPoint = point
+            }
+        }
+        return (Double(maxPoint.x), Double(maxPoint.y))
+    }
+    
+    // Returns points from point list with minimum X value
+    static func minXPoint(pointList: [(xValue: Double, yValue: Double)]) -> (Double, Double)? {
+        if pointList.isEmpty {
+            return nil
+        }
+        var maxPoint: (xValue: Double, yValue: Double) = pointList[0]
+        for point in pointList {
+            if point.xValue < maxPoint.xValue {
+                maxPoint = point
+            }
+        }
+        return maxPoint
+    }
+    
+    static func minXPoint(pointList: [CGPoint]) -> (Double, Double)? {
+        if pointList.isEmpty {
+            return nil
+        }
+        var minPoint: CGPoint = pointList[0]
+        for point in pointList {
+            if point.x < minPoint.x {
+                minPoint = point
+            }
+        }
+        return (Double(minPoint.x), Double(minPoint.y))
+    }
+    
+    // Returns points from point list with minimum Y value
+    static func minYPoint(pointList: [(xValue: Double, yValue: Double)]) -> (Double, Double)? {
+        if pointList.isEmpty {
+            return nil
+        }
+        var maxPoint: (xValue: Double, yValue: Double) = pointList[0]
+        for point in pointList {
+            if point.yValue < maxPoint.yValue {
+                maxPoint = point
+            }
+        }
+        return maxPoint
+    }
+    
+    static func minYPoint(pointList: [CGPoint]) -> (Double, Double)? {
+        if pointList.isEmpty {
+            return nil
+        }
+        var minPoint: CGPoint = pointList[0]
+        for point in pointList {
+            if point.y < minPoint.y {
+                minPoint = point
+            }
+        }
+        return (Double(minPoint.x), Double(minPoint.y))
+    }
+    
+    static func screenToPredictionCoordsCG(screenPoint: CGPoint, orientation: CGImagePropertyOrientation) -> CGPoint {
+        let (x,y) = screenToPredictionCoords(screenPoint: screenPoint, orientation: orientation)
+        return CGPoint(x: x, y: y)
+    }
+    
+    static func screenToPredictionCoords(screenPoint: CGPoint, orientation: CGImagePropertyOrientation) -> (xPrediction: Double, yPrediction: Double) {
+        return screenToPredictionCoords(xScreen: screenPoint.x, yScreen: screenPoint.y, orientation: orientation)
+    }
+    
+    static func screenToPredictionCoords(xScreen: Double, yScreen: Double, orientation: CGImagePropertyOrientation) -> (xPrediction: Double, yPrediction: Double) {
+        // Distance from camera to top-left corner of screen
+        let deviceCameraToScreenXmm: Double = 80
+        let deviceCameraToScreenYmm: Double = 5
+        // iPad Pro 11" dimensions according to https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/adaptivity-and-layout/
+        let deviceScreenWidthPoints: Double = 834
+        let deviceScreenHeightPoints: Double = 1194
+        
+        let deviceScreenWidthmm: Double = 160
+        let deviceScreenHeightmm: Double = 229
+        
+        let pointsPerMmX: Double = deviceScreenWidthPoints/deviceScreenWidthmm
+        let pointsPerMmY: Double = deviceScreenHeightPoints/deviceScreenHeightmm
+        
+        // Calculate x and y relative to upper left of screen in mm
+        let xPosRelative: Double = xScreen / pointsPerMmX
+        let yPosRelative: Double = yScreen / pointsPerMmY
+        
+        // Convert x and y so they are relative to camera position and in cm
+        let xPrediction: Double = (xPosRelative - deviceCameraToScreenXmm) / 10
+        // invert y axis
+        let yPrediction: Double = ((yPosRelative * -1) - deviceCameraToScreenYmm) / 10
+        
+        return (xPrediction, yPrediction)
+    }
+    
+    static func scalePrediction(prediction: (x: Double, y: Double), xScaling: Double, yScaling: Double) -> (xScreen: Double, yScreen: Double) {
+        return (prediction.x + prediction.x*xScaling, prediction.y + prediction.y*yScaling)
+    }
+    
+    static func predictionToScreenCoords(xPrediction: Double, yPrediction: Double, orientation: CGImagePropertyOrientation, xScaling: Double, yScaling: Double) -> (xScreen: Double, yScreen: Double) {
+        let (x,y) = predictionToScreenCoords(xPrediction: xPrediction, yPrediction: yPrediction, orientation: orientation)
+        return (x*xScaling, y*yScaling)
+    }
+    
+    static func predictionToScreenCoords(xPrediction: Double, yPrediction: Double, orientation: CGImagePropertyOrientation) -> (xScreen: Double, yScreen: Double) {
         // Distance from camera to top-left corner of screen
         let deviceCameraToScreenXmm = 80
         let deviceCameraToScreenYmm = 5
@@ -29,10 +227,10 @@ class PredictionUtilities {
         // Invert y axis
         let yPosRelative = (yPrediction * 10 * -1) + Double(deviceCameraToScreenYmm)
         
-        let screenX = xPosRelative * pointsPerMmX
-        let screenY = yPosRelative * pointsPerMmY
+        let xScreen = xPosRelative * pointsPerMmX
+        let yScreen = yPosRelative * pointsPerMmY
         
-        return (screenX, screenY)
+        return (xScreen, yScreen)
     }
     
     static func cropParts(originalImage: CGImage, partRect: CGRect, horizontalSpacing hPadding:CGFloat, verticalSpacing vPadding:CGFloat)->CGImage?{
