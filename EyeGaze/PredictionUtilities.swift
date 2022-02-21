@@ -32,7 +32,9 @@ class PredictionUtilities {
     }
     
     static func euclideanDistance(from: CGPoint, to: CGPoint) -> CGFloat {
-        return sqrt(pow(from.x - to.x, 2) + pow(from.y - to.y, 2))
+        var distance = sqrt(pow(to.x - from.x, 2) + pow(to.y - from.y, 2))
+        print("Distance from: \(from.x), \(from.y) to \(to.x), \(to.y) = \(distance)")
+        return distance
     }
     
     static func cgPointFromDoubleTuple(doubleTuple: (xValue: Double, yValue: Double)) -> CGPoint {
@@ -199,8 +201,19 @@ class PredictionUtilities {
         return (xPrediction, yPrediction)
     }
     
-    static func scalePrediction(prediction: (x: Double, y: Double), xScaling: Double, yScaling: Double) -> (xScreen: Double, yScreen: Double) {
-        return (prediction.x + prediction.x*xScaling, prediction.y + prediction.y*yScaling)
+    static func scalePrediction(prediction: (x: Double, y: Double), xScaling: Double, yScaling: Double, xTranslation: Double, yTranslation: Double) -> (xScreen: Double, yScreen: Double) {
+        let deviceScreenWidthPoints: Double = 834
+        let deviceScreenHeightPoints: Double = 1194
+        
+        let deviceScreenWidthmm: Double = 160
+        let deviceScreenHeightmm: Double = 229
+        
+        let pointsPerMmX: Double = deviceScreenWidthPoints/deviceScreenWidthmm
+        let pointsPerMmY: Double = deviceScreenHeightPoints/deviceScreenHeightmm
+        
+        let xTransPoints = xTranslation
+        let yTransPoints = yTranslation
+        return (prediction.x*xScaling + xTransPoints, prediction.y*yScaling + yTransPoints)
     }
     
     static func predictionToScreenCoords(xPrediction: Double, yPrediction: Double, orientation: CGImagePropertyOrientation, xScaling: Double, yScaling: Double) -> (xScreen: Double, yScreen: Double) {
@@ -255,9 +268,14 @@ class PredictionUtilities {
             }) {
             let partsWidth =  Maxx.x - Minx.x
             let partsHeight = Maxy.y - Miny.y
+            var heightPadding = vPadding
+//            if partsHeight < 18 {
+////                heightPadding += 2.5
+////                print("height padding increased")
+//            }
             let originX = Minx.x
             let originY = Miny.y
-            let gRect = CGRect(x: originX - (partsWidth * hPadding), y: originY - (partsHeight * vPadding), width: partsWidth + (partsWidth * hPadding * 2), height: partsHeight + (partsHeight * vPadding * 2))
+            let gRect = CGRect(x: originX - (partsWidth * hPadding), y: originY - (partsHeight * heightPadding), width: partsWidth + (partsWidth * hPadding * 2), height: partsHeight + (partsHeight * heightPadding * 2))
             
             // 224 x 224
             var xOffset: CGFloat
@@ -343,24 +361,33 @@ class PredictionUtilities {
         xHigh = min(gridW-1, max(0, xHigh))
         yHigh = min(gridH-1, max(0, yHigh))
         
+//        print("Original width: \(detectedFaceRect.width), Original height: \(detectedFaceRect.height)")
+//        print("xLow: \(xLow), yLow: \(yLow), xHigh: \(xHigh), yHigh: \(yHigh)")
+        
         for x in xLow...xHigh {
             for y in yLow...yHigh {
-                facegrid[y][x] = 1
+                facegrid[y][gridW-1-x] = 1
             }
         }
         
-//        for ( _, element) in facegrid.enumerated() {
-//            print(element)
-//        }
+//        Self.printFaceGrid(facegrid: facegrid, gridW: gridW, gridH: gridH)
         
+//        let facegridTransposed = facegrid.transposed()
+//        let facegridFlattened2 = facegridTransposed.reduce([], +)
+//        let facegridFlattened2 = facegrid.flatMap{ $0 }
+
         let facegridFlattened = facegrid.reduce([], +)
+//        print("FaceGrid flattened")
+//        print(facegridFlattened)
+//        print("FaceGrid flattened2")
+//        print(facegridFlattened2)
         
-        let shape = [1, 625, 1] as [NSNumber]
-        guard let doubleMultiarray = try? MLMultiArray(shape: shape, dataType: .float) else {
+        let shape = [625, 1, 1] as [NSNumber]
+        guard let doubleMultiarray = try? MLMultiArray(shape: shape, dataType: .double) else {
             fatalError("Couldn't initialise mlmultiarry from facegrid")
         }
         for (i, element) in facegridFlattened.enumerated() {
-            let key = [0, i, 0] as [NSNumber]
+            let key = [i, 0, 0] as [NSNumber]
             doubleMultiarray[key] = element as NSNumber
         }
         return doubleMultiarray
@@ -428,6 +455,20 @@ class PredictionUtilities {
         
         return array
     }
+    
+    static func printFaceGrid(facegrid: [[Double]], gridW: Int, gridH: Int) {
+        for x in 0...gridW-1 {
+            for y in 0...gridH-1 {
+                if facegrid[x][y] == 0.0 {
+                    print(" 0", terminator: "")
+                } else {
+                    print(" 1", terminator: "")
+                }
+            }
+            print("")
+        }
+        print("")
+    }
 }
 
 extension Float {
@@ -435,5 +476,15 @@ extension Float {
         let maxTruncated  = min(self, Float(Int.max).nextDown)
         let bothTruncated = max(maxTruncated, Float(Int.min))
         return Int(bothTruncated)
+    }
+}
+
+extension Collection where Self.Iterator.Element: RandomAccessCollection {
+    // PRECONDITION: `self` must be rectangular, i.e. every row has equal size.
+    func transposed() -> [[Self.Iterator.Element.Iterator.Element]] {
+        guard let firstRow = self.first else { return [] }
+        return firstRow.indices.map { index in
+            self.map{ $0[index] }
+        }
     }
 }

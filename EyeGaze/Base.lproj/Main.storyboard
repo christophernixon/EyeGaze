@@ -132,15 +132,39 @@
                                     <segue destination="3e1-yr-Vn8" kind="show" identifier="showStaticTestViewSegue" id="Bft-SG-yyg"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jkm-pz-nbx">
+                                <rect key="frame" x="345" y="578" width="144.5" height="44"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="SeeSo Test">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="25"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <segue destination="dAl-Gr-nUG" kind="show" identifier="showSeeSoViewSegue" id="8WP-rX-1zN"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X1p-Il-wu6">
+                                <rect key="frame" x="311" y="666" width="212" height="44"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Static SeeSo Test">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="25"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <segue destination="b9L-DA-oJi" kind="show" identifier="showStaticSeeSoTestViewSegue" id="0kb-1B-arn"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="DHv-Y3-TOL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="ltX-Z0-c0t" firstAttribute="top" secondItem="85W-w2-Pai" secondAttribute="bottom" constant="44" id="8GG-u4-9n5"/>
                             <constraint firstItem="85W-w2-Pai" firstAttribute="top" secondItem="sDL-L2-uBc" secondAttribute="bottom" constant="44" id="8Pn-AM-Y3U"/>
+                            <constraint firstItem="Jkm-pz-nbx" firstAttribute="top" secondItem="ltX-Z0-c0t" secondAttribute="bottom" constant="44" id="8mk-x3-jyZ"/>
                             <constraint firstItem="85W-w2-Pai" firstAttribute="centerX" secondItem="zyG-Jz-c8A" secondAttribute="centerX" id="8sx-go-HKA"/>
+                            <constraint firstItem="Jkm-pz-nbx" firstAttribute="centerX" secondItem="zyG-Jz-c8A" secondAttribute="centerX" id="CZJ-D1-N0b"/>
                             <constraint firstItem="sDL-L2-uBc" firstAttribute="centerX" secondItem="zyG-Jz-c8A" secondAttribute="centerX" id="EcE-5T-bpv"/>
                             <constraint firstItem="ltX-Z0-c0t" firstAttribute="centerX" secondItem="zyG-Jz-c8A" secondAttribute="centerX" id="Osr-Wq-f99"/>
+                            <constraint firstItem="X1p-Il-wu6" firstAttribute="centerX" secondItem="zyG-Jz-c8A" secondAttribute="centerX" id="U9x-CA-E5U"/>
+                            <constraint firstItem="X1p-Il-wu6" firstAttribute="top" secondItem="Jkm-pz-nbx" secondAttribute="bottom" constant="44" id="aYg-QV-Til"/>
                             <constraint firstItem="sDL-L2-uBc" firstAttribute="top" secondItem="DHv-Y3-TOL" secondAttribute="top" constant="240" id="mk6-y3-12L"/>
                         </constraints>
                     </view>
@@ -198,6 +222,38 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XIm-FN-XfI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1008.6330935251799" y="1022.6130653266332"/>
+        </scene>
+        <!--Static See So Test View Controller-->
+        <scene sceneID="fUb-UC-z0E">
+            <objects>
+                <viewController id="b9L-DA-oJi" customClass="StaticSeeSoTestViewController" customModule="EyeGaze" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pvh-fl-iHs">
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="zDw-Zr-aEX"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="EiE-1c-JbM"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F2v-rk-SlL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="609" y="-619"/>
+        </scene>
+        <!--See So View Controller-->
+        <scene sceneID="Vn5-Lp-6P6">
+            <objects>
+                <viewController id="dAl-Gr-nUG" customClass="SeeSoViewController" customModule="EyeGaze" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PQU-38-WYS">
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="b4F-FR-mbN"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="8QA-nk-CEk"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ufv-sK-LA7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1722" y="-610"/>
         </scene>
         <!--Static View Controller-->
         <scene sceneID="rPB-sT-UaK">

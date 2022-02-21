@@ -309,8 +309,8 @@
             filePath = "EyeGaze/PredictionUtilities.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "328"
-            endingLineNumber = "328"
+            startingLineNumber = "346"
+            endingLineNumber = "346"
             landmarkName = "faceGridFromFaceRect(originalImage:detectedFaceRect:gridW:gridH:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -380,9 +380,25 @@
             filePath = "EyeGaze/StaticTestViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
             landmarkName = "calculatePredictionResults()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EDF5DAD7-F37A-4ADE-AF7B-0254F3E76E27"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EyeGaze/PredictionUtilities.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "379"
+            endingLineNumber = "379"
+            landmarkName = "faceGridFromFaceRect(originalImage:detectedFaceRect:gridW:gridH:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

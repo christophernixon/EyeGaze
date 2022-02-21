@@ -7,18 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8C165EBB278F1EF8006DD061 /* iTracker.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8C165EBA278F1EF8006DD061 /* iTracker.mlmodel */; };
 		8C210C3D2791908700D0152B /* DetectFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C210C3C2791908700D0152B /* DetectFeatures.swift */; };
 		8C210C3F279620E100D0152B /* LiveFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C210C3E279620E000D0152B /* LiveFeedViewController.swift */; };
 		8C210C412796284400D0152B /* StaticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C210C402796284300D0152B /* StaticViewController.swift */; };
+		8C2B45A327BFA5FD000CF377 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2B45A227BFA5FD000CF377 /* Constants.swift */; };
 		8C31BF4B278888DA00EE3359 /* EinTraum.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8C31BF49278888DA00EE3359 /* EinTraum.pdf */; };
 		8C31BF4E2788927900EE3359 /* PDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31BF4D2788927900EE3359 /* PDF.swift */; };
 		8C31BF502788AA9900EE3359 /* PDFListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31BF4F2788AA9900EE3359 /* PDFListCell.swift */; };
 		8C31BF522788AF4F00EE3359 /* PDFListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31BF512788AF4F00EE3359 /* PDFListDataSource.swift */; };
 		8C31BF542788B5DF00EE3359 /* Vainement,mabien-aimee.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8C31BF532788B5DF00EE3359 /* Vainement,mabien-aimee.pdf */; };
 		8C31BF562788F19E00EE3359 /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31BF552788F19E00EE3359 /* PDFViewController.swift */; };
-		8C31BF58278C3A4B00EE3359 /* BVLCObjectClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8C31BF57278C3A4B00EE3359 /* BVLCObjectClassifier.mlmodel */; };
 		8C402BA5278F88D400CAA1F3 /* PredictionUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C402BA4278F88D400CAA1F3 /* PredictionUtilities.swift */; };
+		8CA650F727AC3CF500F311D3 /* iTracker_v2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8CA650F627AC3CF400F311D3 /* iTracker_v2.mlmodel */; };
+		8CA650F927AEE60B00F311D3 /* iTracker.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8CA650F827AEE60B00F311D3 /* iTracker.mlmodel */; };
 		8CB4CEF22771F4C200E20DC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4CEF12771F4C200E20DC2 /* AppDelegate.swift */; };
 		8CB4CEF42771F4C200E20DC2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4CEF32771F4C200E20DC2 /* SceneDelegate.swift */; };
 		8CB4CEF62771F4C200E20DC2 /* PDFListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4CEF52771F4C200E20DC2 /* PDFListViewController.swift */; };
@@ -28,6 +29,10 @@
 		8CB4CF092771F4C700E20DC2 /* EyeGazeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4CF082771F4C700E20DC2 /* EyeGazeTests.swift */; };
 		8CB4CF132771F4C700E20DC2 /* EyeGazeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4CF122771F4C700E20DC2 /* EyeGazeUITests.swift */; };
 		8CB4CF152771F4C700E20DC2 /* EyeGazeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4CF142771F4C700E20DC2 /* EyeGazeUITestsLaunchTests.swift */; };
+		8CBAD7F527B1365C00C43CC2 /* SeeSoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBAD7F427B1365C00C43CC2 /* SeeSoViewController.swift */; };
+		8CBAD7F827B137DE00C43CC2 /* SeeSo.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CBAD7F627B137C400C43CC2 /* SeeSo.xcframework */; };
+		8CBAD7F927B137DE00C43CC2 /* SeeSo.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8CBAD7F627B137C400C43CC2 /* SeeSo.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8CBAD7FC27B1402700C43CC2 /* StaticSeeSoTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBAD7FB27B1402700C43CC2 /* StaticSeeSoTestViewController.swift */; };
 		8CF2098A279DC48100B65336 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF20989279DC48100B65336 /* DebugViewController.swift */; };
 		8CF2098C27A18D4700B65336 /* PredictionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF2098B27A18D4700B65336 /* PredictionEngine.swift */; };
 		8CF2098E27A2EF6600B65336 /* PathChooseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF2098D27A2EF6600B65336 /* PathChooseViewController.swift */; };
@@ -51,19 +56,34 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		8CBAD7FA27B137DE00C43CC2 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8CBAD7F927B137DE00C43CC2 /* SeeSo.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		8C165EBA278F1EF8006DD061 /* iTracker.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = iTracker.mlmodel; path = ../../../Dissertation/caffeToCoreMLConversion/iTracker.mlmodel; sourceTree = "<group>"; };
 		8C210C3C2791908700D0152B /* DetectFeatures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectFeatures.swift; sourceTree = "<group>"; };
 		8C210C3E279620E000D0152B /* LiveFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveFeedViewController.swift; sourceTree = "<group>"; };
 		8C210C402796284300D0152B /* StaticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticViewController.swift; sourceTree = "<group>"; };
+		8C2B45A227BFA5FD000CF377 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8C31BF49278888DA00EE3359 /* EinTraum.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EinTraum.pdf; sourceTree = "<group>"; };
 		8C31BF4D2788927900EE3359 /* PDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDF.swift; sourceTree = "<group>"; };
 		8C31BF4F2788AA9900EE3359 /* PDFListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFListCell.swift; sourceTree = "<group>"; };
 		8C31BF512788AF4F00EE3359 /* PDFListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFListDataSource.swift; sourceTree = "<group>"; };
 		8C31BF532788B5DF00EE3359 /* Vainement,mabien-aimee.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Vainement,mabien-aimee.pdf"; sourceTree = "<group>"; };
 		8C31BF552788F19E00EE3359 /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
-		8C31BF57278C3A4B00EE3359 /* BVLCObjectClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = BVLCObjectClassifier.mlmodel; sourceTree = "<group>"; };
 		8C402BA4278F88D400CAA1F3 /* PredictionUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionUtilities.swift; sourceTree = "<group>"; };
+		8CA650F627AC3CF400F311D3 /* iTracker_v2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = iTracker_v2.mlmodel; sourceTree = "<group>"; };
+		8CA650F827AEE60B00F311D3 /* iTracker.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = iTracker.mlmodel; sourceTree = "<group>"; };
 		8CB4CEEE2771F4C200E20DC2 /* EyeGaze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EyeGaze.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CB4CEF12771F4C200E20DC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CB4CEF32771F4C200E20DC2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +97,9 @@
 		8CB4CF0E2771F4C700E20DC2 /* EyeGazeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EyeGazeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CB4CF122771F4C700E20DC2 /* EyeGazeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyeGazeUITests.swift; sourceTree = "<group>"; };
 		8CB4CF142771F4C700E20DC2 /* EyeGazeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyeGazeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		8CBAD7F427B1365C00C43CC2 /* SeeSoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeSoViewController.swift; sourceTree = "<group>"; };
+		8CBAD7F627B137C400C43CC2 /* SeeSo.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = SeeSo.xcframework; sourceTree = "<group>"; };
+		8CBAD7FB27B1402700C43CC2 /* StaticSeeSoTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticSeeSoTestViewController.swift; sourceTree = "<group>"; };
 		8CF20989279DC48100B65336 /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 		8CF2098B27A18D4700B65336 /* PredictionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionEngine.swift; sourceTree = "<group>"; };
 		8CF2098D27A2EF6600B65336 /* PathChooseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathChooseViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CBAD7F827B137DE00C43CC2 /* SeeSo.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,29 +155,25 @@
 		8CB4CEF02771F4C200E20DC2 /* EyeGaze */ = {
 			isa = PBXGroup;
 			children = (
+				8CBAD7F627B137C400C43CC2 /* SeeSo.xcframework */,
+				8CBAD7F327B1351A00C43CC2 /* View Controllers */,
 				8C31BF49278888DA00EE3359 /* EinTraum.pdf */,
 				8C31BF532788B5DF00EE3359 /* Vainement,mabien-aimee.pdf */,
-				8C31BF57278C3A4B00EE3359 /* BVLCObjectClassifier.mlmodel */,
-				8C165EBA278F1EF8006DD061 /* iTracker.mlmodel */,
+				8CA650F627AC3CF400F311D3 /* iTracker_v2.mlmodel */,
+				8CA650F827AEE60B00F311D3 /* iTracker.mlmodel */,
 				8CB4CEF12771F4C200E20DC2 /* AppDelegate.swift */,
 				8CB4CEF32771F4C200E20DC2 /* SceneDelegate.swift */,
 				8CB4CEF72771F4C200E20DC2 /* Main.storyboard */,
 				8CB4CEFA2771F4C600E20DC2 /* Assets.xcassets */,
 				8CB4CEFC2771F4C600E20DC2 /* LaunchScreen.storyboard */,
 				8CB4CEFF2771F4C600E20DC2 /* Info.plist */,
-				8CB4CEF52771F4C200E20DC2 /* PDFListViewController.swift */,
 				8C31BF4D2788927900EE3359 /* PDF.swift */,
 				8C31BF4F2788AA9900EE3359 /* PDFListCell.swift */,
 				8C31BF512788AF4F00EE3359 /* PDFListDataSource.swift */,
-				8C31BF552788F19E00EE3359 /* PDFViewController.swift */,
 				8C402BA4278F88D400CAA1F3 /* PredictionUtilities.swift */,
 				8C210C3C2791908700D0152B /* DetectFeatures.swift */,
-				8C210C3E279620E000D0152B /* LiveFeedViewController.swift */,
-				8C210C402796284300D0152B /* StaticViewController.swift */,
-				8CF20989279DC48100B65336 /* DebugViewController.swift */,
 				8CF2098B27A18D4700B65336 /* PredictionEngine.swift */,
-				8CF2098D27A2EF6600B65336 /* PathChooseViewController.swift */,
-				8CF2098F27A2F2F600B65336 /* StaticTestViewController.swift */,
+				8C2B45A227BFA5FD000CF377 /* Constants.swift */,
 			);
 			path = EyeGaze;
 			sourceTree = "<group>";
@@ -175,6 +195,22 @@
 			path = EyeGazeUITests;
 			sourceTree = "<group>";
 		};
+		8CBAD7F327B1351A00C43CC2 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8CB4CEF52771F4C200E20DC2 /* PDFListViewController.swift */,
+				8C31BF552788F19E00EE3359 /* PDFViewController.swift */,
+				8C210C3E279620E000D0152B /* LiveFeedViewController.swift */,
+				8C210C402796284300D0152B /* StaticViewController.swift */,
+				8CF20989279DC48100B65336 /* DebugViewController.swift */,
+				8CF2098D27A2EF6600B65336 /* PathChooseViewController.swift */,
+				8CF2098F27A2F2F600B65336 /* StaticTestViewController.swift */,
+				8CBAD7F427B1365C00C43CC2 /* SeeSoViewController.swift */,
+				8CBAD7FB27B1402700C43CC2 /* StaticSeeSoTestViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -185,6 +221,7 @@
 				8CB4CEEA2771F4C200E20DC2 /* Sources */,
 				8CB4CEEB2771F4C200E20DC2 /* Frameworks */,
 				8CB4CEEC2771F4C200E20DC2 /* Resources */,
+				8CBAD7FA27B137DE00C43CC2 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -310,8 +347,11 @@
 			files = (
 				8CB4CEF62771F4C200E20DC2 /* PDFListViewController.swift in Sources */,
 				8CB4CEF22771F4C200E20DC2 /* AppDelegate.swift in Sources */,
+				8CBAD7F527B1365C00C43CC2 /* SeeSoViewController.swift in Sources */,
 				8C210C3F279620E100D0152B /* LiveFeedViewController.swift in Sources */,
+				8CA650F727AC3CF500F311D3 /* iTracker_v2.mlmodel in Sources */,
 				8C31BF4E2788927900EE3359 /* PDF.swift in Sources */,
+				8CA650F927AEE60B00F311D3 /* iTracker.mlmodel in Sources */,
 				8C210C412796284400D0152B /* StaticViewController.swift in Sources */,
 				8CF2098C27A18D4700B65336 /* PredictionEngine.swift in Sources */,
 				8CF2098E27A2EF6600B65336 /* PathChooseViewController.swift in Sources */,
@@ -320,10 +360,10 @@
 				8CF2099027A2F2F600B65336 /* StaticTestViewController.swift in Sources */,
 				8C31BF562788F19E00EE3359 /* PDFViewController.swift in Sources */,
 				8CF2098A279DC48100B65336 /* DebugViewController.swift in Sources */,
+				8C2B45A327BFA5FD000CF377 /* Constants.swift in Sources */,
 				8C31BF502788AA9900EE3359 /* PDFListCell.swift in Sources */,
-				8C31BF58278C3A4B00EE3359 /* BVLCObjectClassifier.mlmodel in Sources */,
-				8C165EBB278F1EF8006DD061 /* iTracker.mlmodel in Sources */,
 				8C210C3D2791908700D0152B /* DetectFeatures.swift in Sources */,
+				8CBAD7FC27B1402700C43CC2 /* StaticSeeSoTestViewController.swift in Sources */,
 				8C402BA5278F88D400CAA1F3 /* PredictionUtilities.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

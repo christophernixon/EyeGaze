@@ -15,13 +15,13 @@ class PredictionEngine {
     private(set) var currentGazePrediction: (Double, Double) = (0,0)
     private(set) var currentGazePredictionCM: (Double, Double) = (0,0)
     private(set) var currentGazePredictionRaw: (Double, Double) = (0,0)
-    private var iTrackerModel: iTracker
+    private var iTrackerModel: iTracker_v2
     
     private(set) var faceCGImage: CGImage?
     private(set) var leftEyeCGImage: CGImage?
     private(set) var rightEyeCGImage: CGImage?
     
-    init(model: iTracker) {
+    init(model: iTracker_v2) {
         self.iTrackerModel = model
     }
     
@@ -34,6 +34,8 @@ class PredictionEngine {
     }
     
     func predictGaze(image: CGImage) -> (Double, Double) {
+//        let flippedImage = UIImage(cgImage: image).withHorizontallyFlippedOrientation().cgImage!
+        
         let imageRequestHandler = VNImageRequestHandler(cgImage: image, orientation: .up, options: [:])
         let faceDetectionRequest = VNDetectFaceLandmarksRequest(completionHandler: { (request: VNRequest, error: Error?) in
             if let observations = request.results as? [VNFaceObservation] {
@@ -59,7 +61,7 @@ class PredictionEngine {
             let x = observation.boundingBox.origin.x * CGFloat(image.width)
             let y = (1 - observation.boundingBox.origin.y) * CGFloat(image.height) - h
             let faceRectangle = CGRect(x: x, y: y, width: w, height: h)
-            guard let faceImage = PredictionUtilities.cropParts(originalImage: image, partRect: faceRectangle, horizontalSpacing: 0, verticalSpacing: 0) else { return }
+            guard let faceImage = PredictionUtilities.cropParts(originalImage: image, partRect: faceRectangle, horizontalSpacing: 0.1, verticalSpacing: 0.1) else { return }
             
             guard let leftEyeLandmark = observation.landmarks?.leftEye else { return }
             let leftEyePoints = leftEyeLandmark.normalizedPoints.map { PredictionUtilities.convertCGPointToImageCoords(point: $0, boundingBox: faceRectangle) }
@@ -82,7 +84,7 @@ class PredictionEngine {
             guard let faceBuffer = PredictionUtilities.buffer(from: UIImage(cgImage: faceImage).resized(to: targetSize), isGreyscale: false) else { return }
             
             // Predict gaze
-            guard let gazePredictionOutput = try? self.iTrackerModel.prediction(facegrid: faceGridMultiArray, image_face: faceBuffer, image_left: leftEyeBuffer, image_right: rightEyeBuffer) else { return }
+            guard let gazePredictionOutput = try? self.iTrackerModel.prediction(facegrid: faceGridMultiArray, image_face: faceBuffer, image_left: rightEyeBuffer, image_right: leftEyeBuffer) else { return }
             let predictedX = Double(truncating: gazePredictionOutput.fc3[0])
             let predictedY = Double(truncating: gazePredictionOutput.fc3[1])
             let (screenX, screenY) = PredictionUtilities.predictionToScreenCoords(xPrediction: predictedX, yPrediction: predictedY, orientation: CGImagePropertyOrientation.up)
