@@ -447,7 +447,7 @@
             startingLineNumber = "51"
             endingLineNumber = "51"
             landmarkName = "viewDidLayoutSubviews()"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -463,7 +463,7 @@
             startingLineNumber = "107"
             endingLineNumber = "107"
             landmarkName = "changeSlide()"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
