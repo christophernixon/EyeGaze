@@ -55,22 +55,36 @@
                     <navigationItem key="navigationItem" id="27n-9P-62c">
                         <nil key="title"/>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="pmL-oH-4iQ">
-                            <rect key="frame" x="171.5" y="8.5" width="491" height="33"/>
+                            <rect key="frame" x="132" y="8.5" width="491" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="Scrolling"/>
-                                <segment title="Page Turning"/>
-                                <segment title="Animated Page Turning"/>
+                                <segment title="Single Animation"/>
+                                <segment title="Double Animation"/>
                             </segments>
                             <connections>
                                 <action selector="implementationControlChanged:" destination="Hbl-lb-221" eventType="valueChanged" id="UEo-62-pXW"/>
                             </connections>
                         </segmentedControl>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="Hdp-QZ-E9v">
+                            <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="jZb-QG-CWN">
+                                <rect key="frame" x="629" y="8.5" width="185" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="SeeSo"/>
+                                    <segment title="iTracker"/>
+                                </segments>
+                                <connections>
+                                    <action selector="gazeImplementationControlChanged:" destination="Hbl-lb-221" eventType="valueChanged" id="VEI-vW-XDu"/>
+                                </connections>
+                            </segmentedControl>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="gazeImplementationSegmentedControl" destination="jZb-QG-CWN" id="T5i-a0-U7D"/>
                         <outlet property="implementationSegmentedControl" destination="pmL-oH-4iQ" id="OC3-iD-sJy"/>
                         <outlet property="testImage" destination="End-L4-6ev" id="Gdh-4v-USp"/>
-                        <segue destination="B0Z-i3-SZW" kind="show" identifier="ShowPDFSegue" id="4WE-ox-YXw"/>
+                        <segue destination="B0Z-i3-SZW" kind="show" identifier="showPDFSegue" id="4WE-ox-YXw"/>
                         <segue destination="AvL-rR-7OT" kind="show" identifier="showDoubleAnimatedPDFSegue" id="jzz-r7-dMo"/>
                         <segue destination="lP3-LI-4QI" kind="show" identifier="showAnimatedPDFSegue" id="oYi-Zc-o1h"/>
                         <segue destination="9Gx-IH-uUq" kind="show" identifier="showPDFiTrackerSegue" id="nwV-d5-l0N"/>

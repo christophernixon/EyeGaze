@@ -14,10 +14,13 @@ class PDFListViewController: UITableViewController {
     @IBOutlet var testImage: UIImageView!
     @IBOutlet var implementationSegmentedControl: UISegmentedControl!
     
+    @IBOutlet var gazeImplementationSegmentedControl: UISegmentedControl!
+    
     private var pdfListDataSource: PDFListDataSource?
     private var iTrackerModel: iTracker_v2?
     
     private var pageTurningImplementation: PageTurningImplementation = .scrolling
+    private var gazeDetectionImplementation: GazeDetectionImplementation = .SeeSo
     
     var faceRect: CGRect?
     var currentGazeEstimate: (Double,Double)?
@@ -173,6 +176,11 @@ class PDFListViewController: UITableViewController {
     @IBAction func implementationControlChanged(_ sender: Any) {
         self.pageTurningImplementation = PageTurningImplementation(rawValue: implementationSegmentedControl.selectedSegmentIndex) ?? .scrolling
     }
+    
+
+    @IBAction func gazeImplementationControlChanged(_ sender: Any) {
+        self.gazeDetectionImplementation = GazeDetectionImplementation(rawValue: gazeImplementationSegmentedControl.selectedSegmentIndex) ?? .SeeSo
+    }
 }
 
 // Delegate extensions
@@ -181,7 +189,11 @@ extension PDFListViewController {
         let cell = tableView.cellForRow(at: indexPath)
         switch self.pageTurningImplementation {
         case .scrolling:
-            self.performSegue(withIdentifier: Constants.showPDFiTrackerSegue, sender: cell)
+            if (self.gazeDetectionImplementation == .SeeSo) {
+                self.performSegue(withIdentifier: Constants.showPDFSegue, sender: cell)
+            } else {
+                self.performSegue(withIdentifier: Constants.showPDFiTrackerSegue, sender: cell)
+            }
         case .singleAnimation:
             self.performSegue(withIdentifier: Constants.showAnimatedPDFSegue, sender: cell)
         case .doubleAnimation:

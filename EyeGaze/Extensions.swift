@@ -99,6 +99,11 @@ enum PageTurningImplementation: Int {
     case doubleAnimation
 }
 
+enum GazeDetectionImplementation: Int {
+    case SeeSo
+    case iTracker
+}
+
 public enum GazeDetectionResult {
     case success((Double, Double))
     case notFound

@@ -75,6 +75,7 @@ class PDFViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("Using SeeSo")
         initGazeTracking()
         navigationItem.title = NSLocalizedString(pdf?.shortTitle ?? "View PDF", comment: "view PDF nav title")
         view.addSubview(pdfView)

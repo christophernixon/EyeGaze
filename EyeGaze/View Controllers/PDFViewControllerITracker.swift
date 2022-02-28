@@ -71,6 +71,7 @@ class PDFViewControllerITracker: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("Using itracker")
         navigationItem.title = NSLocalizedString(pdf?.shortTitle ?? "View PDF", comment: "view PDF nav title")
         view.addSubview(pdfView)
         pdfView.document = pdf?.document
