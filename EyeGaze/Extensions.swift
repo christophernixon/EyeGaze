@@ -99,6 +99,12 @@ enum PageTurningImplementation: Int {
     case doubleAnimation
 }
 
+public enum GazeDetectionResult {
+    case success((Double, Double))
+    case notFound
+    case failure(Error)
+}
+
 public enum FaceCropResult {
     case success((Double, Double, [CGImage]))
     case notFound

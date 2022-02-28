@@ -32,6 +32,7 @@ class StaticSeeSoTestViewController: UIViewController {
     private var testCurrGazeLocLayers: [CAShapeLayer] = []
     
     // Data stores
+    private var rawGazeEst: (Double, Double) = (0,0)
     private var gazePredictions: [(Double,Double)] = []
     private var gazePredictionsCM: [(Double,Double)] = []
     private var averageGazePredictions: [CGPoint] = []
@@ -235,10 +236,19 @@ extension StaticSeeSoTestViewController: AVCaptureVideoDataOutputSampleBufferDel
         print("\n\n\n\n\nCAPTURING OUTPUT\n\n\n\n\n")
         if testInProgress {
             print("\n\n\n\n\nTEST IN PROGRESS\n\n\n\n\n")
-            let gazePrediction: (Double, Double) = self.predictionEngine!.predictGaze(sampleBuffer: sampleBuffer)
-            let transformedPrediction = transformPrediction(prediction: gazePrediction)
+            self.predictionEngine!.predictGaze(sampleBuffer: sampleBuffer) { [weak self] result in
+                switch result {
+                case .success(let prediction):
+                    self?.rawGazeEst = prediction
+                case .failure(let error):
+                    print("Error performing gaze detection: \(error)")
+                default:
+                    return
+                }
+            }
+            let transformedPrediction = transformPrediction(prediction: self.rawGazeEst)
             self.gazePredictions.append(transformedPrediction)
-            self.gazePredictionsCM.append(PredictionUtilities.scalePrediction(prediction: gazePrediction, xScaling: self.xScaling, yScaling: self.yScaling, xTranslation: self.xTranslation, yTranslation: self.yTranslation))
+            self.gazePredictionsCM.append(PredictionUtilities.scalePrediction(prediction: self.rawGazeEst, xScaling: self.xScaling, yScaling: self.yScaling, xTranslation: self.xTranslation, yTranslation: self.yTranslation))
             DispatchQueue.main.sync {
                 self.drawBlueDot(location: PredictionUtilities.cgPointFromDoubleTuple(doubleTuple: transformedPrediction))
             }

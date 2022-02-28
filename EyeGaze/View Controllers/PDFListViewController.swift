@@ -120,16 +120,20 @@ class PDFListViewController: UITableViewController {
         //        testImage.image = imageForDetection
         
         let predictionEngine = PredictionEngine(model: iTrackerModel)
-        let gazePrediction = predictionEngine.predictGaze(image: imageForDetection.cgImage!)
-        print(gazePrediction)
-        print(predictionEngine.currentGazePredictionCM)
-        DispatchQueue.main.async {
-            if let faceCGImage = predictionEngine.faceCGImage {
-                self.testImage.image = UIImage(cgImage: faceCGImage)
-            } else {
-                self.testImage.image = imageForDetection
-            }
-        }
+//        let gazePrediction = predictionEngine.predictGaze(image: imageForDetection.cgImage!) { [weak self] result in
+//            switch result {
+//                case
+//            }
+//        }
+//        print(gazePrediction)
+//        print(predictionEngine.currentGazePredictionCM)
+//        DispatchQueue.main.async {
+//            if let faceCGImage = predictionEngine.faceCGImage {
+//                self.testImage.image = UIImage(cgImage: faceCGImage)
+//            } else {
+//                self.testImage.image = imageForDetection
+//            }
+//        }
         //        let featureDetector = DetectFeatures()
         //        featureDetector.detectFeatures(model: iTrackerModel, image: (imageForDetection?.cgImage)!) { [weak self] result in
         //            switch result {

@@ -27,10 +27,12 @@ class PDFViewControllerITracker: UIViewController {
     private var xTranslation = 1.5
     private var yTranslation = 9.0
     // Gaze estimates
+    private var rawGazeEst: (Double, Double) = (0,0)
     private var currAvgGazeEst: CGPoint = CGPoint(x: 0, y: 0)
     private var gazeEstimations: [(Double, Double)] = [(Double, Double)] (repeating: (0.0,0.0), count: Constants.rollingAverageWindowSize)
     // Misc gaze values
     private let allowGazeTracking: Bool = true
+    private var isFaceDetected: Bool = false
     
     private var pdf: PDF?
     private var scrollView: UIScrollView?
@@ -196,27 +198,40 @@ extension PDFViewControllerITracker : UIScrollViewDelegate {
 extension PDFViewControllerITracker: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         if allowGazeTracking {
-            let gazePrediction: (Double, Double) = self.predictionEngine!.predictGaze(sampleBuffer: sampleBuffer)
-            let transformedPrediction = transformPrediction(prediction: gazePrediction)
-            
-            // Calculate rolling average
-            var sumX = 0.0
-            var sumY = 0.0
-            for i in 0 ..< gazeEstimations.count {
-                sumX += gazeEstimations[i].0
-                sumY += gazeEstimations[i].1
+            self.predictionEngine!.predictGaze(sampleBuffer: sampleBuffer) { [weak self] result in
+                switch result {
+                case .success(let prediction):
+                    self?.rawGazeEst = prediction
+                    self?.isFaceDetected = true
+                case .notFound:
+                    self?.isFaceDetected = false
+                case .failure(let error):
+                    self?.isFaceDetected = false
+                    print("Error performing gaze detection: \(error)")
+                }
             }
-            let averageX = sumX/5
-            let averageY = sumY/5
+            if (self.isFaceDetected) {
+                let transformedPrediction = transformPrediction(prediction: self.rawGazeEst)
+                
+                // Calculate rolling average
+                var sumX = 0.0
+                var sumY = 0.0
+                for i in 0 ..< gazeEstimations.count {
+                    sumX += gazeEstimations[i].0
+                    sumY += gazeEstimations[i].1
+                }
+                let averageX = sumX/5
+                let averageY = sumY/5
 
-            // Update predictionQueue
-            var returnQueue: [(Double,Double)] = [(Double, Double)] (repeating: (0.0,0.0), count: Constants.rollingAverageWindowSize)
-            for i in 0..<Constants.rollingAverageWindowSize-1 {
-                returnQueue[i] = (gazeEstimations[i+1])
+                // Update predictionQueue
+                var returnQueue: [(Double,Double)] = [(Double, Double)] (repeating: (0.0,0.0), count: Constants.rollingAverageWindowSize)
+                for i in 0..<Constants.rollingAverageWindowSize-1 {
+                    returnQueue[i] = (gazeEstimations[i+1])
+                }
+                returnQueue[Constants.rollingAverageWindowSize-1] = transformedPrediction
+                self.gazeEstimations = returnQueue
+                self.currAvgGazeEst = CGPoint(x: averageX, y: averageY)
             }
-            returnQueue[Constants.rollingAverageWindowSize-1] = transformedPrediction
-            self.gazeEstimations = returnQueue
-            self.currAvgGazeEst = CGPoint(x: averageX, y: averageY)
         }
     }
     

@@ -25,21 +25,38 @@ class PredictionEngine {
         self.iTrackerModel = model
     }
     
-    func predictGaze(sampleBuffer: CMSampleBuffer) -> (Double, Double) {
-        guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return (0,0) }
+    func predictGaze(sampleBuffer: CMSampleBuffer, completion: @escaping (GazeDetectionResult) -> Void) {
+        guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
+            completion(.notFound)
+            return
+        }
         var cgImagePointer: CGImage?
         VTCreateCGImageFromCVPixelBuffer(imageBuffer, options: nil, imageOut: &cgImagePointer)
-        guard let cgImage = cgImagePointer else { return (0,0) }
-        return predictGaze(image: cgImage)
+        guard let cgImage = cgImagePointer else {
+            completion(.notFound)
+            return
+        }
+        return predictGaze(image: cgImage, completion: completion)
     }
     
-    func predictGaze(image: CGImage) -> (Double, Double) {
+    func predictGaze(image: CGImage, completion: @escaping (GazeDetectionResult) -> Void) {
 //        let flippedImage = UIImage(cgImage: image).withHorizontallyFlippedOrientation().cgImage!
         
         let imageRequestHandler = VNImageRequestHandler(cgImage: image, orientation: .up, options: [:])
         let faceDetectionRequest = VNDetectFaceLandmarksRequest(completionHandler: { (request: VNRequest, error: Error?) in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
             if let observations = request.results as? [VNFaceObservation] {
-                self.handleObservations(observations: observations, image: image)
+                if (observations.count == 0) {
+                    completion(.notFound)
+                    return
+                }
+                self.handleObservations(observations: observations, image: image, completion: completion)
+            } else {
+                completion(.notFound)
+                return
             }
         })
         do {
@@ -47,10 +64,9 @@ class PredictionEngine {
         } catch {
           print(error.localizedDescription)
         }
-        return self.currentGazePredictionRaw
     }
     
-    func handleObservations(observations: [VNFaceObservation], image: CGImage) {
+    func handleObservations(observations: [VNFaceObservation], image: CGImage, completion: @escaping (GazeDetectionResult) -> Void) {
         if observations.isEmpty {
             return
         } else { // Only use first face observed.
@@ -92,6 +108,7 @@ class PredictionEngine {
             self.currentGazePredictionCM = (predictedX, predictedY)
             self.currentGazePrediction = (screenX, screenY)
             self.currentGazePredictionRaw = (predictedX, predictedY)
+            completion(.success(self.currentGazePredictionRaw))
         }
     }
 }

@@ -35,6 +35,7 @@ class StaticTestViewController: UIViewController {
     private var testCurrGazeLocLayers: [CAShapeLayer] = []
     
     // Data stores
+    private var rawGazeEst: (Double, Double) = (0,0)
     private var gazePredictions: [(Double,Double)] = []
     private var gazePredictionsCM: [(Double,Double)] = []
     private var averageGazePredictions: [CGPoint] = []
@@ -221,10 +222,19 @@ class StaticTestViewController: UIViewController {
 extension StaticTestViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         if testInProgress {
-            let gazePrediction: (Double, Double) = self.predictionEngine!.predictGaze(sampleBuffer: sampleBuffer)
-            let transformedPrediction = transformPrediction(prediction: gazePrediction)
+            self.predictionEngine!.predictGaze(sampleBuffer: sampleBuffer) { [weak self] result in
+                switch result {
+                case .success(let prediction):
+                    self?.rawGazeEst = prediction
+                case .failure(let error):
+                    print("Error performing gaze detection: \(error)")
+                default:
+                    return
+                }
+            }
+            let transformedPrediction = transformPrediction(prediction: self.rawGazeEst)
             self.gazePredictions.append(transformedPrediction)
-            self.gazePredictionsCM.append(PredictionUtilities.scalePrediction(prediction: gazePrediction, xScaling: self.xScaling, yScaling: self.yScaling, xTranslation: self.xTranslation, yTranslation: self.yTranslation))
+            self.gazePredictionsCM.append(PredictionUtilities.scalePrediction(prediction: self.rawGazeEst, xScaling: self.xScaling, yScaling: self.yScaling, xTranslation: self.xTranslation, yTranslation: self.yTranslation))
             DispatchQueue.main.sync {
                 self.drawBlueDot(location: PredictionUtilities.cgPointFromDoubleTuple(doubleTuple: transformedPrediction))
             }
