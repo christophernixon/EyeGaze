@@ -232,6 +232,14 @@ extension PDFViewControllerITracker: AVCaptureVideoDataOutputSampleBufferDelegat
                 self.gazeEstimations = returnQueue
                 self.currAvgGazeEst = CGPoint(x: averageX, y: averageY)
             }
+            DispatchQueue.main.sync {
+                if (!self.isFaceDetected) {
+                    self.navigationItem.title = NSLocalizedString("No face detected", comment: "view PDF nav title")
+                    self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.red]
+                } else {
+                    self.navigationItem.title = nil
+                }
+            }
         }
     }
     

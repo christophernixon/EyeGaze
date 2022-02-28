@@ -269,6 +269,12 @@ extension PDFViewController : StatusDelegate {
 extension PDFViewController : GazeDelegate {
     
     func onGaze(gazeInfo : GazeInfo) {
+        if (gazeInfo.trackingState.description == "FACE_MISSING") {
+            self.navigationItem.title = NSLocalizedString("No face detected", comment: "view PDF nav title")
+            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.red]
+        } else {
+            self.navigationItem.title = nil
+        }
         let (predictSpacePointX, predictSpacePointY)  = PredictionUtilities.screenToPredictionCoords(xScreen: gazeInfo.x, yScreen: gazeInfo.y, orientation: .up)
         // Waits for half a second, turns page then allows next page turn after one second
         if (self.canTurnPage && self.pageTurningImplementation == .singleAnimation && gazeInfo.x > self.bottomRightCornerThreshold.x && gazeInfo.y > self.bottomRightCornerThreshold.y) {

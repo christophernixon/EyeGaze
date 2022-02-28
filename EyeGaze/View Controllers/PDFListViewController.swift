@@ -63,7 +63,7 @@ class PDFListViewController: UITableViewController {
         super.viewDidLoad()
         pdfListDataSource = PDFListDataSource()
         tableView.dataSource = pdfListDataSource
-        navigationItem.title = NSLocalizedString("Sheet Music Library", comment: "PDFList nav title")
+//        navigationItem.title = NSLocalizedString("Sheet Music Library", comment: "PDFList nav title")
         do {
             self.iTrackerModel = try iTracker_v2(configuration: MLModelConfiguration())
         } catch {

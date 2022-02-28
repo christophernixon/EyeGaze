@@ -33,18 +33,22 @@ class AnimatedPDFViewController: UIPageViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.isTranslucent = false
         initGazeTracking()
         self.dataSource = self
+        self.delegate = self
         let pageCount = (self.pdf?.document.pageCount ?? 1) - 1
         for index in 0...pageCount {
             let page: PDFPage = (self.pdf?.document.page(at: index)!)!
-            let pdfView: PDFView = PDFView(frame: self.view.frame)
+            let pdfView: PDFView = PDFView()
+            pdfView.frame = self.view.bounds
             pdfView.document = self.pdf?.document
             pdfView.displayMode = .singlePage
             pdfView.go(to: page)
             pdfView.autoScales = true
             let vc = UIViewController()
             vc.view = pdfView
+            vc.view.frame = self.view.bounds
             pages.append(vc)
         }
         
@@ -92,7 +96,11 @@ extension AnimatedPDFViewController: UIPageViewControllerDataSource
     }
 }
 
-extension AnimatedPDFViewController: UIPageViewControllerDelegate { }
+extension AnimatedPDFViewController: UIPageViewControllerDelegate {
+    func pageViewController(_ pageViewController: UIPageViewController, spineLocationFor orientation: UIInterfaceOrientation) -> UIPageViewController.SpineLocation {
+        return .max
+    }
+}
 
 // Gaze tracking stuff
 extension AnimatedPDFViewController {
@@ -144,6 +152,12 @@ extension AnimatedPDFViewController : StatusDelegate {
 extension AnimatedPDFViewController : GazeDelegate {
     
     func onGaze(gazeInfo : GazeInfo) {
+        if (gazeInfo.trackingState.description == "FACE_MISSING") {
+            self.navigationItem.title = NSLocalizedString("No face detected", comment: "view PDF nav title")
+            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.red]
+        } else {
+            self.navigationItem.title = nil
+        }
         let (predictSpacePointX, predictSpacePointY)  = PredictionUtilities.screenToPredictionCoords(xScreen: gazeInfo.x, yScreen: gazeInfo.y, orientation: .up)
         // Waits for half a second, turns page then allows next page turn after one second
         if (self.canTurnPage && self.pageTurningImplementation == .singleAnimation && gazeInfo.x > self.bottomRightCornerThreshold.x && gazeInfo.y > self.bottomRightCornerThreshold.y) {

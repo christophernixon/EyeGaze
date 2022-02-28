@@ -53,8 +53,9 @@ class AnimatedPDFViewControllerITracker: UIPageViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = NSLocalizedString(pdf?.shortTitle ?? "View PDF", comment: "view PDF nav title")
+        self.navigationController?.navigationBar.isTranslucent = false
         self.dataSource = self
+        self.delegate = self
         let pageCount = (self.pdf?.document.pageCount ?? 1) - 1
         for index in 0...pageCount {
             let page: PDFPage = (self.pdf?.document.page(at: index)!)!
@@ -106,6 +107,13 @@ extension AnimatedPDFViewControllerITracker {
         self.changeSlide()
     }
 }
+
+extension AnimatedPDFViewControllerITracker: UIPageViewControllerDelegate {
+    func pageViewController(_ pageViewController: UIPageViewController, spineLocationFor orientation: UIInterfaceOrientation) -> UIPageViewController.SpineLocation {
+        return .max
+    }
+}
+
 // Allowing user to flick between pages
 extension AnimatedPDFViewControllerITracker: UIPageViewControllerDataSource
 {
@@ -200,6 +208,15 @@ extension AnimatedPDFViewControllerITracker: AVCaptureVideoDataOutputSampleBuffe
             RunLoop.main.add(timer, forMode: .common)
             let unlockTimer = Timer(timeInterval: 1.5, target: self, selector: #selector(resetPageTurningBlock), userInfo: nil, repeats: false)
             RunLoop.main.add(unlockTimer, forMode: .common)
+        }
+        
+        DispatchQueue.main.sync {
+            if (!self.isFaceDetected) {
+                self.navigationItem.title = NSLocalizedString("No face detected", comment: "view PDF nav title")
+                self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.red]
+            } else {
+                self.navigationItem.title = nil
+            }
         }
     }
     

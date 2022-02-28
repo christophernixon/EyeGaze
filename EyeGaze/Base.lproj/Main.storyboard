@@ -52,33 +52,36 @@
                             <outlet property="delegate" destination="Hbl-lb-221" id="d22-QA-1gn"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="27n-9P-62c">
-                        <nil key="title"/>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="pmL-oH-4iQ">
-                            <rect key="frame" x="132" y="8.5" width="491" height="33"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <segments>
-                                <segment title="Scrolling"/>
-                                <segment title="Single Animation"/>
-                                <segment title="Double Animation"/>
-                            </segments>
-                            <connections>
-                                <action selector="implementationControlChanged:" destination="Hbl-lb-221" eventType="valueChanged" id="UEo-62-pXW"/>
-                            </connections>
-                        </segmentedControl>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="Hdp-QZ-E9v">
-                            <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="jZb-QG-CWN">
-                                <rect key="frame" x="629" y="8.5" width="185" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="SeeSo"/>
-                                    <segment title="iTracker"/>
-                                </segments>
-                                <connections>
-                                    <action selector="gazeImplementationControlChanged:" destination="Hbl-lb-221" eventType="valueChanged" id="VEI-vW-XDu"/>
-                                </connections>
-                            </segmentedControl>
-                        </barButtonItem>
+                    <navigationItem key="navigationItem" prompt="Sheet Music Library" id="27n-9P-62c">
+                        <rightBarButtonItems>
+                            <barButtonItem style="plain" id="Hdp-QZ-E9v">
+                                <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="jZb-QG-CWN">
+                                    <rect key="frame" x="629" y="42.5" width="185" height="33"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <segments>
+                                        <segment title="SeeSo"/>
+                                        <segment title="iTracker"/>
+                                    </segments>
+                                    <connections>
+                                        <action selector="gazeImplementationControlChanged:" destination="Hbl-lb-221" eventType="valueChanged" id="VEI-vW-XDu"/>
+                                    </connections>
+                                </segmentedControl>
+                            </barButtonItem>
+                            <barButtonItem style="plain" id="ohl-SQ-cdm">
+                                <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="pmL-oH-4iQ">
+                                    <rect key="frame" x="130" y="42.5" width="491" height="33"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <segments>
+                                        <segment title="Scrolling"/>
+                                        <segment title="Single Animation"/>
+                                        <segment title="Double Animation"/>
+                                    </segments>
+                                    <connections>
+                                        <action selector="implementationControlChanged:" destination="Hbl-lb-221" eventType="valueChanged" id="UEo-62-pXW"/>
+                                    </connections>
+                                </segmentedControl>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="gazeImplementationSegmentedControl" destination="jZb-QG-CWN" id="T5i-a0-U7D"/>
