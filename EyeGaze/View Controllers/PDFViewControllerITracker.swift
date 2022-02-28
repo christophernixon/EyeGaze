@@ -1,8 +1,8 @@
 //
-//  PDFViewController.swift
+//  PDFViewControllerITracker.swift
 //  EyeGaze
 //
-//  Created by Chris Nixon on 07/01/2022.
+//  Created by Chris Nixon on 28/02/2022.
 //
 
 import SeeSo
@@ -71,7 +71,6 @@ class PDFViewControllerITracker: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Using itracker")
         navigationItem.title = NSLocalizedString(pdf?.shortTitle ?? "View PDF", comment: "view PDF nav title")
         view.addSubview(pdfView)
         pdfView.document = pdf?.document

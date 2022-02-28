@@ -14,11 +14,12 @@ class Constants {
     // Segues
     public static let showPDFSegue = "showPDFSegue"
     public static let showPDFiTrackerSegue = "showPDFiTrackerSegue"
+    public static let showAnimatedPDFSegue = "showAnimatedPDFSegue"
+    public static let showAnimatedPDFiTrackerSegue = "showAnimatedPDFiTrackerSegue"
+    public static let showDoubleAnimatedPDFSegue = "showDoubleAnimatedPDFSegue"
     public static let liveFeedViewSegue = "showLiveFeedSegue"
     public static let staticViewSegue = "showStaticViewSegue"
     public static let debugViewSegue = "showDebugViewSegue"
-    public static let showAnimatedPDFSegue = "showAnimatedPDFSegue"
-    public static let showDoubleAnimatedPDFSegue = "showDoubleAnimatedPDFSegue"
     
     // Window size for rolling average of gaze estimations
     public static let rollingAverageWindowSize: Int = 7

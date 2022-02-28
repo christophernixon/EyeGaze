@@ -43,7 +43,7 @@ class PDFListViewController: UITableViewController {
                   let cell = sender as? UITableViewCell,
                   let indexPath = tableView.indexPath(for: cell) {
             let pdf = PDF.testData[indexPath.row]
-            destination.configure(with: pdf, pageTurningImplementation: self.pageTurningImplementation)
+            destination.configure(with: pdf, pageTurningImplementation: self.pageTurningImplementation, gazeTrackingImplementation: self.gazeDetectionImplementation, iTrackerModel: self.iTrackerModel!)
         } else if segue.identifier == Constants.showDoubleAnimatedPDFSegue,
                   let destination = segue.destination as? ModalPDFViewController,
                   let cell = sender as? UITableViewCell,

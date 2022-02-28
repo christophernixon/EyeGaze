@@ -17,7 +17,6 @@ class AnimatedPDFViewController: UIPageViewController {
     var tracker : GazeTracker? = nil
     private var pageTurningImplementation: PageTurningImplementation = .scrolling
     private var currGazePrediction: CGPoint = CGPoint(x: 0, y: 0)
-    private var displayLink: CADisplayLink?
     private var canTurnPage: Bool = true
     private var bottomRightCornerThreshold: CGPoint = CGPoint(x: Constants.iPadScreenWidthPoints - Constants.iPadScreenWidthPoints/3, y: Constants.iPadScreenHeightPoints - Constants.iPadScreenHeightPoints/5)
     
@@ -48,7 +47,6 @@ class AnimatedPDFViewController: UIPageViewController {
             vc.view = pdfView
             pages.append(vc)
         }
-        
         
         if let firstVC = pages.first
         {
