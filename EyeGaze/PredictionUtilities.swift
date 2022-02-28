@@ -470,21 +470,3 @@ class PredictionUtilities {
         print("")
     }
 }
-
-extension Float {
-    func toIntTruncated() -> Int {
-        let maxTruncated  = min(self, Float(Int.max).nextDown)
-        let bothTruncated = max(maxTruncated, Float(Int.min))
-        return Int(bothTruncated)
-    }
-}
-
-extension Collection where Self.Iterator.Element: RandomAccessCollection {
-    // PRECONDITION: `self` must be rectangular, i.e. every row has equal size.
-    func transposed() -> [[Self.Iterator.Element.Iterator.Element]] {
-        guard let firstRow = self.first else { return [] }
-        return firstRow.indices.map { index in
-            self.map{ $0[index] }
-        }
-    }
-}

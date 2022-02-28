@@ -223,62 +223,11 @@ class DetectFeatures {
     }
 }
 
-extension UIImage {
-    public func resized(to target: CGSize) -> UIImage {
-        let ratio = min(
-            target.height / size.height, target.width / size.width
-        )
-        let new = CGSize(
-            width: size.width * ratio, height: size.height * ratio
-        )
-        let renderer = UIGraphicsImageRenderer(size: target)
-        return renderer.image { _ in
-            self.draw(in: CGRect(origin: .zero, size: target))
-        }
-    }
-}
 
-extension TimeInterval {
-    init?(dispatchTimeInterval: DispatchTimeInterval) {
-        switch dispatchTimeInterval {
-        case .seconds(let value):
-            self = Double(value)
-        case .milliseconds(let value):
-            self = Double(value) / 1_000
-        case .microseconds(let value):
-            self = Double(value) / 1_000_000
-        case .nanoseconds(let value):
-            self = Double(value) / 1_000_000_000
-        case .never:
-            return nil
-        }
-    }
-}
 
-extension TimeInterval{
 
-func stringFromTimeInterval() -> String {
 
-    let time = NSInteger(self)
 
-    let seconds = time % 60
-    let minutes = (time / 60) % 60
-    let hours = (time / 3600)
-
-    var formatString = ""
-    if hours == 0 {
-        if(minutes < 10) {
-            formatString = "%2d:%0.2d"
-        }else {
-            formatString = "%0.2d:%0.2d"
-        }
-        return String(format: formatString,minutes,seconds)
-    }else {
-        formatString = "%2d:%0.2d:%0.2d"
-        return String(format: formatString,hours,minutes,seconds)
-    }
-}
-}
 
 
 //extension CGSize {
@@ -300,9 +249,3 @@ func stringFromTimeInterval() -> String {
 //func + (left: CGPoint, right: CGPoint) -> CGPoint {
 //  return CGPoint(x: left.x + right.x, y: left.y + right.y)
 //}
-
-public enum FaceCropResult {
-    case success((Double, Double, [CGImage]))
-    case notFound
-    case failure(Error)
-}

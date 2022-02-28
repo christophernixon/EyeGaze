@@ -24,17 +24,26 @@ class PDFViewController: UIViewController {
     private var scrollView: UIScrollView?
     
     // Scrolling
+    
+    private var pageTurningImplementation: PageTurningImplementation = .scrolling
     private var scrollSpeed: CGFloat = 0.1
     private var scrollOffset: CGPoint = CGPoint(x: 0.0, y: 0.0)
     private var currScrollYOffset: CGFloat = 0.0
     private var maxScrollOffset: CGFloat = .zero
     private var displayLink: CADisplayLink?
-    private var halfScreenThreshold: CGFloat = CGFloat(Constants.iPadScreenHeightPoints/2)
-    private var bottomQuarterScreenThreshold: CGFloat = CGFloat(Constants.iPadScreenHeightPoints - Constants.iPadScreenHeightPoints/4)
-    private var bottomRightCornerThreshold: CGPoint = CGPoint(x: Constants.iPadScreenWidthPoints - Constants.iPadScreenWidthPoints/3, y: Constants.iPadScreenHeightPoints - Constants.iPadScreenHeightPoints/5)
     private var currSpeed: Speed = Speed.slow
     private var prevSpeed: Speed = Speed.slow
     private var rateOfSpeedChange = 0.001
+    private var canScroll: Bool = true
+    
+    // Page turning
+    
+    private var canTurnPage: Bool = true
+    
+    // Thresholds
+    private var halfScreenThreshold: CGFloat = CGFloat(Constants.iPadScreenHeightPoints/2)
+    private var bottomQuarterScreenThreshold: CGFloat = CGFloat(Constants.iPadScreenHeightPoints - Constants.iPadScreenHeightPoints/4)
+    private var bottomRightCornerThreshold: CGPoint = CGPoint(x: Constants.iPadScreenWidthPoints - Constants.iPadScreenWidthPoints/3, y: Constants.iPadScreenHeightPoints - Constants.iPadScreenHeightPoints/5)
     
     enum Speed {
         case slow
@@ -46,8 +55,9 @@ class PDFViewController: UIViewController {
         case fast
     }
     
-    func configure(with pdf: PDF) {
+    func configure(with pdf: PDF, pageTurningImplementation implementation: PageTurningImplementation) {
         self.pdf = pdf
+        self.pageTurningImplementation = implementation
     }
     
     func initGazeTracking() {
@@ -70,6 +80,8 @@ class PDFViewController: UIViewController {
         view.addSubview(pdfView)
         pdfView.document = pdf?.document
         pdfView.autoScales = true
+        
+//        pdfView.usePageViewController(true, withViewOptions: nil)
 //        let timer = Timer(timeInterval: 0.5, target: self, selector: #selector(printContentOffset), userInfo: nil, repeats: false)
 //        RunLoop.current.add(timer, forMode: .common)
         
@@ -96,37 +108,43 @@ class PDFViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print(self.bottomQuarterScreenThreshold)
         //Initialize a new display link inside a displayLink variable, providing 'self'
         //as target object and a selector to be called when the screen is updated.
-        displayLink = CADisplayLink(target: self, selector: #selector(step(displaylink:)))
-
-        // And add the displayLink variable to the current run loop with default mode.
-        displayLink?.add(to: .current, forMode: .common)
+        if (pageTurningImplementation == .scrolling) {
+            self.displayLink = CADisplayLink(target: self, selector: #selector(step(displaylink:)))
+            // And add the displayLink variable to the current run loop with default mode.
+            self.displayLink?.add(to: .current, forMode: .common)
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.tracker?.stopTracking()
-        self.displayLink?.invalidate()
+        if (pageTurningImplementation == .scrolling) {
+            self.displayLink?.invalidate()
+        }
     }
     
     @objc func step(displaylink: CADisplayLink) {
+        // Check that user-initiated scroll event isn't happening
+        if (!canScroll) {
+            return
+        }
         // Adjust scrolling speed
         if (currGazePrediction.y > bottomQuarterScreenThreshold) {
-            if (self.scrollSpeed < 0.6) {
+            if (self.scrollSpeed < 0.7) {
                 self.scrollSpeed += self.rateOfSpeedChange
             } else {
-                self.scrollSpeed = 0.6
+                self.scrollSpeed = 0.7
             }
             self.currSpeed = Speed.fast
             self.prevSpeed = Speed.fast
         } else if (currGazePrediction.y > halfScreenThreshold) {
             if (self.prevSpeed == Speed.slow) {
-                if (self.scrollSpeed < 0.3) {
+                if (self.scrollSpeed < 0.4) {
                     self.scrollSpeed += self.rateOfSpeedChange
                 } else {
-                    self.scrollSpeed = 0.3
+                    self.scrollSpeed = 0.4
                     self.prevSpeed = Speed.medium
                 }
             } else if (self.prevSpeed == Speed.fast) {
@@ -189,32 +207,28 @@ class PDFViewController: UIViewController {
     }
 }
 
-// Exposing scrollView component
-extension PDFView {
-    public var scrollView: UIScrollView? {
-        for view in self.subviews {
-            if let scrollView = view as? UIScrollView {
-                return scrollView
-            }
-        }
-        return nil
-    }
-}
 // Scrolling extensions
 extension PDFViewController : UIScrollViewDelegate {
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        // Halt auto-scrolling to allow user to override and scroll themselves
+        self.canScroll = false
+    }
     
 //    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
 //        self.scrollView!.setContentOffset(self.scrollView!.contentOffset, animated: true)
 //    }
     
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        //        endOfScroll()
-    }
-    
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         //      if !decelerate {
         //         endOfScroll()
         //      }
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        // Scrolling animation initiated by user has ended, auto-scrolling can continue.
+        self.currScrollYOffset = scrollView.contentOffset.y
+        self.canScroll = true
     }
     
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
@@ -256,15 +270,30 @@ extension PDFViewController : GazeDelegate {
     
     func onGaze(gazeInfo : GazeInfo) {
         let (predictSpacePointX, predictSpacePointY)  = PredictionUtilities.screenToPredictionCoords(xScreen: gazeInfo.x, yScreen: gazeInfo.y, orientation: .up)
-        // y: 180, x: 115
-        if (gazeInfo.x > self.bottomRightCornerThreshold.x && gazeInfo.y > self.bottomRightCornerThreshold.y) {
-            print("TURNING PAGE")
+        // Waits for half a second, turns page then allows next page turn after one second
+        if (self.canTurnPage && self.pageTurningImplementation == .singleAnimation && gazeInfo.x > self.bottomRightCornerThreshold.x && gazeInfo.y > self.bottomRightCornerThreshold.y) {
+            // Prevent page being turning more than once
+            self.canTurnPage = false
+            let timer = Timer(timeInterval: 0.5, target: self, selector: #selector(turnPage), userInfo: nil, repeats: false)
+            RunLoop.current.add(timer, forMode: .common)
+            let unlockTimer = Timer(timeInterval: 1.5, target: self, selector: #selector(resetPageTurningBlock), userInfo: nil, repeats: false)
+            RunLoop.current.add(unlockTimer, forMode: .common)
         }
 //        print("timestamp : \(gazeInfo.timestamp), (x , y) : (\(gazeInfo.x), \(gazeInfo.y)) , (x , y) : (\(predictSpacePointX), \(predictSpacePointY)) state : \(gazeInfo.trackingState.description), speed : \(self.currSpeed)")
         self.currGazePrediction = CGPoint(x: gazeInfo.x, y: gazeInfo.y)
 //        if (!gazeInfo.x.isNaN) {
 //            drawGreenDot(location: CGPoint(x: gazeInfo.x, y: gazeInfo.y))
 //        }
+    }
+    
+    @objc
+    func resetPageTurningBlock() {
+        self.canTurnPage = true
+    }
+    
+    @objc
+    func turnPage() {
+        self.pdfView.goToNextPage(nil)
     }
     
     func drawGreenDot(location: CGPoint) {

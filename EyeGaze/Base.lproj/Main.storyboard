@@ -44,7 +44,6 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="pdfTitleLabel" destination="MTH-SC-ftu" id="76B-3F-zkc"/>
-                                    <segue destination="B0Z-i3-SZW" kind="show" identifier="ShowPDFSegue" id="tXM-6h-Tt3"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -53,9 +52,28 @@
                             <outlet property="delegate" destination="Hbl-lb-221" id="d22-QA-1gn"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="27n-9P-62c"/>
+                    <navigationItem key="navigationItem" id="27n-9P-62c">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="pmL-oH-4iQ">
+                            <rect key="frame" x="171.5" y="8.5" width="491" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Scrolling"/>
+                                <segment title="Page Turning"/>
+                                <segment title="Animated Page Turning"/>
+                            </segments>
+                            <connections>
+                                <action selector="implementationControlChanged:" destination="Hbl-lb-221" eventType="valueChanged" id="UEo-62-pXW"/>
+                            </connections>
+                        </segmentedControl>
+                    </navigationItem>
                     <connections>
+                        <outlet property="implementationSegmentedControl" destination="pmL-oH-4iQ" id="OC3-iD-sJy"/>
                         <outlet property="testImage" destination="End-L4-6ev" id="Gdh-4v-USp"/>
+                        <segue destination="B0Z-i3-SZW" kind="show" identifier="ShowPDFSegue" id="4WE-ox-YXw"/>
+                        <segue destination="AvL-rR-7OT" kind="show" identifier="showDoubleAnimatedPDFSegue" id="jzz-r7-dMo"/>
+                        <segue destination="lP3-LI-4QI" kind="show" identifier="showAnimatedPDFSegue" id="oYi-Zc-o1h"/>
+                        <segue destination="9Gx-IH-uUq" kind="show" identifier="showPDFiTrackerSegue" id="nwV-d5-l0N"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="of1-do-aan" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -92,7 +110,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="elq-qH-05K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2762.5899280575541" y="160.80402010050253"/>
+            <point key="canvasLocation" x="4168" y="38"/>
+        </scene>
+        <!--View ControllerI Tracker-->
+        <scene sceneID="cIH-Ly-T30">
+            <objects>
+                <viewController id="9Gx-IH-uUq" customClass="PDFViewControllerITracker" customModule="EyeGaze" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9fA-Gd-1Rg">
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="MLf-fr-C8Y"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="9Mf-a0-fMh"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tca-vO-Yfg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4168" y="701"/>
         </scene>
         <!--Path Choose View Controller-->
         <scene sceneID="NCU-lI-cWR">
@@ -254,6 +288,38 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ufv-sK-LA7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1722" y="-610"/>
+        </scene>
+        <!--ModalPDF View Controller-->
+        <scene sceneID="k61-hQ-Ret">
+            <objects>
+                <viewController id="AvL-rR-7OT" customClass="ModalPDFViewController" customModule="EyeGaze" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VFX-Rt-XVa">
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="x1e-5f-cvc"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Nkn-wL-HJ0"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GaG-sp-nal" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4168" y="-2541"/>
+        </scene>
+        <!--Parent AnimatedPDF View Controller-->
+        <scene sceneID="t3o-ms-jfy">
+            <objects>
+                <viewController id="lP3-LI-4QI" customClass="ParentAnimatedPDFViewController" customModule="EyeGaze" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vdT-Xt-ptD">
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="EDw-R4-ge0"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Zja-NC-d2E"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="edX-wB-MgV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4168" y="-1187"/>
         </scene>
         <!--Static View Controller-->
         <scene sceneID="rPB-sT-UaK">

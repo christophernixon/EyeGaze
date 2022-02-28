@@ -7,10 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C16B1FA27C91DCA00F86B54 /* ModelPDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C16B1F927C91DCA00F86B54 /* ModelPDFViewController.swift */; };
+		8C16B1FD27CA3A5400F86B54 /* TileTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C16B1FC27CA3A5400F86B54 /* TileTransition.swift */; };
+		8C16B1FF27CA3A6100F86B54 /* TileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C16B1FE27CA3A6100F86B54 /* TileViewController.swift */; };
+		8C16B20127CD32C000F86B54 /* PDFViewControllerITracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C16B20027CD32C000F86B54 /* PDFViewControllerITracker.swift */; };
+		8C16B20327CD330D00F86B54 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C16B20227CD330D00F86B54 /* Extensions.swift */; };
 		8C210C3D2791908700D0152B /* DetectFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C210C3C2791908700D0152B /* DetectFeatures.swift */; };
 		8C210C3F279620E100D0152B /* LiveFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C210C3E279620E000D0152B /* LiveFeedViewController.swift */; };
 		8C210C412796284400D0152B /* StaticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C210C402796284300D0152B /* StaticViewController.swift */; };
 		8C2B45A327BFA5FD000CF377 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2B45A227BFA5FD000CF377 /* Constants.swift */; };
+		8C2B45A527C3D55E000CF377 /* AnimatedPDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2B45A427C3D55D000CF377 /* AnimatedPDFViewController.swift */; };
+		8C2B45A727C4F146000CF377 /* ParentAnimatedPDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2B45A627C4F145000CF377 /* ParentAnimatedPDFViewController.swift */; };
 		8C31BF4B278888DA00EE3359 /* EinTraum.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8C31BF49278888DA00EE3359 /* EinTraum.pdf */; };
 		8C31BF4E2788927900EE3359 /* PDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31BF4D2788927900EE3359 /* PDF.swift */; };
 		8C31BF502788AA9900EE3359 /* PDFListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31BF4F2788AA9900EE3359 /* PDFListCell.swift */; };
@@ -71,10 +78,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8C16B1F927C91DCA00F86B54 /* ModelPDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelPDFViewController.swift; sourceTree = "<group>"; };
+		8C16B1FC27CA3A5400F86B54 /* TileTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileTransition.swift; sourceTree = "<group>"; };
+		8C16B1FE27CA3A6100F86B54 /* TileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileViewController.swift; sourceTree = "<group>"; };
+		8C16B20027CD32C000F86B54 /* PDFViewControllerITracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewControllerITracker.swift; sourceTree = "<group>"; };
+		8C16B20227CD330D00F86B54 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		8C210C3C2791908700D0152B /* DetectFeatures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectFeatures.swift; sourceTree = "<group>"; };
 		8C210C3E279620E000D0152B /* LiveFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveFeedViewController.swift; sourceTree = "<group>"; };
 		8C210C402796284300D0152B /* StaticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticViewController.swift; sourceTree = "<group>"; };
 		8C2B45A227BFA5FD000CF377 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		8C2B45A427C3D55D000CF377 /* AnimatedPDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedPDFViewController.swift; sourceTree = "<group>"; };
+		8C2B45A627C4F145000CF377 /* ParentAnimatedPDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentAnimatedPDFViewController.swift; sourceTree = "<group>"; };
 		8C31BF49278888DA00EE3359 /* EinTraum.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EinTraum.pdf; sourceTree = "<group>"; };
 		8C31BF4D2788927900EE3359 /* PDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDF.swift; sourceTree = "<group>"; };
 		8C31BF4F2788AA9900EE3359 /* PDFListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFListCell.swift; sourceTree = "<group>"; };
@@ -132,6 +146,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C16B1FB27CA3A3900F86B54 /* Transitions */ = {
+			isa = PBXGroup;
+			children = (
+				8C16B1FC27CA3A5400F86B54 /* TileTransition.swift */,
+				8C16B1FE27CA3A6100F86B54 /* TileViewController.swift */,
+			);
+			path = Transitions;
+			sourceTree = "<group>";
+		};
 		8CB4CEE52771F4C200E20DC2 = {
 			isa = PBXGroup;
 			children = (
@@ -155,6 +178,7 @@
 		8CB4CEF02771F4C200E20DC2 /* EyeGaze */ = {
 			isa = PBXGroup;
 			children = (
+				8C16B1FB27CA3A3900F86B54 /* Transitions */,
 				8CBAD7F627B137C400C43CC2 /* SeeSo.xcframework */,
 				8CBAD7F327B1351A00C43CC2 /* View Controllers */,
 				8C31BF49278888DA00EE3359 /* EinTraum.pdf */,
@@ -174,6 +198,7 @@
 				8C210C3C2791908700D0152B /* DetectFeatures.swift */,
 				8CF2098B27A18D4700B65336 /* PredictionEngine.swift */,
 				8C2B45A227BFA5FD000CF377 /* Constants.swift */,
+				8C16B20227CD330D00F86B54 /* Extensions.swift */,
 			);
 			path = EyeGaze;
 			sourceTree = "<group>";
@@ -200,6 +225,7 @@
 			children = (
 				8CB4CEF52771F4C200E20DC2 /* PDFListViewController.swift */,
 				8C31BF552788F19E00EE3359 /* PDFViewController.swift */,
+				8C16B20027CD32C000F86B54 /* PDFViewControllerITracker.swift */,
 				8C210C3E279620E000D0152B /* LiveFeedViewController.swift */,
 				8C210C402796284300D0152B /* StaticViewController.swift */,
 				8CF20989279DC48100B65336 /* DebugViewController.swift */,
@@ -207,6 +233,9 @@
 				8CF2098F27A2F2F600B65336 /* StaticTestViewController.swift */,
 				8CBAD7F427B1365C00C43CC2 /* SeeSoViewController.swift */,
 				8CBAD7FB27B1402700C43CC2 /* StaticSeeSoTestViewController.swift */,
+				8C2B45A427C3D55D000CF377 /* AnimatedPDFViewController.swift */,
+				8C2B45A627C4F145000CF377 /* ParentAnimatedPDFViewController.swift */,
+				8C16B1F927C91DCA00F86B54 /* ModelPDFViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -345,11 +374,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C16B20127CD32C000F86B54 /* PDFViewControllerITracker.swift in Sources */,
+				8C16B20327CD330D00F86B54 /* Extensions.swift in Sources */,
+				8C16B1FD27CA3A5400F86B54 /* TileTransition.swift in Sources */,
 				8CB4CEF62771F4C200E20DC2 /* PDFListViewController.swift in Sources */,
 				8CB4CEF22771F4C200E20DC2 /* AppDelegate.swift in Sources */,
 				8CBAD7F527B1365C00C43CC2 /* SeeSoViewController.swift in Sources */,
+				8C16B1FF27CA3A6100F86B54 /* TileViewController.swift in Sources */,
 				8C210C3F279620E100D0152B /* LiveFeedViewController.swift in Sources */,
+				8C2B45A727C4F146000CF377 /* ParentAnimatedPDFViewController.swift in Sources */,
 				8CA650F727AC3CF500F311D3 /* iTracker_v2.mlmodel in Sources */,
+				8C16B1FA27C91DCA00F86B54 /* ModelPDFViewController.swift in Sources */,
 				8C31BF4E2788927900EE3359 /* PDF.swift in Sources */,
 				8CA650F927AEE60B00F311D3 /* iTracker.mlmodel in Sources */,
 				8C210C412796284400D0152B /* StaticViewController.swift in Sources */,
@@ -358,6 +393,7 @@
 				8C31BF522788AF4F00EE3359 /* PDFListDataSource.swift in Sources */,
 				8CB4CEF42771F4C200E20DC2 /* SceneDelegate.swift in Sources */,
 				8CF2099027A2F2F600B65336 /* StaticTestViewController.swift in Sources */,
+				8C2B45A527C3D55E000CF377 /* AnimatedPDFViewController.swift in Sources */,
 				8C31BF562788F19E00EE3359 /* PDFViewController.swift in Sources */,
 				8CF2098A279DC48100B65336 /* DebugViewController.swift in Sources */,
 				8C2B45A327BFA5FD000CF377 /* Constants.swift in Sources */,
