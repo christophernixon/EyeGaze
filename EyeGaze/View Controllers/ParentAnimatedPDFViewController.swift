@@ -25,7 +25,7 @@ class ParentAnimatedPDFViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        navigationItem.title = NSLocalizedString(pdf?.shortTitle ?? "View PDF", comment: "view PDF nav title")
+        navigationItem.title = NSLocalizedString("Single Animation Mode", comment: "view PDF nav title")
         setupPageController()
     }
     

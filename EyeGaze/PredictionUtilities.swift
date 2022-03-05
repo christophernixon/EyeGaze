@@ -33,7 +33,6 @@ class PredictionUtilities {
     
     static func euclideanDistance(from: CGPoint, to: CGPoint) -> CGFloat {
         var distance = sqrt(pow(to.x - from.x, 2) + pow(to.y - from.y, 2))
-        print("Distance from: \(from.x), \(from.y) to \(to.x), \(to.y) = \(distance)")
         return distance
     }
     
@@ -173,6 +172,14 @@ class PredictionUtilities {
     
     static func screenToPredictionCoords(screenPoint: CGPoint, orientation: CGImagePropertyOrientation) -> (xPrediction: Double, yPrediction: Double) {
         return screenToPredictionCoords(xScreen: screenPoint.x, yScreen: screenPoint.y, orientation: orientation)
+    }
+    
+    static func screenToPredictionCoords(screenPoints: [CGPoint], orientation: CGImagePropertyOrientation) -> [(Double, Double)] {
+        var predictionCoords = [(Double, Double)] (repeating: (0.0,0.0), count: screenPoints.count)
+        for i in 0..<screenPoints.count {
+            predictionCoords[i] = screenToPredictionCoords(xScreen: screenPoints[i].x, yScreen: screenPoints[i].y, orientation: orientation)
+        }
+        return predictionCoords
     }
     
     static func screenToPredictionCoords(xScreen: Double, yScreen: Double, orientation: CGImagePropertyOrientation) -> (xPrediction: Double, yPrediction: Double) {

@@ -69,6 +69,10 @@ class PDFListViewController: UITableViewController {
         } catch {
             fatalError("Error while initialising iTracker model")
         }
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "calibrationDescriptionModalVC")
+        self.present(vc, animated: true)
         //        navigationItem.leftBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(segueToLiveFeed)), UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(segueToDebugView))]
         //        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(segueToStaticFeed))
         //        predict()

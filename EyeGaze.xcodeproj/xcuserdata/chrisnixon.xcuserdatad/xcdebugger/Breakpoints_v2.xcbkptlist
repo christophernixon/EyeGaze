@@ -309,8 +309,8 @@
             filePath = "EyeGaze/PredictionUtilities.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "346"
-            endingLineNumber = "346"
+            startingLineNumber = "353"
+            endingLineNumber = "353"
             landmarkName = "faceGridFromFaceRect(originalImage:detectedFaceRect:gridW:gridH:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -396,8 +396,8 @@
             filePath = "EyeGaze/PredictionUtilities.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "379"
-            endingLineNumber = "379"
+            startingLineNumber = "386"
+            endingLineNumber = "386"
             landmarkName = "faceGridFromFaceRect(originalImage:detectedFaceRect:gridW:gridH:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -476,8 +476,8 @@
             filePath = "EyeGaze/View Controllers/AnimatedPDFViewControllerITracker.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
+            startingLineNumber = "227"
+            endingLineNumber = "227"
             landmarkName = "captureOutput(_:didOutput:from:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -492,8 +492,8 @@
             filePath = "EyeGaze/View Controllers/AnimatedPDFViewControllerITracker.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
             landmarkName = "changeSlide()"
             landmarkType = "7">
          </BreakpointContent>
@@ -508,8 +508,8 @@
             filePath = "EyeGaze/View Controllers/AnimatedPDFViewControllerITracker.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
             landmarkName = "turnPage()"
             landmarkType = "7">
          </BreakpointContent>
@@ -524,9 +524,25 @@
             filePath = "EyeGaze/View Controllers/AnimatedPDFViewControllerITracker.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
             landmarkName = "resetPageTurningBlock()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CB99CFBB-AA3A-4E7B-8A7D-0E1397FA996D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EyeGaze/View Controllers/AnimatedPDFViewControllerITracker.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "loadUserDefaults()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DJF-Ql-q1k">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qEy-74-ivJ">
     <device id="ipad11_0rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
@@ -91,11 +91,12 @@
                         <segue destination="AvL-rR-7OT" kind="show" identifier="showDoubleAnimatedPDFSegue" id="jzz-r7-dMo"/>
                         <segue destination="lP3-LI-4QI" kind="show" identifier="showAnimatedPDFSegue" id="oYi-Zc-o1h"/>
                         <segue destination="9Gx-IH-uUq" kind="show" identifier="showPDFiTrackerSegue" id="nwV-d5-l0N"/>
+                        <segue destination="THE-rx-FOe" kind="presentation" identifier="showCalibrationDescriptionModalSegue" id="2Uf-Jl-Ov3"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="of1-do-aan" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1721.5827338129498" y="161.30653266331657"/>
+            <point key="canvasLocation" x="2475.5395683453239" y="161.30653266331657"/>
         </scene>
         <!--Live Feed View-->
         <scene sceneID="Dxg-Rh-7Ln">
@@ -127,7 +128,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="elq-qH-05K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4168" y="38"/>
+            <point key="canvasLocation" x="4921.5827338129502" y="37.688442211055275"/>
         </scene>
         <!--View ControllerI Tracker-->
         <scene sceneID="cIH-Ly-T30">
@@ -143,7 +144,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tca-vO-Yfg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4168" y="701"/>
+            <point key="canvasLocation" x="4921.5827338129502" y="700.5025125628141"/>
         </scene>
         <!--Path Choose View Controller-->
         <scene sceneID="NCU-lI-cWR">
@@ -154,17 +155,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sDL-L2-uBc">
-                                <rect key="frame" x="313.5" y="314" width="207" height="44"/>
+                                <rect key="frame" x="313.5" y="264" width="207" height="44"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="I'm a normal user">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="25"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="Hbl-lb-221" kind="show" identifier="showPDFListViewSegue" id="9ch-7e-b1D"/>
+                                    <segue destination="qEy-74-ivJ" kind="show" identifier="showPDFListViewSegue" id="9ch-7e-b1D"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="85W-w2-Pai">
-                                <rect key="frame" x="340" y="402" width="154.5" height="44"/>
+                                <rect key="frame" x="340" y="352" width="154.5" height="44"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Debug View">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="25"/>
@@ -174,7 +175,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ltX-Z0-c0t">
-                                <rect key="frame" x="318.5" y="490" width="197" height="44"/>
+                                <rect key="frame" x="318.5" y="440" width="197" height="44"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Static Gaze Test">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="25"/>
@@ -184,7 +185,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jkm-pz-nbx">
-                                <rect key="frame" x="345" y="578" width="144.5" height="44"/>
+                                <rect key="frame" x="345" y="528" width="144.5" height="44"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="SeeSo Test">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="25"/>
@@ -194,13 +195,24 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X1p-Il-wu6">
-                                <rect key="frame" x="311" y="666" width="212" height="44"/>
+                                <rect key="frame" x="311" y="616" width="212" height="44"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Static SeeSo Test">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="25"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <segue destination="b9L-DA-oJi" kind="show" identifier="showStaticSeeSoTestViewSegue" id="0kb-1B-arn"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PZZ-ap-noT">
+                                <rect key="frame" x="266" y="762" width="307" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="New Calibration Controller">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="25"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <segue destination="THE-rx-FOe" kind="show" identifier="showCalibrationViewSegue" id="nxT-P3-WdX"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -230,20 +242,20 @@
             <objects>
                 <viewController id="EeJ-pc-pSC" customClass="DebugViewController" customModule="EyeGaze" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hWG-jm-dJq">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6ft-Ox-w3S">
-                                <rect key="frame" x="88" y="74" width="658" height="658"/>
+                                <rect key="frame" x="88" y="0.0" width="528" height="528"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="6ft-Ox-w3S" secondAttribute="height" multiplier="15:15" id="2Cp-fd-Naa"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dNC-FP-grk">
-                                <rect key="frame" x="20" y="754" width="394" height="420"/>
+                                <rect key="frame" x="20" y="550" width="264" height="445.5"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="m5j-uS-aau">
-                                <rect key="frame" x="436" y="754" width="378" height="420"/>
+                                <rect key="frame" x="306" y="550" width="378" height="445.5"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="bDg-3K-WCB"/>
@@ -279,7 +291,7 @@
             <objects>
                 <viewController id="b9L-DA-oJi" customClass="StaticSeeSoTestViewController" customModule="EyeGaze" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pvh-fl-iHs">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="zDw-Zr-aEX"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -295,7 +307,7 @@
             <objects>
                 <viewController id="dAl-Gr-nUG" customClass="SeeSoViewController" customModule="EyeGaze" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PQU-38-WYS">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="b4F-FR-mbN"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -378,20 +390,170 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="eXJ-c6-xg1" kind="relationship" relationship="rootViewController" id="VIc-70-cAx"/>
-                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t5d-LT-2cp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-145.32374100719426" y="160.80402010050253"/>
+        </scene>
+        <!--Begin Calibration View Controller-->
+        <scene sceneID="bZV-K8-GQv">
+            <objects>
+                <viewController storyboardIdentifier="calibrationDescriptionModalVC" id="THE-rx-FOe" customClass="BeginCalibrationViewController" customModule="EyeGaze" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ggr-qB-unc">
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8nP-90-1kZ">
+                                <rect key="frame" x="52" y="240" width="600" height="100"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="600" id="WLx-Cz-W2i"/>
+                                    <constraint firstAttribute="height" constant="100" id="sdI-VV-juh"/>
+                                </constraints>
+                                <string key="text">Once you click "Begin First Calibration" ten red dots will appear on screen, one at a time. Please look at the centre of each dot as it appears.</string>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EHf-nV-VrX">
+                                <rect key="frame" x="222" y="390" width="260" height="44"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Begin First Calibration">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="25"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="beginCalibrationButtonPressed:" destination="THE-rx-FOe" eventType="touchUpInside" id="4Ub-Ti-Ydm"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7jE-ld-vgi">
+                                <rect key="frame" x="52" y="70" width="600" height="100"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="B3p-p6-9v7"/>
+                                    <constraint firstAttribute="width" constant="600" id="oMB-SD-gNv"/>
+                                </constraints>
+                                <string key="text">Welcome to EyeGaze! Before you can begin using the app we need to calibrate the two gaze detection systems we will be using. This should take about 45 seconds.</string>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="AFd-Jx-cag"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="EHf-nV-VrX" firstAttribute="top" secondItem="8nP-90-1kZ" secondAttribute="bottom" constant="50" id="3a2-AU-K7z"/>
+                            <constraint firstItem="8nP-90-1kZ" firstAttribute="centerX" secondItem="ggr-qB-unc" secondAttribute="centerX" id="MhO-NU-SQx"/>
+                            <constraint firstItem="EHf-nV-VrX" firstAttribute="centerX" secondItem="ggr-qB-unc" secondAttribute="centerX" id="Piq-N5-gyK"/>
+                            <constraint firstItem="8nP-90-1kZ" firstAttribute="top" secondItem="7jE-ld-vgi" secondAttribute="bottom" constant="70" id="cxI-df-zEp"/>
+                            <constraint firstItem="7jE-ld-vgi" firstAttribute="centerX" secondItem="ggr-qB-unc" secondAttribute="centerX" id="g4I-iQ-bu4"/>
+                            <constraint firstItem="7jE-ld-vgi" firstAttribute="top" secondItem="AFd-Jx-cag" secondAttribute="top" constant="70" id="ovr-am-W1y"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="qI2-MX-VaX"/>
+                    <connections>
+                        <outlet property="beginCalibrationButton" destination="EHf-nV-VrX" id="hw7-2v-QXY"/>
+                        <outlet property="calibrationExplanationText" destination="8nP-90-1kZ" id="fsR-Pk-FXY"/>
+                        <segue destination="CEj-w3-4m6" kind="presentation" identifier="showFirstCalibrationSegue" modalPresentationStyle="fullScreen" id="iAh-BH-6ay"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Ut-ew-5T0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-816" y="1722"/>
+        </scene>
+        <!--Second Calibration Detail View Controller-->
+        <scene sceneID="jwg-JO-jgs">
+            <objects>
+                <viewController id="oSa-qM-ZfG" customClass="SecondCalibrationDetailViewController" customModule="EyeGaze" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="s2e-r5-stp">
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="First calibration sucessfully completed. Please press &quot;Continue Calibration&quot; to begin the second and final calibration." textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4S-wa-pLt">
+                                <rect key="frame" x="52" y="70" width="600" height="120"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="2XW-bq-SqW"/>
+                                    <constraint firstAttribute="width" constant="600" id="VfI-LZ-OAn"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KTb-kF-W40">
+                                <rect key="frame" x="204.5" y="240" width="295.5" height="44"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Begin Second Calibration">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="25"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="continueCalibrationButtonPressed:" destination="oSa-qM-ZfG" eventType="touchUpInside" id="tOk-aa-Z7D"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="MKz-eC-4O0"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="C4S-wa-pLt" firstAttribute="top" secondItem="MKz-eC-4O0" secondAttribute="top" constant="70" id="F2U-g9-Gge"/>
+                            <constraint firstItem="C4S-wa-pLt" firstAttribute="centerX" secondItem="s2e-r5-stp" secondAttribute="centerX" id="SlB-6g-4gb"/>
+                            <constraint firstItem="KTb-kF-W40" firstAttribute="top" secondItem="C4S-wa-pLt" secondAttribute="bottom" constant="50" id="hh3-0h-Wr5"/>
+                            <constraint firstItem="KTb-kF-W40" firstAttribute="centerX" secondItem="s2e-r5-stp" secondAttribute="centerX" id="ngq-8w-XqT"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="u2a-5i-4cC"/>
+                    <connections>
+                        <outlet property="calibrationDescriptionText" destination="C4S-wa-pLt" id="uZH-Z8-sPR"/>
+                        <outlet property="continueCalibrationButton" destination="KTb-kF-W40" id="Qjz-mV-ovu"/>
+                        <segue destination="Qyx-WI-fJF" kind="presentation" identifier="showSecondCalibrationSegue" modalPresentationStyle="fullScreen" id="muf-Yl-r9C"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gvc-ND-nB7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-817" y="2397"/>
+        </scene>
+        <!--Calibration View Controller-->
+        <scene sceneID="Q72-rf-jF9">
+            <objects>
+                <viewController id="CEj-w3-4m6" customClass="CalibrationViewController" customModule="EyeGaze" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4se-tt-LFe">
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="hLO-fc-Jfe"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="B8Z-91-xh9"/>
+                    <connections>
+                        <segue destination="oSa-qM-ZfG" kind="presentation" identifier="showSecondCalibrationDescriptionSegue" modalPresentationStyle="automatic" id="F6F-Uy-FCW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RXY-B7-NCj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-12" y="1723"/>
+        </scene>
+        <!--Calibration View Controller-->
+        <scene sceneID="zag-Ad-Md0">
+            <objects>
+                <viewController id="Qyx-WI-fJF" customClass="CalibrationViewController" customModule="EyeGaze" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="b0n-JT-huZ">
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Tk0-XV-M39"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="eNU-Th-Tbi"/>
+                    <connections>
+                        <segue destination="qEy-74-ivJ" kind="presentation" identifier="finishCalibrationSegue" modalPresentationStyle="fullScreen" id="t3K-WS-9qe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5s5-OP-Uvw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-12" y="2397"/>
         </scene>
         <!--Static Test View Controller-->
         <scene sceneID="b6c-nh-1n5">
             <objects>
                 <viewController id="3e1-yr-Vn8" customClass="StaticTestViewController" customModule="EyeGaze" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LPS-hb-cFh">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="5vK-vx-guH"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -402,8 +564,49 @@
             </objects>
             <point key="canvasLocation" x="115" y="1023"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="brh-BG-sb9">
+            <objects>
+                <viewController id="OPE-no-vY0" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bH1-Ov-fls">
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="WwH-Ly-njG"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tju-c9-xkb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-886" y="1067"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="dbY-w9-vPR">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qEy-74-ivJ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="Hyb-yT-mZB"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cMI-Et-IA9">
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="50"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Hbl-lb-221" kind="relationship" relationship="rootViewController" id="faz-LM-wcg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkI-nn-he5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1721.5827338129498" y="161.30653266331657"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="t3K-WS-9qe"/>
+        <segue reference="2Uf-Jl-Ov3"/>
+    </inferredMetricsTieBreakers>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -19,8 +19,19 @@ class Constants {
     public static let showDoubleAnimatedPDFSegue = "showDoubleAnimatedPDFSegue"
     public static let liveFeedViewSegue = "showLiveFeedSegue"
     public static let staticViewSegue = "showStaticViewSegue"
+    public static let staticTestViewSegue = "showStaticTestViewSegue"
     public static let debugViewSegue = "showDebugViewSegue"
+    public static let calibrationViewSegue = "showCalibrationViewSegue"
+    public static let firstCalibrationSegue = "showFirstCalibrationSegue"
+    public static let secondCalibrationSegue = "showSecondCalibrationSegue"
+    public static let secondCalibrationDescriptionSegue = "showSecondCalibrationDescriptionSegue"
+    public static let calibrationDescriptionModalSegue = "showCalibrationDescriptionModalSegue"
+    public static let finishCalibrationSegue = "finishCalibrationSegue"
+    
+    // User default keys
+    public static let cornerAnchorsKeyiTracker = "cornerAnchorsitracker"
+    public static let cornerAnchorsKeySeeSo = "cornerAnchorsSeeSo"
     
     // Window size for rolling average of gaze estimations
-    public static let rollingAverageWindowSize: Int = 7
+    public static let rollingAverageWindowSize: Int = 15
 }

@@ -23,7 +23,7 @@ class StaticSeeSoTestViewController: UIViewController {
     // Translations in cm, converted to screen points in utility function
     private var xTranslation = 1.5
     private var yTranslation = 9.0
-    
+    // 680, 950
     private static let dotLocations: [CGPoint] = [CGPoint(x: 200, y: 200), CGPoint(x: 600, y: 200), CGPoint(x: 120, y: 450), CGPoint(x: 400, y: 450), CGPoint(x: 680, y: 450), CGPoint(x: 200, y: 700), CGPoint(x: 600, y: 700), CGPoint(x: 120, y: 950), CGPoint(x: 400, y: 950), CGPoint(x: 680, y: 950)]
     private var dotLocationsPredSpace: [(Double, Double)] = []
     private static let initialDelay: Double = 2.5

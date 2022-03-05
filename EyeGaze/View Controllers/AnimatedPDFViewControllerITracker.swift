@@ -51,8 +51,29 @@ class AnimatedPDFViewControllerITracker: UIPageViewController {
         self.predictionEngine = PredictionEngine(model: iTrackerModel)
     }
     
+    func loadUserDefaults() {
+        let userDefaults = UserDefaults.standard
+        let cornerAnchorsStrings = userDefaults.object(forKey: Constants.cornerAnchorsKeyiTracker) as? [String] ?? [String]()
+        if cornerAnchorsStrings.count != 4 {
+            print("No user calibration recieved, using default values for thresholds.")
+        } else {
+            var cornerAnchors: [CGPoint] = []
+            for point in cornerAnchorsStrings {
+                cornerAnchors.append(NSCoder.cgPoint(for: point))
+            }
+            let bottomScreenWidth = cornerAnchors[2].x - cornerAnchors[3].x
+            let bottomRightThresholdX = cornerAnchors[2].x - bottomScreenWidth/5
+            let rightScreenHeight = cornerAnchors[2].y - cornerAnchors[1].y
+            let bottomRightThresholdY = cornerAnchors[2].y - rightScreenHeight/8
+            print("Previous threshold: \(self.bottomRightCornerThreshold)")
+            self.bottomRightCornerThreshold = CGPoint(x: bottomRightThresholdX, y: bottomRightThresholdY)
+            print("Updated threshold: \(self.bottomRightCornerThreshold)")
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadUserDefaults()
         self.navigationController?.navigationBar.isTranslucent = false
         self.dataSource = self
         self.delegate = self
@@ -186,8 +207,8 @@ extension AnimatedPDFViewControllerITracker: AVCaptureVideoDataOutputSampleBuffe
                 sumX += gazeEstimations[i].0
                 sumY += gazeEstimations[i].1
             }
-            let averageX = sumX/5
-            let averageY = sumY/5
+            let averageX = sumX/Double(Constants.rollingAverageWindowSize)
+            let averageY = sumY/Double(Constants.rollingAverageWindowSize)
             
             // Update predictionQueue
             var returnQueue: [(Double,Double)] = [(Double, Double)] (repeating: (0.0,0.0), count: Constants.rollingAverageWindowSize)
@@ -199,14 +220,14 @@ extension AnimatedPDFViewControllerITracker: AVCaptureVideoDataOutputSampleBuffe
             self.currAvgGazeEst = CGPoint(x: averageX, y: averageY)
         }
         
-//        print("Current gaze estimate: \(self.currAvgGazeEst), (\(self.bottomRightCornerThreshold.x), \(self.bottomRightCornerThreshold.y)), \(self.pageTurningImplementation)")
+        print("Current gaze estimate: \(self.currAvgGazeEst), (\(self.bottomRightCornerThreshold.x), \(self.bottomRightCornerThreshold.y)), \(self.pageTurningImplementation)")
         
-        if (self.canTurnPage && self.pageTurningImplementation == .singleAnimation && self.currAvgGazeEst.x > self.bottomRightCornerThreshold.x && self.currAvgGazeEst.y > self.bottomRightCornerThreshold.y) {
+        if (self.canTurnPage && self.pageTurningImplementation == .singleAnimation && self.currAvgGazeEst.x > self.bottomRightCornerThreshold.x && self.currAvgGazeEst.y > self.bottomRightCornerThreshold.y && self.isFaceDetected) {
             // Prevent page being turning more than once
             self.canTurnPage = false
             let timer = Timer(timeInterval: 0.5, target: self, selector: #selector(turnPage), userInfo: nil, repeats: false)
             RunLoop.main.add(timer, forMode: .common)
-            let unlockTimer = Timer(timeInterval: 1.5, target: self, selector: #selector(resetPageTurningBlock), userInfo: nil, repeats: false)
+            let unlockTimer = Timer(timeInterval: 2.5, target: self, selector: #selector(resetPageTurningBlock), userInfo: nil, repeats: false)
             RunLoop.main.add(unlockTimer, forMode: .common)
         }
         
