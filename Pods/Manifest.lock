@@ -1,0 +1,16 @@
+PODS:
+  - CodableCSV (0.6.7)
+
+DEPENDENCIES:
+  - CodableCSV (~> 0.6.7)
+
+SPEC REPOS:
+  trunk:
+    - CodableCSV
+
+SPEC CHECKSUMS:
+  CodableCSV: a586657d66aac32b860c0b5df52d49440ec6e6dd
+
+PODFILE CHECKSUM: 9b3dc70fe2fc96044586d226007b221df5b2870b
+
+COCOAPODS: 1.11.2

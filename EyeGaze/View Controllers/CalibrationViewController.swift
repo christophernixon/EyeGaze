@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import SeeSo
 import AVFoundation
+import CodableCSV
 
 class CalibrationViewController: UIViewController {
     
@@ -45,6 +46,7 @@ class CalibrationViewController: UIViewController {
     private var yRangeGroundTruth: Double = 0.0
     private var meanXDeviation: Double = 0.0
     private var meanYDeviation: Double = 0.0
+    private var allGazePredictions: [(Int, Double, Double, Double)] = []
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.secondCalibrationDescriptionSegue,
@@ -129,10 +131,11 @@ class CalibrationViewController: UIViewController {
         self.meanYDeviation = (highYPrediction.1 - (self.yRange/2)) + 11.95
         // Save gaze predictions for four corners, from top left clockwise
         // TODO: fix bug when calibration completes without user looking at all dots
+        let numCalPoints = self.averagedGazePredictions.count
         self.cornerGazePredictions.append(NSCoder.string(for: self.averagedGazePredictions[0]))
         self.cornerGazePredictions.append(NSCoder.string(for: self.averagedGazePredictions[1]))
-        self.cornerGazePredictions.append(NSCoder.string(for: self.averagedGazePredictions[9]))
-        self.cornerGazePredictions.append(NSCoder.string(for: self.averagedGazePredictions[8]))
+        self.cornerGazePredictions.append(NSCoder.string(for: self.averagedGazePredictions[numCalPoints-1]))
+        self.cornerGazePredictions.append(NSCoder.string(for: self.averagedGazePredictions[numCalPoints-2]))
         
         printPredictionResults(averagedGazePredictionsCM: averagedGazePredictionsCM)
     }
@@ -158,6 +161,39 @@ class CalibrationViewController: UIViewController {
         } else {
             userDefaults.set(self.cornerGazePredictions, forKey: Constants.cornerAnchorsKeySeeSo)
         }
+    }
+    
+    func writeCalibrationsToFile() {
+        let calibrationData = CalibrationData(averagedGazepredictions: self.averagedGazePredictions, pointDistances: self.pointDistances, cornerGazePredictions: self.cornerGazePredictions, dotError: self.dotError, xRange: self.xRange, yRange: self.yRange, xRangeGroundTruth: self.xRangeGroundTruth, yRangeGrountTruth: self.yRangeGroundTruth, meanXDeviation: self.meanXDeviation, meanYDeviation: self.meanYDeviation, allGazePredictions: self.allGazePredictions)
+//        calibrationData.averagedGazePredictions = self.averagedGazePredictions
+//        calibrationData.pointDistances = self.pointDistances
+//        calibrationData.cornerGazePredictions = self.cornerGazePredictions
+//        calibrationData.dotError = self.dotError
+//        calibrationData.xRange = self.xRange
+//        calibrationData.yRange = self.yRange
+//        calibrationData.xRangeGroundTruth = self.xRangeGroundTruth
+//        calibrationData.yRangeGroundTruth = self.yRangeGroundTruth
+//        calibrationData.meanXDeviation = self.meanXDeviation
+//        calibrationData.meanYDeviation = self.meanYDeviation
+//        
+//        calibrationData.formatDataStores()
+        
+        if self.isUsingiTrackerModel {
+            calibrationData.writeCalibrationsToFile(toDocumentNamed: "averagedGazePredictions.csv", forGazeImplementation: .iTracker)
+        } else {
+            calibrationData.writeCalibrationsToFile(toDocumentNamed: "averagedGazePredictions.csv", forGazeImplementation: .SeeSo)
+        }
+//        let fileIOController = FileIOController()
+//        do {
+//            var dict4 = [String:[[CGPoint]]]()
+//            dict4["averagedGazePredictions"] = [self.averagedGazePredictions]
+////            try fileIOController.write(self.averagedGazePredictions, toDocumentNamed: "calibrationData.csv")
+//            try fileIOController.write(self.averagedGazePredictions, toDocumentNamed: "averagedGazePredictions.csv")
+//            try fileIOController.write(self.cornerGazePredictions, toDocumentNamed: "cornerGazePredictions.csv")
+//        } catch let error {
+//            print("File writing error: \(error)")
+//        }
+        
     }
     
     @objc
@@ -192,6 +228,7 @@ class CalibrationViewController: UIViewController {
         updateDotData()
         calculatePredictionResults()
         saveUserCalibrations()
+        writeCalibrationsToFile()
         self.calibrationInProgress = false
         if self.isUsingiTrackerModel {
             self.captureSession.stopRunning()
@@ -247,6 +284,8 @@ extension CalibrationViewController: AVCaptureVideoDataOutputSampleBufferDelegat
             }
             let transformedPrediction = transformPrediction(prediction: self.rawGazeEst)
             self.currentDotPredictions.append(transformedPrediction)
+            let timestamp = NSDate().timeIntervalSince1970 * 1000
+            self.allGazePredictions.append((self.dotLocationIndex, timestamp, transformedPrediction.0, transformedPrediction.1))
         }
     }
     
@@ -324,6 +363,7 @@ extension CalibrationViewController : GazeDelegate {
         if (gazeInfo.trackingState == SeeSo.TrackingState.SUCCESS && self.calibrationInProgress) {
             let gazePrediction: (Double, Double) = (gazeInfo.x, gazeInfo.y)
             self.currentDotPredictions.append(gazePrediction)
+            self.allGazePredictions.append((self.dotLocationIndex, gazeInfo.timestamp, gazeInfo.x, gazeInfo.y))
         }
     }
 }

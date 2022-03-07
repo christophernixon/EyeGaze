@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreML
+import CodableCSV
 
 class PredictionUtilities {
     
@@ -257,29 +258,29 @@ class PredictionUtilities {
         let partsWidth =  partRect.width
         let partsHeight = partRect.height
         let gRect = CGRect(x: partRect.origin.x - (partsWidth * hPadding), y: partRect.origin.y - (partsHeight * vPadding), width: partsWidth + (partsWidth * hPadding * 2), height: partsHeight + (partsHeight * vPadding * 2))
-       return originalImage.cropping(to: gRect)
+        return originalImage.cropping(to: gRect)
     }
     
     static func cropParts(originalImage: CGImage, partsPoints points:[CGPoint],horizontalSpacing hPadding:CGFloat, verticalSpacing vPadding:CGFloat)->CGImage?{
         if let Minx = points.min(by: { a,b -> Bool in
             a.x < b.x
         }),
-            let Miny = points.min(by: { a,b -> Bool in
-                a.y < b.y
-            }),
-            let Maxx = points.max(by: { a,b -> Bool in
-                a.x < b.x
-            }),
-            let Maxy = points.max(by: { a,b -> Bool in
-                a.y < b.y
-            }) {
+           let Miny = points.min(by: { a,b -> Bool in
+               a.y < b.y
+           }),
+           let Maxx = points.max(by: { a,b -> Bool in
+               a.x < b.x
+           }),
+           let Maxy = points.max(by: { a,b -> Bool in
+               a.y < b.y
+           }) {
             let partsWidth =  Maxx.x - Minx.x
             let partsHeight = Maxy.y - Miny.y
             var heightPadding = vPadding
-//            if partsHeight < 18 {
-////                heightPadding += 2.5
-////                print("height padding increased")
-//            }
+            //            if partsHeight < 18 {
+            ////                heightPadding += 2.5
+            ////                print("height padding increased")
+            //            }
             let originX = Minx.x
             let originY = Miny.y
             let gRect = CGRect(x: originX - (partsWidth * hPadding), y: originY - (partsHeight * heightPadding), width: partsWidth + (partsWidth * hPadding * 2), height: partsHeight + (partsHeight * heightPadding * 2))
@@ -299,7 +300,7 @@ class PredictionUtilities {
             }
             
             let gRect2 = CGRect(x: originX + xOffset, y: originY + yOffset, width: 223, height: 223)
-           return originalImage.cropping(to: gRect)
+            return originalImage.cropping(to: gRect)
         } else {
             return nil
         }
@@ -309,15 +310,15 @@ class PredictionUtilities {
         if let Minx = points.min(by: { a,b -> Bool in
             a.x < b.x
         }),
-            let Miny = points.min(by: { a,b -> Bool in
-                a.y < b.y
-            }),
-            let Maxx = points.max(by: { a,b -> Bool in
-                a.x < b.x
-            }),
-            let Maxy = points.max(by: { a,b -> Bool in
-                a.y < b.y
-            }) {
+           let Miny = points.min(by: { a,b -> Bool in
+               a.y < b.y
+           }),
+           let Maxx = points.max(by: { a,b -> Bool in
+               a.x < b.x
+           }),
+           let Maxy = points.max(by: { a,b -> Bool in
+               a.y < b.y
+           }) {
             let partsWidth =  Maxx.x - Minx.x
             let partsHeight = Maxy.y - Miny.y
             let originX = Minx.x
@@ -336,7 +337,7 @@ class PredictionUtilities {
                 yOffset = ((partsHeight - 224)/2)
             }
             let gRect = CGRect(x: originX + xOffset, y: originY + yOffset, width: 223, height: 223)
-           return originalImage.cropping(to: gRect)
+            return originalImage.cropping(to: gRect)
         } else {
             return nil
         }
@@ -368,8 +369,8 @@ class PredictionUtilities {
         xHigh = min(gridW-1, max(0, xHigh))
         yHigh = min(gridH-1, max(0, yHigh))
         
-//        print("Original width: \(detectedFaceRect.width), Original height: \(detectedFaceRect.height)")
-//        print("xLow: \(xLow), yLow: \(yLow), xHigh: \(xHigh), yHigh: \(yHigh)")
+        //        print("Original width: \(detectedFaceRect.width), Original height: \(detectedFaceRect.height)")
+        //        print("xLow: \(xLow), yLow: \(yLow), xHigh: \(xHigh), yHigh: \(yHigh)")
         
         for x in xLow...xHigh {
             for y in yLow...yHigh {
@@ -377,17 +378,17 @@ class PredictionUtilities {
             }
         }
         
-//        Self.printFaceGrid(facegrid: facegrid, gridW: gridW, gridH: gridH)
+        //        Self.printFaceGrid(facegrid: facegrid, gridW: gridW, gridH: gridH)
         
-//        let facegridTransposed = facegrid.transposed()
-//        let facegridFlattened2 = facegridTransposed.reduce([], +)
-//        let facegridFlattened2 = facegrid.flatMap{ $0 }
-
+        //        let facegridTransposed = facegrid.transposed()
+        //        let facegridFlattened2 = facegridTransposed.reduce([], +)
+        //        let facegridFlattened2 = facegrid.flatMap{ $0 }
+        
         let facegridFlattened = facegrid.reduce([], +)
-//        print("FaceGrid flattened")
-//        print(facegridFlattened)
-//        print("FaceGrid flattened2")
-//        print(facegridFlattened2)
+        //        print("FaceGrid flattened")
+        //        print(facegridFlattened)
+        //        print("FaceGrid flattened2")
+        //        print(facegridFlattened2)
         
         let shape = [625, 1, 1] as [NSNumber]
         guard let doubleMultiarray = try? MLMultiArray(shape: shape, dataType: .double) else {
@@ -418,32 +419,32 @@ class PredictionUtilities {
                 contextRef?.draw(imageRef, in: drawRect)
             })
         }
-
+        
         return (pixelValues, width, height)
     }
-
+    
     static func buffer(from image: UIImage, isGreyscale: Bool) -> CVPixelBuffer? {
         let attrs = [kCVPixelBufferCGImageCompatibilityKey: kCFBooleanTrue, kCVPixelBufferCGBitmapContextCompatibilityKey: kCFBooleanTrue] as CFDictionary
         var pixelBuffer : CVPixelBuffer?
         let status = isGreyscale ? CVPixelBufferCreate(kCFAllocatorDefault, Int(image.size.width), Int(image.size.height), kCVPixelFormatType_OneComponent8, attrs, &pixelBuffer) : CVPixelBufferCreate(kCFAllocatorDefault, Int(image.size.width), Int(image.size.height), kCVPixelFormatType_32ARGB, attrs, &pixelBuffer)
         guard (status == kCVReturnSuccess) else {
-        return nil
+            return nil
         }
-
+        
         CVPixelBufferLockBaseAddress(pixelBuffer!, CVPixelBufferLockFlags(rawValue: 0))
         let pixelData = CVPixelBufferGetBaseAddress(pixelBuffer!)
-
+        
         let colorSpace = isGreyscale ? CGColorSpaceCreateDeviceGray() : CGColorSpaceCreateDeviceRGB()
         let context = isGreyscale ? CGContext(data: pixelData, width: Int(image.size.width), height: Int(image.size.height), bitsPerComponent: 8, bytesPerRow: CVPixelBufferGetBytesPerRow(pixelBuffer!), space: colorSpace, bitmapInfo: 0) : CGContext(data: pixelData, width: Int(image.size.width), height: Int(image.size.height), bitsPerComponent: 8, bytesPerRow: CVPixelBufferGetBytesPerRow(pixelBuffer!), space: colorSpace, bitmapInfo: CGImageAlphaInfo.noneSkipFirst.rawValue)
-
+        
         context?.translateBy(x: 0, y: image.size.height)
         context?.scaleBy(x: 1.0, y: -1.0)
-
+        
         UIGraphicsPushContext(context!)
         image.draw(in: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
         UIGraphicsPopContext()
         CVPixelBufferUnlockBaseAddress(pixelBuffer!, CVPixelBufferLockFlags(rawValue: 0))
-
+        
         return pixelBuffer
     }
     
@@ -475,5 +476,42 @@ class PredictionUtilities {
             print("")
         }
         print("")
+    }
+}
+
+struct FileIOController {
+    var manager = FileManager.default
+    
+    func write<T: Encodable>(
+        _ object: T,
+        toDocumentNamed documentName: String,
+        encodedUsing encoder: CSVEncoder = .init()
+    ) throws {
+        let rootFolderURL = try manager.url(
+            for: .documentDirectory,
+               in: .userDomainMask,
+               appropriateFor: nil,
+               create: false
+        )
+        
+        let nestedFolderURL = rootFolderURL.appendingPathComponent("EyeGazeFiles")
+        let fileURL = nestedFolderURL.appendingPathComponent(documentName)
+        let data = try encoder.encode(object)
+        
+        if !manager.fileExists(atPath: nestedFolderURL.relativePath) {
+            try manager.createDirectory(
+                at: nestedFolderURL,
+                withIntermediateDirectories: false,
+                attributes: nil
+            )
+            try data.write(to: fileURL)
+        } else {
+            if let fileHandle = try? FileHandle(forWritingTo: fileURL) {
+                fileHandle.seekToEndOfFile()
+                fileHandle.write(data)
+                fileHandle.closeFile()
+            }
+        }
+        
     }
 }

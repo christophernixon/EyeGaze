@@ -1,0 +1,6 @@
+framework module Pods_EyeGazeTests {
+  umbrella header "Pods-EyeGazeTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
