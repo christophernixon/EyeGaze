@@ -45,7 +45,6 @@ class PDFViewControllerITracker: UIViewController {
     private var maxScrollOffset: CGFloat = .zero
     private var currSpeed: Speed = Speed.slow
     private var prevSpeed: Speed = Speed.slow
-    private var rateOfSpeedChange = 0.001
     private var canScroll: Bool = true
     
     // Page turning
@@ -114,35 +113,35 @@ class PDFViewControllerITracker: UIViewController {
         }
         // Adjust scrolling speed
         if (currAvgGazeEst.y > bottomQuarterScreenThreshold) {
-            if (self.scrollSpeed < 0.7) {
-                self.scrollSpeed += self.rateOfSpeedChange
+            if (self.scrollSpeed < Constants.fastScrollingSpeed) {
+                self.scrollSpeed += Constants.changeOfSpeedRate
             } else {
-                self.scrollSpeed = 0.7
+                self.scrollSpeed = Constants.fastScrollingSpeed
             }
             self.currSpeed = Speed.fast
             self.prevSpeed = Speed.fast
         } else if (currAvgGazeEst.y > halfScreenThreshold) {
             if (self.prevSpeed == Speed.slow) {
-                if (self.scrollSpeed < 0.4) {
-                    self.scrollSpeed += self.rateOfSpeedChange
+                if (self.scrollSpeed < Constants.mediumScrollingSpeed) {
+                    self.scrollSpeed += Constants.changeOfSpeedRate
                 } else {
-                    self.scrollSpeed = 0.4
+                    self.scrollSpeed = Constants.mediumScrollingSpeed
                     self.prevSpeed = Speed.medium
                 }
             } else if (self.prevSpeed == Speed.fast) {
-                if (self.scrollSpeed > 0.3) {
-                    self.scrollSpeed -= self.rateOfSpeedChange
+                if (self.scrollSpeed > Constants.slowScrollingSpeed) {
+                    self.scrollSpeed -= Constants.changeOfSpeedRate
                 } else {
-                    self.scrollSpeed = 0.3
+                    self.scrollSpeed = Constants.slowScrollingSpeed
                     self.prevSpeed = Speed.medium
                 }
             }
             self.currSpeed = Speed.medium
         } else if (!currAvgGazeEst.y.isNaN) {
-            if (self.scrollSpeed > 0.1) {
-                self.scrollSpeed -= self.rateOfSpeedChange
+            if (self.scrollSpeed > Constants.defaultScrollingSpeed) {
+                self.scrollSpeed -= Constants.changeOfSpeedRate
             } else {
-                self.scrollSpeed = 0.1
+                self.scrollSpeed = Constants.defaultScrollingSpeed
             }
             self.currSpeed = Speed.slow
             self.prevSpeed = Speed.slow

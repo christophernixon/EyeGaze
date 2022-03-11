@@ -33,7 +33,6 @@ class PDFViewController: UIViewController {
     private var displayLink: CADisplayLink?
     private var currSpeed: Speed = Speed.slow
     private var prevSpeed: Speed = Speed.slow
-    private var rateOfSpeedChange = 0.001
     private var canScroll: Bool = true
     
     // Page turning
@@ -41,7 +40,7 @@ class PDFViewController: UIViewController {
     private var canTurnPage: Bool = true
     
     // Thresholds
-    private var halfScreenThreshold: CGFloat = CGFloat(Constants.iPadScreenHeightPoints/2)
+    private var thirdScreenThreshold: CGFloat = CGFloat(Constants.iPadScreenHeightPoints/3)
     private var bottomQuarterScreenThreshold: CGFloat = CGFloat(Constants.iPadScreenHeightPoints - Constants.iPadScreenHeightPoints/4)
     private var bottomRightCornerThreshold: CGPoint = CGPoint(x: Constants.iPadScreenWidthPoints - Constants.iPadScreenWidthPoints/3, y: Constants.iPadScreenHeightPoints - Constants.iPadScreenHeightPoints/5)
     
@@ -132,35 +131,35 @@ class PDFViewController: UIViewController {
         }
         // Adjust scrolling speed
         if (currGazePrediction.y > bottomQuarterScreenThreshold) {
-            if (self.scrollSpeed < 0.7) {
-                self.scrollSpeed += self.rateOfSpeedChange
+            if (self.scrollSpeed < Constants.fastScrollingSpeed) {
+                self.scrollSpeed += Constants.changeOfSpeedRate
             } else {
-                self.scrollSpeed = 0.7
+                self.scrollSpeed = Constants.fastScrollingSpeed
             }
             self.currSpeed = Speed.fast
             self.prevSpeed = Speed.fast
-        } else if (currGazePrediction.y > halfScreenThreshold) {
+        } else if (currGazePrediction.y > thirdScreenThreshold) {
             if (self.prevSpeed == Speed.slow) {
-                if (self.scrollSpeed < 0.4) {
-                    self.scrollSpeed += self.rateOfSpeedChange
+                if (self.scrollSpeed < Constants.mediumScrollingSpeed) {
+                    self.scrollSpeed += Constants.changeOfSpeedRate
                 } else {
-                    self.scrollSpeed = 0.4
+                    self.scrollSpeed = Constants.mediumScrollingSpeed
                     self.prevSpeed = Speed.medium
                 }
             } else if (self.prevSpeed == Speed.fast) {
-                if (self.scrollSpeed > 0.3) {
-                    self.scrollSpeed -= self.rateOfSpeedChange
+                if (self.scrollSpeed > Constants.slowScrollingSpeed) {
+                    self.scrollSpeed -= Constants.changeOfSpeedRate
                 } else {
-                    self.scrollSpeed = 0.3
+                    self.scrollSpeed = Constants.slowScrollingSpeed
                     self.prevSpeed = Speed.medium
                 }
             }
             self.currSpeed = Speed.medium
         } else if (!currGazePrediction.y.isNaN) {
-            if (self.scrollSpeed > 0.1) {
-                self.scrollSpeed -= self.rateOfSpeedChange
+            if (self.scrollSpeed > Constants.defaultScrollingSpeed) {
+                self.scrollSpeed -= Constants.changeOfSpeedRate
             } else {
-                self.scrollSpeed = 0.1
+                self.scrollSpeed = Constants.defaultScrollingSpeed
             }
             self.currSpeed = Speed.slow
             self.prevSpeed = Speed.slow

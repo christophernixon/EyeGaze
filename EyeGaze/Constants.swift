@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class Constants {
     public static let iPadScreenHeightPoints = 1194
@@ -36,4 +37,10 @@ class Constants {
     public static let rollingAverageWindowSize: Int = 15
     
     public static let gazeCalibrationFrameCount: Int = 30
+    
+    public static let fastScrollingSpeed: CGFloat = 1.5
+    public static let mediumScrollingSpeed: CGFloat = 0.5
+    public static let slowScrollingSpeed: CGFloat = 0.4
+    public static let defaultScrollingSpeed: CGFloat = 0.1
+    public static let changeOfSpeedRate: CGFloat = 0.002
 }
