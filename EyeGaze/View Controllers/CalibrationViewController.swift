@@ -3,7 +3,7 @@
 //  EyeGaze
 //
 //  Created by Chris Nixon on 02/03/2022.
-//
+// TODO: Track and record the amount of frames for each dot
 
 import Foundation
 import UIKit
@@ -12,6 +12,8 @@ import AVFoundation
 import CodableCSV
 
 class CalibrationViewController: UIViewController {
+    
+    @IBOutlet var faceVisibilityWarningLabel: UILabel!
     
     private var predictionEngine: PredictionEngine?
     private var iTrackerModel: iTracker_v2?
@@ -25,6 +27,9 @@ class CalibrationViewController: UIViewController {
     private var dotLayers: [CAShapeLayer] = []
     private var currentDotPredictions: [(Double, Double)] = []
     private var rawGazeEst: (Double, Double) = (0,0)
+    private var isFaceVisible: Bool = false
+    private var currAcceptableCalibrationFramesCount: Int = 0
+//    private var timerHasBeenTriggered: Bool = true
     private var timers: [Timer] = []
     
     private var dotLocationIndex: Int = 0
@@ -109,7 +114,7 @@ class CalibrationViewController: UIViewController {
         self.averagedGazePredictions.append(averagePoint)
         // Convert the ground truth and gaze prediction points to CM to calculate distance in CM
         self.pointDistances.append(PredictionUtilities.euclideanDistance(from: PredictionUtilities.screenToPredictionCoordsCG(screenPoint: averagePoint, orientation: CGImagePropertyOrientation.up), to: PredictionUtilities.screenToPredictionCoordsCG(screenPoint: previousRedDot, orientation: CGImagePropertyOrientation.up)))
-        drawGreenDot(location: averagePoint)
+//        drawGreenDot(location: averagePoint)
     }
     
     func calculatePredictionResults() {
@@ -197,6 +202,20 @@ class CalibrationViewController: UIViewController {
     }
     
     @objc
+    func displayNextDot() {
+//        self.timerHasBeenTriggered = true
+//        if self.currAcceptableCalibrationFramesCount < Constants.gazeCalibrationFrameCount {
+//            return
+//        }
+        self.currAcceptableCalibrationFramesCount = 0
+        if self.dotLocationIndex < self.dotLocations.count {
+            testDotLocation()
+        } else {
+            finishTest()
+        }
+    }
+    
+    @objc
     func testDotLocation() {
         let nextDotLocation = self.dotLocations[self.dotLocationIndex]
         self.dotLayers.forEach({ drawing in drawing.removeFromSuperlayer() })
@@ -210,34 +229,38 @@ class CalibrationViewController: UIViewController {
         }
         
         self.dotLocationIndex += 1
-        if self.dotLocationIndex < self.dotLocations.count {
-            let dotTimer = Timer(timeInterval: self.timeDelayBetweenDots, target: self, selector: #selector(testDotLocation), userInfo: nil, repeats: false)
-            self.timers.append(dotTimer)
-            RunLoop.current.add(dotTimer, forMode: .common)
-        } else {
-            let finishTestTimer = Timer(timeInterval: self.timeDelayBetweenDots, target: self, selector: #selector(finishTest), userInfo: nil, repeats: false)
-            self.timers.append(finishTestTimer)
-            RunLoop.current.add(finishTestTimer, forMode: .common)
-        }
+//        if self.dotLocationIndex < self.dotLocations.count {
+//            let dotTimer = Timer(timeInterval: self.timeDelayBetweenDots, target: self, selector: #selector(displayNextDot), userInfo: nil, repeats: false)
+//            self.timers.append(dotTimer)
+//            self.timerHasBeenTriggered = false
+//            RunLoop.current.add(dotTimer, forMode: .common)
+//        } else {
+//            let finishTestTimer = Timer(timeInterval: self.timeDelayBetweenDots, target: self, selector: #selector(displayNextDot), userInfo: nil, repeats: false)
+//            self.timers.append(finishTestTimer)
+//            self.timerHasBeenTriggered = false
+//            RunLoop.current.add(finishTestTimer, forMode: .common)
+//        }
     }
     
     @objc
     func finishTest() {
+        self.calibrationInProgress = false
         // Remove last red dot
         self.dotLayers.forEach({ drawing in drawing.removeFromSuperlayer() })
         updateDotData()
         calculatePredictionResults()
         saveUserCalibrations()
         writeCalibrationsToFile()
-        self.calibrationInProgress = false
         if self.isUsingiTrackerModel {
             self.captureSession.stopRunning()
             // Dismiss all calibration modals
-            var vc: UIViewController = self
-            while vc.presentingViewController != nil {
-                vc = vc.presentingViewController!
+            DispatchQueue.main.async {
+                var vc: UIViewController = self
+                while vc.presentingViewController != nil {
+                    vc = vc.presentingViewController!
+                }
+                vc.dismiss(animated: true, completion: nil)
             }
-            vc.dismiss(animated: true, completion: nil)
         } else {
             self.seeSoTracker?.stopTracking()
             self.performSegue(withIdentifier: Constants.secondCalibrationDescriptionSegue, sender: self)
@@ -276,16 +299,32 @@ extension CalibrationViewController: AVCaptureVideoDataOutputSampleBufferDelegat
                 switch result {
                 case .success(let prediction):
                     self?.rawGazeEst = prediction
+                    self?.isFaceVisible = true
                 case .failure(let error):
+                    self?.isFaceVisible = false
                     print("Error performing gaze detection: \(error)")
                 default:
+                    self?.isFaceVisible = false
                     return
                 }
             }
-            let transformedPrediction = transformPrediction(prediction: self.rawGazeEst)
-            self.currentDotPredictions.append(transformedPrediction)
-            let timestamp = NSDate().timeIntervalSince1970 * 1000
-            self.allGazePredictions.append((self.dotLocationIndex, timestamp, transformedPrediction.0, transformedPrediction.1))
+            if self.isFaceVisible {
+                self.currAcceptableCalibrationFramesCount += 1
+                let transformedPrediction = transformPrediction(prediction: self.rawGazeEst)
+                self.currentDotPredictions.append(transformedPrediction)
+                let timestamp = NSDate().timeIntervalSince1970 * 1000
+                self.allGazePredictions.append((self.dotLocationIndex, timestamp, transformedPrediction.0, transformedPrediction.1))
+                DispatchQueue.main.async {
+                    self.faceVisibilityWarningLabel.text = ""
+                }
+                if self.currAcceptableCalibrationFramesCount >= Constants.gazeCalibrationFrameCount {
+                    displayNextDot()
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.faceVisibilityWarningLabel.text = "No Face Detected"
+                }
+            }
         }
     }
     
@@ -300,34 +339,38 @@ extension CalibrationViewController: AVCaptureVideoDataOutputSampleBufferDelegat
 // Drawing dots
 extension CalibrationViewController {
     func drawRedDot(location: CGPoint) {
-        let outerDot = UIBezierPath(arcCenter: location, radius: CGFloat(20), startAngle: CGFloat(0), endAngle: CGFloat(Double.pi * 2), clockwise: true)
-        var shapeLayer = CAShapeLayer()
-        shapeLayer.path = outerDot.cgPath
-        shapeLayer.fillColor = UIColor.red.cgColor
-        self.dotLayers.append(shapeLayer)
-        view.layer.addSublayer(shapeLayer)
-        
-        let innerDot = UIBezierPath(arcCenter: location, radius: CGFloat(3), startAngle: CGFloat(0), endAngle: CGFloat(Double.pi * 2), clockwise: true)
-        shapeLayer = CAShapeLayer()
-        shapeLayer.path = innerDot.cgPath
-        shapeLayer.fillColor = UIColor.black.cgColor
-        self.dotLayers.append(shapeLayer)
-        view.layer.addSublayer(shapeLayer)
+        DispatchQueue.main.async {
+            let outerDot = UIBezierPath(arcCenter: location, radius: CGFloat(20), startAngle: CGFloat(0), endAngle: CGFloat(Double.pi * 2), clockwise: true)
+            var shapeLayer = CAShapeLayer()
+            shapeLayer.path = outerDot.cgPath
+            shapeLayer.fillColor = UIColor.red.cgColor
+            self.dotLayers.append(shapeLayer)
+            self.view.layer.addSublayer(shapeLayer)
+            
+            let innerDot = UIBezierPath(arcCenter: location, radius: CGFloat(3), startAngle: CGFloat(0), endAngle: CGFloat(Double.pi * 2), clockwise: true)
+            shapeLayer = CAShapeLayer()
+            shapeLayer.path = innerDot.cgPath
+            shapeLayer.fillColor = UIColor.black.cgColor
+            self.dotLayers.append(shapeLayer)
+            self.view.layer.addSublayer(shapeLayer)
+        }
     }
     func drawGreenDot(location: CGPoint) {
-        let outerDot = UIBezierPath(arcCenter: location, radius: CGFloat(20), startAngle: CGFloat(0), endAngle: CGFloat(Double.pi * 2), clockwise: true)
-        var shapeLayer = CAShapeLayer()
-        shapeLayer.path = outerDot.cgPath
-        shapeLayer.fillColor = UIColor.clear.cgColor
-        shapeLayer.strokeColor = UIColor.green.cgColor
-        shapeLayer.lineWidth = CGFloat(3)
-        view.layer.addSublayer(shapeLayer)
-        
-        let innerDot = UIBezierPath(arcCenter: location, radius: CGFloat(3), startAngle: CGFloat(0), endAngle: CGFloat(Double.pi * 2), clockwise: true)
-        shapeLayer = CAShapeLayer()
-        shapeLayer.path = innerDot.cgPath
-        shapeLayer.fillColor = UIColor.green.cgColor
-        view.layer.addSublayer(shapeLayer)
+        DispatchQueue.main.async {
+            let outerDot = UIBezierPath(arcCenter: location, radius: CGFloat(20), startAngle: CGFloat(0), endAngle: CGFloat(Double.pi * 2), clockwise: true)
+            var shapeLayer = CAShapeLayer()
+            shapeLayer.path = outerDot.cgPath
+            shapeLayer.fillColor = UIColor.clear.cgColor
+            shapeLayer.strokeColor = UIColor.green.cgColor
+            shapeLayer.lineWidth = CGFloat(3)
+            self.view.layer.addSublayer(shapeLayer)
+            
+            let innerDot = UIBezierPath(arcCenter: location, radius: CGFloat(3), startAngle: CGFloat(0), endAngle: CGFloat(Double.pi * 2), clockwise: true)
+            shapeLayer = CAShapeLayer()
+            shapeLayer.path = innerDot.cgPath
+            shapeLayer.fillColor = UIColor.green.cgColor
+            self.view.layer.addSublayer(shapeLayer)
+        }
     }
 }
 
@@ -360,10 +403,23 @@ extension CalibrationViewController : GazeDelegate {
     
     func onGaze(gazeInfo : GazeInfo) {
 //        print("timestamp : \(gazeInfo.timestamp), (x , y) : (\(gazeInfo.x), \(gazeInfo.y)) , state : \(gazeInfo.trackingState.description)")
-        if (gazeInfo.trackingState == SeeSo.TrackingState.SUCCESS && self.calibrationInProgress) {
-            let gazePrediction: (Double, Double) = (gazeInfo.x, gazeInfo.y)
-            self.currentDotPredictions.append(gazePrediction)
-            self.allGazePredictions.append((self.dotLocationIndex, gazeInfo.timestamp, gazeInfo.x, gazeInfo.y))
+        if self.calibrationInProgress {
+            if (gazeInfo.trackingState == SeeSo.TrackingState.SUCCESS) {
+                self.currAcceptableCalibrationFramesCount += 1
+                let gazePrediction: (Double, Double) = (gazeInfo.x, gazeInfo.y)
+                self.currentDotPredictions.append(gazePrediction)
+                self.allGazePredictions.append((self.dotLocationIndex, gazeInfo.timestamp, gazeInfo.x, gazeInfo.y))
+                DispatchQueue.main.async {
+                    self.faceVisibilityWarningLabel.text = ""
+                }
+                if self.currAcceptableCalibrationFramesCount >= Constants.gazeCalibrationFrameCount {
+                    displayNextDot()
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.faceVisibilityWarningLabel.text = "No Face Detected"
+                }
+            }
         }
     }
 }

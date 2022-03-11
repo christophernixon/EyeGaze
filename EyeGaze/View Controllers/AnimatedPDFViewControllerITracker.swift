@@ -220,7 +220,7 @@ extension AnimatedPDFViewControllerITracker: AVCaptureVideoDataOutputSampleBuffe
             self.currAvgGazeEst = CGPoint(x: averageX, y: averageY)
         }
         
-        print("Current gaze estimate: \(self.currAvgGazeEst), (\(self.bottomRightCornerThreshold.x), \(self.bottomRightCornerThreshold.y)), \(self.pageTurningImplementation)")
+//        print("Current gaze estimate: \(self.currAvgGazeEst), (\(self.bottomRightCornerThreshold.x), \(self.bottomRightCornerThreshold.y)), \(self.pageTurningImplementation)")
         
         if (self.canTurnPage && self.pageTurningImplementation == .singleAnimation && self.currAvgGazeEst.x > self.bottomRightCornerThreshold.x && self.currAvgGazeEst.y > self.bottomRightCornerThreshold.y && self.isFaceDetected) {
             // Prevent page being turning more than once

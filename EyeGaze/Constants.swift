@@ -34,4 +34,6 @@ class Constants {
     
     // Window size for rolling average of gaze estimations
     public static let rollingAverageWindowSize: Int = 15
+    
+    public static let gazeCalibrationFrameCount: Int = 30
 }
