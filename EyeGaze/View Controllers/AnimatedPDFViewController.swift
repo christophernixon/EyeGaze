@@ -30,9 +30,30 @@ class AnimatedPDFViewController: UIPageViewController {
         self.pageTurningImplementation = implementation
     }
     
+    func loadUserDefaults() {
+        let userDefaults = UserDefaults.standard
+        let cornerAnchorsStrings = userDefaults.object(forKey: Constants.cornerAnchorsKeyiTracker) as? [String] ?? [String]()
+        if cornerAnchorsStrings.count != 4 {
+            print("No user calibration recieved, using default values for thresholds.")
+        } else {
+            var cornerAnchors: [CGPoint] = []
+            for point in cornerAnchorsStrings {
+                cornerAnchors.append(NSCoder.cgPoint(for: point))
+            }
+            let bottomScreenWidth = cornerAnchors[2].x - cornerAnchors[3].x
+            let bottomRightThresholdX = cornerAnchors[2].x - bottomScreenWidth/5
+            let rightScreenHeight = cornerAnchors[2].y - cornerAnchors[1].y
+            let bottomRightThresholdY = cornerAnchors[2].y - rightScreenHeight/8
+            print("Previous threshold: \(self.bottomRightCornerThreshold)")
+            self.bottomRightCornerThreshold = CGPoint(x: bottomRightThresholdX, y: bottomRightThresholdY)
+            print("Updated threshold: \(self.bottomRightCornerThreshold)")
+        }
+    }
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        loadUserDefaults()
         self.navigationController?.navigationBar.isTranslucent = false
         initGazeTracking()
         self.dataSource = self
