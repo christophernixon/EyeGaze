@@ -63,6 +63,8 @@
 		8CF2098C27A18D4700B65336 /* PredictionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF2098B27A18D4700B65336 /* PredictionEngine.swift */; };
 		8CF2098E27A2EF6600B65336 /* PathChooseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF2098D27A2EF6600B65336 /* PathChooseViewController.swift */; };
 		8CF2099027A2F2F600B65336 /* StaticTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF2098F27A2F2F600B65336 /* StaticTestViewController.swift */; };
+		8CF2D02727DBBC9E0007811B /* TwoPartAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF2D02627DBBC9E0007811B /* TwoPartAnimationViewController.swift */; };
+		8CF2D02927DBC2C80007811B /* Mask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF2D02827DBC2C80007811B /* Mask.swift */; };
 		9753CEE95788C2177A34901A /* Pods_EyeGaze.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CA3C6A4C04F8E8A8DDD662 /* Pods_EyeGaze.framework */; };
 /* End PBXBuildFile section */
 
@@ -160,6 +162,8 @@
 		8CF2098B27A18D4700B65336 /* PredictionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionEngine.swift; sourceTree = "<group>"; };
 		8CF2098D27A2EF6600B65336 /* PathChooseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathChooseViewController.swift; sourceTree = "<group>"; };
 		8CF2098F27A2F2F600B65336 /* StaticTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticTestViewController.swift; sourceTree = "<group>"; };
+		8CF2D02627DBBC9E0007811B /* TwoPartAnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoPartAnimationViewController.swift; sourceTree = "<group>"; };
+		8CF2D02827DBC2C80007811B /* Mask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mask.swift; sourceTree = "<group>"; };
 		8DA0D1AE07C0E40C7C59B057 /* Pods-EyeGaze.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EyeGaze.release.xcconfig"; path = "Target Support Files/Pods-EyeGaze/Pods-EyeGaze.release.xcconfig"; sourceTree = "<group>"; };
 		A3DE416160D3B89DD9DC625F /* Pods-EyeGaze-EyeGazeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EyeGaze-EyeGazeUITests.release.xcconfig"; path = "Target Support Files/Pods-EyeGaze-EyeGazeUITests/Pods-EyeGaze-EyeGazeUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A4FD2A11A9A867735585312E /* Pods-EyeGaze.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EyeGaze.debug.xcconfig"; path = "Target Support Files/Pods-EyeGaze/Pods-EyeGaze.debug.xcconfig"; sourceTree = "<group>"; };
@@ -294,6 +298,7 @@
 				8C16B20227CD330D00F86B54 /* Extensions.swift */,
 				8C475BF627CE235800F35714 /* UserData.xcdatamodeld */,
 				8CA19EC227D3EFBC00F690E7 /* CalibrationData.swift */,
+				8CF2D02827DBC2C80007811B /* Mask.swift */,
 			);
 			path = EyeGaze;
 			sourceTree = "<group>";
@@ -335,6 +340,7 @@
 				8CECE63927CF8F01001FC551 /* CalibrationViewController.swift */,
 				8C3002D527D0E49600F8FBBB /* BeginCalibrationViewController.swift */,
 				8C3002D727D0ED0C00F8FBBB /* SecondCalibrationDetailViewController.swift */,
+				8CF2D02627DBBC9E0007811B /* TwoPartAnimationViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -601,6 +607,8 @@
 				8CBAD7F527B1365C00C43CC2 /* SeeSoViewController.swift in Sources */,
 				8CECE63A27CF8F01001FC551 /* CalibrationViewController.swift in Sources */,
 				8C16B1FF27CA3A6100F86B54 /* TileViewController.swift in Sources */,
+				8CF2D02927DBC2C80007811B /* Mask.swift in Sources */,
+				8CF2D02727DBBC9E0007811B /* TwoPartAnimationViewController.swift in Sources */,
 				8C210C3F279620E100D0152B /* LiveFeedViewController.swift in Sources */,
 				8C3002D627D0E49600F8FBBB /* BeginCalibrationViewController.swift in Sources */,
 				8C2B45A727C4F146000CF377 /* ParentAnimatedPDFViewController.swift in Sources */,

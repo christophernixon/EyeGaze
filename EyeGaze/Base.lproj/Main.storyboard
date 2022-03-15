@@ -318,17 +318,32 @@
             </objects>
             <point key="canvasLocation" x="1722" y="-610"/>
         </scene>
-        <!--ModalPDF View Controller-->
+        <!--Two Part Animation View Controller-->
         <scene sceneID="k61-hQ-Ret">
             <objects>
-                <viewController id="AvL-rR-7OT" customClass="ModalPDFViewController" customModule="EyeGaze" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="AvL-rR-7OT" customClass="TwoPartAnimationViewController" customModule="EyeGaze" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VFX-Rt-XVa">
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="04S-z1-3Wb">
+                                <rect key="frame" x="417" y="130" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="x1e-5f-cvc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="04S-z1-3Wb" firstAttribute="top" secondItem="VFX-Rt-XVa" secondAttribute="top" constant="130" id="3EC-ib-6jm"/>
+                            <constraint firstItem="04S-z1-3Wb" firstAttribute="centerX" secondItem="VFX-Rt-XVa" secondAttribute="centerX" id="8lW-jA-OT5"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Nkn-wL-HJ0"/>
+                    <connections>
+                        <outlet property="faceVisibilityWarningLabel" destination="04S-z1-3Wb" id="6XO-JU-KHI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GaG-sp-nal" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

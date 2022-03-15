@@ -34,7 +34,7 @@ class Constants {
     public static let cornerAnchorsKeySeeSo = "cornerAnchorsSeeSo"
     
     // Window size for rolling average of gaze estimations
-    public static let rollingAverageWindowSize: Int = 15
+    public static let rollingAverageWindowSize: Int = 10
     
     public static let gazeCalibrationFrameCount: Int = 30
     
