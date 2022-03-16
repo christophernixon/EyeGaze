@@ -44,6 +44,10 @@ class TwoPartAnimationViewController: UIViewController {
     private var canHalfTurnPage: Bool = true
     private var canFullyTurnPage: Bool = false
     
+    func maskPath(cornerRadius: CGFloat) -> UIBezierPath {
+        let fullRect = UIBezierPath(rect: CGRect(x: self.view.frame.minX, y: self.view.frame.minY + self.view.frame.height/2, width: self.view.frame.width, height: self.view.frame.height/2))
+        return fullRect
+    }
     
     func configure(with pdf: PDF, pageTurningImplementation implementation: PageTurningImplementation, gazeDetectionMethod: GazeDetectionImplementation) {
         self.pdf = pdf
@@ -202,22 +206,73 @@ extension TwoPartAnimationViewController {
     
     @objc
     func halfTurnPage() {
+        print("Half turning page")
         let currPageIndex = self.pages.count - self.currentPageNumber
         self.pageIsHalfTurned = true
         if currPageIndex > 0 { // Don't turn past last page
             let currPage = self.pages[currPageIndex]
-            currPage.mask = MaskView(frame: self.view.frame)
+            //            currPage.mask = MaskView(frame: self.view.frame)
             
+            let maskLayer = CAShapeLayer()
+//            maskLayer.fillRule = .evenOdd
+            maskLayer.fillColor = UIColor.white.withAlphaComponent(1.0).cgColor
+            maskLayer.strokeColor = UIColor.clear.cgColor
+//            maskLayer.contents = UIImage(named: "AppStoreIconImage")?.cgImage
+            let currPDFView = self.pages[currPageIndex] as? PDFView
+            maskLayer.contents = currPDFView?.currentPage?.thumbnail(of: CGSize(width: self.view.frame.width, height: self.view.frame.height), for: .mediaBox).cgImage
+            maskLayer.frame = CGRect(x: self.view.frame.minX, y: self.view.frame.minY, width: self.view.frame.width, height: self.view.frame.height)
+//            maskLayer.path = maskPath(cornerRadius: 20).cgPath
+//            maskLayer.opacity = 1.0
+            currPage.layer.mask = maskLayer
+            
+            let oldBounds = maskLayer.bounds
+            let oldFrame = maskLayer.frame
+            let newBounds = CGRect(x: 0, y: 0, width: self.view.frame.width/2, height: self.view.frame.height)
+            let newFrame = CGRect(x: self.view.frame.minX, y: self.view.frame.minY, width: self.view.frame.width, height: self.view.frame.height/2)
+            // Animation
+            print(maskLayer.position.debugDescription)
+            let animation = CABasicAnimation(keyPath: "position")
+//            animation.fromValue = NSValue(cgRect: oldBounds)
+//            animation.toValue = NSValue(cgRect: newBounds)
+            animation.fromValue = maskLayer.position
+            animation.toValue = [maskLayer.position.x, maskLayer.position.y+self.view.frame.height/2]
+            animation.duration = 3.0
+//            animation.isRemovedOnCompletion = false
+//            animation.fillMode = .forwards
+//            maskLayer.bounds = newBounds
+//            maskLayer.frame = newFrame
+            maskLayer.position = CGPoint(x: maskLayer.position.x, y: maskLayer.position.y+self.view.frame.height/2)
+            
+            maskLayer.add(animation, forKey: nil)
+            
+            
+//            CATransaction.begin()
+//            CATransaction.setDisableActions(true)
+//            currPage.layer.mask?.opacity = 1.0
+//            CATransaction.commit()
+            //            currPage.mask?.alpha = 1
+            //            UIView.animate(withDuration: 1.0) {
+            //                currPage.mask?.alpha = 0
+            //            }
         }
     }
     
     @objc
     func fullyTurnPage() {
+        print("Fully turning page")
         let currPageIndex = self.pages.count - self.currentPageNumber
         self.pageIsHalfTurned = false
         if currPageIndex > 0 { // Don't turn past last page
             let currPage = self.pages[currPageIndex]
-            currPage.mask = FullMaskView(frame: self.view.frame)
+            let animation = CABasicAnimation(keyPath: "position")
+            animation.fromValue = currPage.layer.mask?.position
+            animation.toValue = [currPage.layer.mask?.position.x, (currPage.layer.mask?.position.y)! + self.view.frame.height/2]
+            animation.duration = 3.0
+            animation.isRemovedOnCompletion = false
+            animation.fillMode = .forwards
+            currPage.layer.mask?.add(animation, forKey: nil)
+            
+//            currPage.mask = FullMaskView(frame: self.view.frame)
             self.currentPageNumber += 1
         }
     }
