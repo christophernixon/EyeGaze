@@ -75,7 +75,7 @@ class AnimatedPDFViewController: UIPageViewController {
         
         if let firstVC = pages.first
         {
-            setViewControllers([firstVC], direction: .reverse, animated: true, completion: nil)
+            setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
         }
         
 //        let timer = Timer(timeInterval: 1.0, target: self, selector: #selector(changeSlide), userInfo: nil, repeats: true)
@@ -86,11 +86,11 @@ class AnimatedPDFViewController: UIPageViewController {
     func changeSlide() {
         self.currentPageNumber += 1
         if self.currentPageNumber < self.pages.count {
-            self.setViewControllers([self.pages[self.currentPageNumber]], direction: .reverse, animated: true, completion: nil)
+            self.setViewControllers([self.pages[self.currentPageNumber]], direction: .forward, animated: true, completion: nil)
         }
         else {
             self.currentPageNumber = 0
-            self.setViewControllers([self.pages[0]], direction: .reverse, animated: false, completion: nil)
+            self.setViewControllers([self.pages[0]], direction: .forward, animated: false, completion: nil)
         }
     }
 }
@@ -118,9 +118,9 @@ extension AnimatedPDFViewController: UIPageViewControllerDataSource
 }
 
 extension AnimatedPDFViewController: UIPageViewControllerDelegate {
-    func pageViewController(_ pageViewController: UIPageViewController, spineLocationFor orientation: UIInterfaceOrientation) -> UIPageViewController.SpineLocation {
-        return .max
-    }
+//    func pageViewController(_ pageViewController: UIPageViewController, spineLocationFor orientation: UIInterfaceOrientation) -> UIPageViewController.SpineLocation {
+//        return .max
+//    }
 }
 
 // Gaze tracking stuff

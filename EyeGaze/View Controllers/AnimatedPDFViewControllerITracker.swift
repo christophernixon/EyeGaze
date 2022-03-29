@@ -92,7 +92,7 @@ class AnimatedPDFViewControllerITracker: UIPageViewController {
         
         if let firstVC = pages.first
         {
-            setViewControllers([firstVC], direction: .reverse, animated: true, completion: nil)
+            setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
         }
         setupCamera()
         captureSession.startRunning()
@@ -110,11 +110,11 @@ extension AnimatedPDFViewControllerITracker {
     func changeSlide() {
         self.currentPageNumber += 1
         if self.currentPageNumber < self.pages.count {
-            self.setViewControllers([self.pages[self.currentPageNumber]], direction: .reverse, animated: true, completion: nil)
+            self.setViewControllers([self.pages[self.currentPageNumber]], direction: .forward, animated: true, completion: nil)
         }
         else {
             self.currentPageNumber = 0
-            self.setViewControllers([self.pages[0]], direction: .reverse, animated: false, completion: nil)
+            self.setViewControllers([self.pages[0]], direction: .forward, animated: false, completion: nil)
         }
     }
     
@@ -130,9 +130,9 @@ extension AnimatedPDFViewControllerITracker {
 }
 
 extension AnimatedPDFViewControllerITracker: UIPageViewControllerDelegate {
-    func pageViewController(_ pageViewController: UIPageViewController, spineLocationFor orientation: UIInterfaceOrientation) -> UIPageViewController.SpineLocation {
-        return .max
-    }
+//    func pageViewController(_ pageViewController: UIPageViewController, spineLocationFor orientation: UIInterfaceOrientation) -> UIPageViewController.SpineLocation {
+//        return .max
+//    }
 }
 
 // Allowing user to flick between pages
