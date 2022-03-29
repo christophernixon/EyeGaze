@@ -11,6 +11,8 @@ import UIKit
 class Constants {
     public static let iPadScreenHeightPoints = 1194
     public static let iPadScreenWidthPoints = 834
+    public static let iPadScreenHeightMm = 229
+    public static let iPadScreenWidthMm = 160
     
     // Segues
     public static let showPDFSegue = "showPDFSegue"
@@ -38,9 +40,9 @@ class Constants {
     
     public static let gazeCalibrationFrameCount: Int = 30
     
-    public static let fastScrollingSpeed: CGFloat = 1.5
-    public static let mediumScrollingSpeed: CGFloat = 0.5
-    public static let slowScrollingSpeed: CGFloat = 0.4
-    public static let defaultScrollingSpeed: CGFloat = 0.1
-    public static let changeOfSpeedRate: CGFloat = 0.002
+    public static let fastScrollingSpeed: CGFloat = 0.7
+    public static let mediumScrollingSpeed: CGFloat = 0.35
+    public static let slowScrollingSpeed: CGFloat = 0.15
+    public static let defaultScrollingSpeed: CGFloat = 0.0
+    public static let changeOfSpeedRate: CGFloat = 0.001
 }

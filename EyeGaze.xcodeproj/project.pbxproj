@@ -21,6 +21,7 @@
 		8C2B45A327BFA5FD000CF377 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2B45A227BFA5FD000CF377 /* Constants.swift */; };
 		8C2B45A527C3D55E000CF377 /* AnimatedPDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2B45A427C3D55D000CF377 /* AnimatedPDFViewController.swift */; };
 		8C2B45A727C4F146000CF377 /* ParentAnimatedPDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2B45A627C4F145000CF377 /* ParentAnimatedPDFViewController.swift */; };
+		8C2B9A5527F30ECA0049A40F /* Clair_De_Lune.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8C2B9A5427F30ECA0049A40F /* Clair_De_Lune.pdf */; };
 		8C3002D627D0E49600F8FBBB /* BeginCalibrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3002D527D0E49600F8FBBB /* BeginCalibrationViewController.swift */; };
 		8C3002D827D0ED0C00F8FBBB /* SecondCalibrationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3002D727D0ED0C00F8FBBB /* SecondCalibrationDetailViewController.swift */; };
 		8C31BF4B278888DA00EE3359 /* EinTraum.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8C31BF49278888DA00EE3359 /* EinTraum.pdf */; };
@@ -30,6 +31,7 @@
 		8C31BF542788B5DF00EE3359 /* Vainement,mabien-aimee.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8C31BF532788B5DF00EE3359 /* Vainement,mabien-aimee.pdf */; };
 		8C31BF562788F19E00EE3359 /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31BF552788F19E00EE3359 /* PDFViewController.swift */; };
 		8C402BA5278F88D400CAA1F3 /* PredictionUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C402BA4278F88D400CAA1F3 /* PredictionUtilities.swift */; };
+		8C41BCE527E92AD8005A532B /* ViensMonBienAime.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8C41BCE427E92AD8005A532B /* ViensMonBienAime.pdf */; };
 		8C475BEA27CD7D3200F35714 /* Ganymed.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8C475BDE27CD7D2F00F35714 /* Ganymed.pdf */; };
 		8C475BEB27CD7D3200F35714 /* total_eclipse_spare_page.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8C475BDF27CD7D2F00F35714 /* total_eclipse_spare_page.pdf */; };
 		8C475BEC27CD7D3200F35714 /* Komm,JesuKomm.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8C475BE027CD7D3000F35714 /* Komm,JesuKomm.pdf */; };
@@ -58,6 +60,7 @@
 		8CBAD7F827B137DE00C43CC2 /* SeeSo.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CBAD7F627B137C400C43CC2 /* SeeSo.xcframework */; };
 		8CBAD7F927B137DE00C43CC2 /* SeeSo.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8CBAD7F627B137C400C43CC2 /* SeeSo.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8CBAD7FC27B1402700C43CC2 /* StaticSeeSoTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBAD7FB27B1402700C43CC2 /* StaticSeeSoTestViewController.swift */; };
+		8CD7013E27F07F7B00B7C483 /* sicut_cervus.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7013D27F07F7B00B7C483 /* sicut_cervus.pdf */; };
 		8CECE63A27CF8F01001FC551 /* CalibrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CECE63927CF8F01001FC551 /* CalibrationViewController.swift */; };
 		8CF2098A279DC48100B65336 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF20989279DC48100B65336 /* DebugViewController.swift */; };
 		8CF2098C27A18D4700B65336 /* PredictionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF2098B27A18D4700B65336 /* PredictionEngine.swift */; };
@@ -117,6 +120,7 @@
 		8C2B45A227BFA5FD000CF377 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8C2B45A427C3D55D000CF377 /* AnimatedPDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedPDFViewController.swift; sourceTree = "<group>"; };
 		8C2B45A627C4F145000CF377 /* ParentAnimatedPDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentAnimatedPDFViewController.swift; sourceTree = "<group>"; };
+		8C2B9A5427F30ECA0049A40F /* Clair_De_Lune.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Clair_De_Lune.pdf; sourceTree = "<group>"; };
 		8C3002D527D0E49600F8FBBB /* BeginCalibrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeginCalibrationViewController.swift; sourceTree = "<group>"; };
 		8C3002D727D0ED0C00F8FBBB /* SecondCalibrationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondCalibrationDetailViewController.swift; sourceTree = "<group>"; };
 		8C31BF49278888DA00EE3359 /* EinTraum.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EinTraum.pdf; sourceTree = "<group>"; };
@@ -126,6 +130,7 @@
 		8C31BF532788B5DF00EE3359 /* Vainement,mabien-aimee.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Vainement,mabien-aimee.pdf"; sourceTree = "<group>"; };
 		8C31BF552788F19E00EE3359 /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
 		8C402BA4278F88D400CAA1F3 /* PredictionUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionUtilities.swift; sourceTree = "<group>"; };
+		8C41BCE427E92AD8005A532B /* ViensMonBienAime.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ViensMonBienAime.pdf; sourceTree = "<group>"; };
 		8C475BDE27CD7D2F00F35714 /* Ganymed.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Ganymed.pdf; sourceTree = "<group>"; };
 		8C475BDF27CD7D2F00F35714 /* total_eclipse_spare_page.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = total_eclipse_spare_page.pdf; sourceTree = "<group>"; };
 		8C475BE027CD7D3000F35714 /* Komm,JesuKomm.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Komm,JesuKomm.pdf"; sourceTree = "<group>"; };
@@ -157,6 +162,7 @@
 		8CBAD7F427B1365C00C43CC2 /* SeeSoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeSoViewController.swift; sourceTree = "<group>"; };
 		8CBAD7F627B137C400C43CC2 /* SeeSo.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = SeeSo.xcframework; sourceTree = "<group>"; };
 		8CBAD7FB27B1402700C43CC2 /* StaticSeeSoTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticSeeSoTestViewController.swift; sourceTree = "<group>"; };
+		8CD7013D27F07F7B00B7C483 /* sicut_cervus.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = sicut_cervus.pdf; sourceTree = "<group>"; };
 		8CECE63927CF8F01001FC551 /* CalibrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalibrationViewController.swift; sourceTree = "<group>"; };
 		8CF20989279DC48100B65336 /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 		8CF2098B27A18D4700B65336 /* PredictionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionEngine.swift; sourceTree = "<group>"; };
@@ -247,6 +253,9 @@
 				8C475BDF27CD7D2F00F35714 /* total_eclipse_spare_page.pdf */,
 				8C475BE127CD7D3000F35714 /* total_eclipse.pdf */,
 				8C31BF532788B5DF00EE3359 /* Vainement,mabien-aimee.pdf */,
+				8C41BCE427E92AD8005A532B /* ViensMonBienAime.pdf */,
+				8CD7013D27F07F7B00B7C483 /* sicut_cervus.pdf */,
+				8C2B9A5427F30ECA0049A40F /* Clair_De_Lune.pdf */,
 			);
 			path = SheetMusic;
 			sourceTree = "<group>";
@@ -458,6 +467,7 @@
 				8C475BED27CD7D3200F35714 /* total_eclipse.pdf in Resources */,
 				8CB4CEFE2771F4C600E20DC2 /* LaunchScreen.storyboard in Resources */,
 				8C31BF4B278888DA00EE3359 /* EinTraum.pdf in Resources */,
+				8CD7013E27F07F7B00B7C483 /* sicut_cervus.pdf in Resources */,
 				8C475BF027CD7D3200F35714 /* SilentNoon.pdf in Resources */,
 				8C31BF542788B5DF00EE3359 /* Vainement,mabien-aimee.pdf in Resources */,
 				8CB4CEFB2771F4C600E20DC2 /* Assets.xcassets in Resources */,
@@ -465,9 +475,11 @@
 				8C475BEA27CD7D3200F35714 /* Ganymed.pdf in Resources */,
 				8C475BF327CD7D3200F35714 /* IllsailupontheDogStar.pdf in Resources */,
 				8C475BEB27CD7D3200F35714 /* total_eclipse_spare_page.pdf in Resources */,
+				8C41BCE527E92AD8005A532B /* ViensMonBienAime.pdf in Resources */,
 				8C475BEC27CD7D3200F35714 /* Komm,JesuKomm.pdf in Resources */,
 				8C475BEF27CD7D3200F35714 /* GoLovelyRose.pdf in Resources */,
 				8CB4CEF92771F4C200E20DC2 /* Main.storyboard in Resources */,
+				8C2B9A5527F30ECA0049A40F /* Clair_De_Lune.pdf in Resources */,
 				8C475BF227CD7D3200F35714 /* Adelaide.pdf in Resources */,
 				8C475BF427CD7D3200F35714 /* Prigionierahol_almainpena.pdf in Resources */,
 				8C475BF127CD7D3200F35714 /* Isshenotpassingfair.pdf in Resources */,

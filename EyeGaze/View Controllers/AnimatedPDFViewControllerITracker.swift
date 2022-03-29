@@ -198,7 +198,8 @@ extension AnimatedPDFViewControllerITracker: AVCaptureVideoDataOutputSampleBuffe
         }
         
         if (self.isFaceDetected) { //Update rolling estimates
-            let transformedPrediction = transformPrediction(prediction: self.rawGazeEst)
+            var transformedPrediction = transformPrediction(prediction: self.rawGazeEst)
+            transformedPrediction = PredictionUtilities.boundPredictionToScreen(prediction: transformedPrediction)
             
             // Calculate rolling average
             var sumX = 0.0

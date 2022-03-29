@@ -179,9 +179,11 @@ extension AnimatedPDFViewController : GazeDelegate {
         } else {
             self.navigationItem.title = nil
         }
-        let (predictSpacePointX, predictSpacePointY)  = PredictionUtilities.screenToPredictionCoords(xScreen: gazeInfo.x, yScreen: gazeInfo.y, orientation: .up)
+
+        let (predX, predY) = PredictionUtilities.boundPredictionToScreen(prediction: (gazeInfo.x, gazeInfo.y))
+        
         // Waits for half a second, turns page then allows next page turn after one second
-        if (self.canTurnPage && self.pageTurningImplementation == .singleAnimation && gazeInfo.x > self.bottomRightCornerThreshold.x && gazeInfo.y > self.bottomRightCornerThreshold.y) {
+        if (self.canTurnPage && self.pageTurningImplementation == .singleAnimation && predX > self.bottomRightCornerThreshold.x && predY > self.bottomRightCornerThreshold.y) {
             // Prevent page being turning more than once
             self.canTurnPage = false
             let timer = Timer(timeInterval: 0.5, target: self, selector: #selector(turnPage), userInfo: nil, repeats: false)
@@ -191,7 +193,7 @@ extension AnimatedPDFViewController : GazeDelegate {
         }
 //        print("\(self.bottomRightCornerThreshold.x), \(self.bottomRightCornerThreshold.y)")
 //        print("timestamp : \(gazeInfo.timestamp), (x , y) : (\(gazeInfo.x), \(gazeInfo.y)) , (x , y) : (\(predictSpacePointX), \(predictSpacePointY)) state : \(gazeInfo.trackingState.description)")
-        self.currGazePrediction = CGPoint(x: gazeInfo.x, y: gazeInfo.y)
+        self.currGazePrediction = CGPoint(x: predX, y: predY)
     }
     
     @objc

@@ -44,6 +44,9 @@ extension PDF {
         PDF(pdfTitle: "Prigionierahol_almainpena"),
         PDF(pdfTitle: "SilentNoon"),
         PDF(pdfTitle: "total_eclipse_spare_page"),
-        PDF(pdfTitle: "total_eclipse")
+        PDF(pdfTitle: "total_eclipse"),
+        PDF(pdfTitle: "ViensMonBienAime"),
+        PDF(pdfTitle: "sicut_cervus"),
+        PDF(pdfTitle: "Clair_De_Lune")
     ]
 }

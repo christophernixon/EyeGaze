@@ -39,7 +39,7 @@ class TwoPartAnimationViewController: UIViewController {
     private var yTranslation = 9.0
     private var pageIsHalfTurned: Bool = false
     // Thresholds
-    private var bottomRightCornerThreshold: CGPoint = CGPoint(x: Constants.iPadScreenWidthPoints - Constants.iPadScreenWidthPoints/2, y: Constants.iPadScreenHeightPoints - Constants.iPadScreenHeightPoints/6)
+    private var bottomRightCornerThreshold: CGPoint = CGPoint(x: Constants.iPadScreenWidthPoints/3, y: Constants.iPadScreenHeightPoints - Constants.iPadScreenHeightPoints/5)
     private var topLeftCornerThreshold: CGPoint = CGPoint(x: Constants.iPadScreenWidthPoints, y: Constants.iPadScreenHeightPoints/3)
     private var canHalfTurnPage: Bool = true
     private var canFullyTurnPage: Bool = false
@@ -166,13 +166,13 @@ extension TwoPartAnimationViewController {
             // Prevent page being turning more than once
             self.canHalfTurnPage = false
             self.canFullyTurnPage = true
-            let timer = Timer(timeInterval: 0.5, target: self, selector: #selector(halfTurnPage), userInfo: nil, repeats: false)
+            let timer = Timer(timeInterval: 0.1, target: self, selector: #selector(halfTurnPage), userInfo: nil, repeats: false)
             RunLoop.main.add(timer, forMode: .common)
             let unlockTimer = Timer(timeInterval: 1.5, target: self, selector: #selector(resetHalfPageTurningBlock), userInfo: nil, repeats: false)
             RunLoop.main.add(unlockTimer, forMode: .common)
         } else if (self.isFaceVisible && self.pageIsHalfTurned && self.canFullyTurnPage && self.currAvgGazeEst.x < self.topLeftCornerThreshold.x && self.currAvgGazeEst.y < self.topLeftCornerThreshold.y) {
             self.canFullyTurnPage = false
-            let timer = Timer(timeInterval: 0.5, target: self, selector: #selector(fullyTurnPage), userInfo: nil, repeats: false)
+            let timer = Timer(timeInterval: 0.1, target: self, selector: #selector(fullyTurnPage), userInfo: nil, repeats: false)
             RunLoop.main.add(timer, forMode: .common)
             let unlockTimer = Timer(timeInterval: 1.5, target: self, selector: #selector(resetFullPageTurningBlock), userInfo: nil, repeats: false)
             RunLoop.main.add(unlockTimer, forMode: .common)
@@ -206,7 +206,6 @@ extension TwoPartAnimationViewController {
     
     @objc
     func halfTurnPage() {
-        print("Half turning page")
         let currPageIndex = self.pages.count - self.currentPageNumber
         self.pageIsHalfTurned = true
         if currPageIndex > 0 { // Don't turn past last page
@@ -259,7 +258,6 @@ extension TwoPartAnimationViewController {
     
     @objc
     func fullyTurnPage() {
-        print("Fully turning page")
         let currPageIndex = self.pages.count - self.currentPageNumber
         self.pageIsHalfTurned = false
         if currPageIndex > 0 { // Don't turn past last page
@@ -329,7 +327,8 @@ extension TwoPartAnimationViewController: AVCaptureVideoDataOutputSampleBufferDe
         }
         
         if (self.isFaceVisible) { //Update rolling estimates
-            let transformedPrediction = transformPrediction(prediction: self.rawGazeEst)
+            var transformedPrediction = transformPrediction(prediction: self.rawGazeEst)
+            transformedPrediction = PredictionUtilities.boundPredictionToScreen(prediction: transformedPrediction)
             self.updateRollingAverage(gazePrediction: transformedPrediction)
             // When to half-turn page
             self.checkIfPageShouldTurn()
@@ -373,7 +372,8 @@ extension TwoPartAnimationViewController : GazeDelegate {
     func onGaze(gazeInfo : GazeInfo) {
         if (gazeInfo.trackingState == SeeSo.TrackingState.SUCCESS) {
             self.isFaceVisible = true
-            self.currAvgGazeEst = CGPoint(x: gazeInfo.x, y: gazeInfo.y)
+            let (predX, predY) = PredictionUtilities.boundPredictionToScreen(prediction: (gazeInfo.x, gazeInfo.y))
+            self.currAvgGazeEst = CGPoint(x: predX, y: predY)
             self.checkIfPageShouldTurn()
         } else {
             self.isFaceVisible = false

@@ -114,7 +114,7 @@ class CalibrationViewController: UIViewController {
         self.averagedGazePredictions.append(averagePoint)
         // Convert the ground truth and gaze prediction points to CM to calculate distance in CM
         self.pointDistances.append(PredictionUtilities.euclideanDistance(from: PredictionUtilities.screenToPredictionCoordsCG(screenPoint: averagePoint, orientation: CGImagePropertyOrientation.up), to: PredictionUtilities.screenToPredictionCoordsCG(screenPoint: previousRedDot, orientation: CGImagePropertyOrientation.up)))
-//        drawGreenDot(location: averagePoint)
+        drawGreenDot(location: averagePoint)
     }
     
     func calculatePredictionResults() {

@@ -11,6 +11,40 @@ import CodableCSV
 
 class PredictionUtilities {
     
+    // If prediction is outside screen, but within 2cm of screen, prediction is clamped to screen bounds
+    static func boundPredictionToScreen(prediction: (x: Double, y: Double)) -> (Double, Double) {
+        let pointsPerMmX: Double = Double(Constants.iPadScreenWidthPoints)/Double(Constants.iPadScreenWidthMm)
+        let pointsPerMmY: Double = Double(Constants.iPadScreenHeightPoints)/Double(Constants.iPadScreenHeightMm)
+        // Amount of points in 2cm
+        let xBufferPoints = pointsPerMmX * 20
+        let yBufferPoints = pointsPerMmY * 20
+        
+        let bufferRectOriginX = 0 - xBufferPoints
+        let bufferRectOriginY = 0 - yBufferPoints
+        let bufferRectWidth = (Double(Constants.iPadScreenWidthPoints) + xBufferPoints) - bufferRectOriginX
+        let bufferRectHeight = (Double(Constants.iPadScreenHeightPoints) + yBufferPoints) - bufferRectOriginY
+        
+        // A rect surrounding the screen, 2cm larger
+        let bufferRect = CGRect(x: bufferRectOriginX, y: bufferRectOriginY, width: bufferRectWidth, height: bufferRectHeight)
+        let screenRect = CGRect(x: 0, y: 0, width: Constants.iPadScreenWidthPoints, height: Constants.iPadScreenHeightPoints)
+        
+        let predPoint = CGPoint(x: prediction.x, y: prediction.y)
+        var returnPoint = predPoint
+        if (!screenRect.contains(predPoint) && bufferRect.contains(predPoint)) {
+            if predPoint.x < 0 {
+                returnPoint.x = 0
+            } else if predPoint.x > Double(Constants.iPadScreenWidthPoints) {
+                returnPoint.x = Double(Constants.iPadScreenWidthPoints)
+            }
+            if predPoint.y < 0 {
+                returnPoint.y = 0
+            } else if predPoint.y > Double(Constants.iPadScreenHeightPoints){
+                returnPoint.y = Double(Constants.iPadScreenHeightPoints)
+            }
+        }
+        return (returnPoint.x, returnPoint.y)
+    }
+    
     static func pointsToCMX(xValue: Double) -> Double {
         // iPad Pro 11" dimensions according to https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/adaptivity-and-layout/
         let deviceScreenWidthPoints: Double = 834

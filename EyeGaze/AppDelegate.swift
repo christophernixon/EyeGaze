@@ -58,6 +58,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIWindowSceneDelegate {
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        let prefs = UserDefaults.standard
+        prefs.removeObject(forKey: Constants.cornerAnchorsKeySeeSo)
+        prefs.removeObject(forKey: Constants.cornerAnchorsKeyiTracker)
+        
         if let rootNavVC = window?.rootViewController as? UINavigationController {
             if let rootVC = rootNavVC.viewControllers.first as? PathChooseViewController {
                 rootVC.container = persistentContainer
