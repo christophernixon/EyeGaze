@@ -111,6 +111,10 @@ class PDFViewControllerITracker: UIViewController {
         if (!canScroll) {
             return
         }
+        // Check that scrolling hasn't reached end of file
+        if self.currScrollYOffset >= self.maxScrollOffset {
+            return
+        }
         // Adjust scrolling speed
         if (currAvgGazeEst.y > bottomQuarterScreenThreshold) {
             if (self.scrollSpeed < Constants.fastScrollingSpeed) {

@@ -126,7 +126,11 @@ class PDFViewController: UIViewController {
     
     @objc func step(displaylink: CADisplayLink) {
         // Check that user-initiated scroll event isn't happening
-        if (!canScroll) {
+        if (!self.canScroll) {
+            return
+        }
+        // Check that scrolling hasn't reached end of file
+        if self.currScrollYOffset >= self.maxScrollOffset {
             return
         }
         // Adjust scrolling speed
