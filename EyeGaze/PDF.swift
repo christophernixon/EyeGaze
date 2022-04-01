@@ -47,6 +47,7 @@ extension PDF {
         PDF(pdfTitle: "total_eclipse"),
         PDF(pdfTitle: "ViensMonBienAime"),
         PDF(pdfTitle: "sicut_cervus"),
-        PDF(pdfTitle: "Clair_De_Lune")
+        PDF(pdfTitle: "Clair_De_Lune"),
+        PDF(pdfTitle: "cul-ta")
     ]
 }

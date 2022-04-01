@@ -17,6 +17,7 @@ class AnimatedPDFViewController: UIPageViewController {
     var tracker : GazeTracker? = nil
     private var pageTurningImplementation: PageTurningImplementation = .scrolling
     private var currGazePrediction: CGPoint = CGPoint(x: 0, y: 0)
+    private var gazeEstimations: [(Double, Double)] = [(Double, Double)] (repeating: (0.0,0.0), count: Constants.rollingAverageWindowSize)
     private var canTurnPage: Bool = true
     private var bottomRightCornerThreshold: CGPoint = CGPoint(x: Constants.iPadScreenWidthPoints - Constants.iPadScreenWidthPoints/3, y: Constants.iPadScreenHeightPoints - Constants.iPadScreenHeightPoints/5)
     
@@ -80,6 +81,27 @@ class AnimatedPDFViewController: UIPageViewController {
         
 //        let timer = Timer(timeInterval: 1.0, target: self, selector: #selector(changeSlide), userInfo: nil, repeats: true)
 //        RunLoop.current.add(timer, forMode: .common)
+    }
+    
+    func updateRollingAverage(gazePrediction: (Double, Double)) {
+        // Calculate rolling average
+        var sumX = 0.0
+        var sumY = 0.0
+        for i in 0 ..< self.gazeEstimations.count {
+            sumX += self.gazeEstimations[i].0
+            sumY += self.gazeEstimations[i].1
+        }
+        let averageX = sumX/Double(Constants.rollingAverageWindowSize)
+        let averageY = sumY/Double(Constants.rollingAverageWindowSize)
+        
+        // Update predictionQueue
+        var returnQueue: [(Double,Double)] = [(Double, Double)] (repeating: (0.0,0.0), count: Constants.rollingAverageWindowSize)
+        for i in 0..<Constants.rollingAverageWindowSize-1 {
+            returnQueue[i] = (self.gazeEstimations[i+1])
+        }
+        returnQueue[Constants.rollingAverageWindowSize-1] = gazePrediction
+        self.gazeEstimations = returnQueue
+        self.currGazePrediction = CGPoint(x: averageX, y: averageY)
     }
     
     @objc
@@ -181,19 +203,19 @@ extension AnimatedPDFViewController : GazeDelegate {
         }
 
         let (predX, predY) = PredictionUtilities.boundPredictionToScreen(prediction: (gazeInfo.x, gazeInfo.y))
+        updateRollingAverage(gazePrediction: (predX, predY))
         
         // Waits for half a second, turns page then allows next page turn after one second
-        if (self.canTurnPage && self.pageTurningImplementation == .singleAnimation && predX > self.bottomRightCornerThreshold.x && predY > self.bottomRightCornerThreshold.y) {
+        if (self.canTurnPage && self.pageTurningImplementation == .singleAnimation && self.currGazePrediction.x > self.bottomRightCornerThreshold.x && self.currGazePrediction.y > self.bottomRightCornerThreshold.y) {
             // Prevent page being turning more than once
             self.canTurnPage = false
-            let timer = Timer(timeInterval: 0.5, target: self, selector: #selector(turnPage), userInfo: nil, repeats: false)
+            let timer = Timer(timeInterval: 1.0, target: self, selector: #selector(turnPage), userInfo: nil, repeats: false)
             RunLoop.current.add(timer, forMode: .common)
-            let unlockTimer = Timer(timeInterval: 1.5, target: self, selector: #selector(resetPageTurningBlock), userInfo: nil, repeats: false)
+            let unlockTimer = Timer(timeInterval: 3.0, target: self, selector: #selector(resetPageTurningBlock), userInfo: nil, repeats: false)
             RunLoop.current.add(unlockTimer, forMode: .common)
         }
 //        print("\(self.bottomRightCornerThreshold.x), \(self.bottomRightCornerThreshold.y)")
 //        print("timestamp : \(gazeInfo.timestamp), (x , y) : (\(gazeInfo.x), \(gazeInfo.y)) , (x , y) : (\(predictSpacePointX), \(predictSpacePointY)) state : \(gazeInfo.trackingState.description)")
-        self.currGazePrediction = CGPoint(x: predX, y: predY)
     }
     
     @objc

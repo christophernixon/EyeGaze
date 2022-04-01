@@ -14,6 +14,10 @@ class Constants {
     public static let iPadScreenHeightMm = 229
     public static let iPadScreenWidthMm = 160
     
+    public static let pointsPerMmX: Double = Double(iPadScreenWidthPoints)/Double(iPadScreenWidthMm)
+    public static let pointsPerMmY: Double = Double(Constants.iPadScreenHeightPoints)/Double(Constants.iPadScreenHeightMm)
+    public static let iPadBottomRightCornerWithBuffer: CGPoint = CGPoint(x: Double(iPadScreenWidthPoints) + (pointsPerMmX * 10), y: Double(iPadScreenHeightPoints) + (pointsPerMmY * 10))
+    
     // Segues
     public static let showPDFSegue = "showPDFSegue"
     public static let showPDFiTrackerSegue = "showPDFiTrackerSegue"
@@ -36,7 +40,7 @@ class Constants {
     public static let cornerAnchorsKeySeeSo = "cornerAnchorsSeeSo"
     
     // Window size for rolling average of gaze estimations
-    public static let rollingAverageWindowSize: Int = 10
+    public static let rollingAverageWindowSize: Int = 20
     
     public static let gazeCalibrationFrameCount: Int = 30
     

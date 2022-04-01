@@ -38,8 +38,8 @@ class TwoPartAnimationViewController: UIViewController {
     private var xTranslation = 1.5
     private var yTranslation = 9.0
     private var pageIsHalfTurned: Bool = false
-    // Thresholds
-    private var bottomRightCornerThreshold: CGPoint = CGPoint(x: Constants.iPadScreenWidthPoints/3, y: Constants.iPadScreenHeightPoints - Constants.iPadScreenHeightPoints/5)
+    // Thresholds, default 278,955.2
+    private var bottomRightCornerMinThreshold: CGPoint = CGPoint(x: Constants.iPadScreenWidthPoints/3, y: Constants.iPadScreenHeightPoints - Constants.iPadScreenHeightPoints/5)
     private var topLeftCornerThreshold: CGPoint = CGPoint(x: Constants.iPadScreenWidthPoints, y: Constants.iPadScreenHeightPoints/3)
     private var canHalfTurnPage: Bool = true
     private var canFullyTurnPage: Bool = false
@@ -84,8 +84,8 @@ class TwoPartAnimationViewController: UIViewController {
             let bottomRightThresholdX = cornerAnchors[2].x - bottomScreenWidth/2
             let rightScreenHeight = cornerAnchors[2].y - cornerAnchors[1].y
             let bottomRightThresholdY = cornerAnchors[2].y - rightScreenHeight/6
-            print("Updated bottom right threshold using calibration, previous: \(self.bottomRightCornerThreshold), updated: (\(bottomRightThresholdX),\(bottomRightThresholdY))")
-            self.bottomRightCornerThreshold = CGPoint(x: bottomRightThresholdX, y: bottomRightThresholdY)
+            print("Updated bottom right threshold using calibration, previous: \(self.bottomRightCornerMinThreshold), updated: (\(bottomRightThresholdX),\(bottomRightThresholdY))")
+            self.bottomRightCornerMinThreshold = CGPoint(x: bottomRightThresholdX, y: bottomRightThresholdY)
             let leftScreenHeight = cornerAnchors[3].y - cornerAnchors[0].y
             let topLeftThresholdY = cornerAnchors[0].y + leftScreenHeight/3
             print("Updated top left threshold using calibration, previous: \(self.topLeftCornerThreshold), updated: (\(self.topLeftCornerThreshold.x),\(topLeftThresholdY))")
@@ -162,17 +162,17 @@ class TwoPartAnimationViewController: UIViewController {
 extension TwoPartAnimationViewController {
     
     func checkIfPageShouldTurn() {
-        if (self.isFaceVisible && !self.pageIsHalfTurned && self.canHalfTurnPage && self.currAvgGazeEst.x > self.bottomRightCornerThreshold.x && self.currAvgGazeEst.y > self.bottomRightCornerThreshold.y) {
+        if (self.isFaceVisible && !self.pageIsHalfTurned && self.canHalfTurnPage && self.currAvgGazeEst.x > self.bottomRightCornerMinThreshold.x && self.currAvgGazeEst.y > self.bottomRightCornerMinThreshold.y && self.currAvgGazeEst.x < Constants.iPadBottomRightCornerWithBuffer.x && self.currAvgGazeEst.y < Constants.iPadBottomRightCornerWithBuffer.y) {
             // Prevent page being turning more than once
             self.canHalfTurnPage = false
             self.canFullyTurnPage = true
-            let timer = Timer(timeInterval: 0.1, target: self, selector: #selector(halfTurnPage), userInfo: nil, repeats: false)
+            let timer = Timer(timeInterval: 1.0, target: self, selector: #selector(halfTurnPage), userInfo: nil, repeats: false)
             RunLoop.main.add(timer, forMode: .common)
             let unlockTimer = Timer(timeInterval: 1.5, target: self, selector: #selector(resetHalfPageTurningBlock), userInfo: nil, repeats: false)
             RunLoop.main.add(unlockTimer, forMode: .common)
-        } else if (self.isFaceVisible && self.pageIsHalfTurned && self.canFullyTurnPage && self.currAvgGazeEst.x < self.topLeftCornerThreshold.x && self.currAvgGazeEst.y < self.topLeftCornerThreshold.y) {
+        } else if (self.isFaceVisible && self.pageIsHalfTurned && self.canFullyTurnPage && self.currAvgGazeEst.x < self.topLeftCornerThreshold.x && self.currAvgGazeEst.y < self.topLeftCornerThreshold.y && self.currAvgGazeEst.x < Constants.iPadBottomRightCornerWithBuffer.x && self.currAvgGazeEst.y < Constants.iPadBottomRightCornerWithBuffer.y) {
             self.canFullyTurnPage = false
-            let timer = Timer(timeInterval: 0.1, target: self, selector: #selector(fullyTurnPage), userInfo: nil, repeats: false)
+            let timer = Timer(timeInterval: 1.0, target: self, selector: #selector(fullyTurnPage), userInfo: nil, repeats: false)
             RunLoop.main.add(timer, forMode: .common)
             let unlockTimer = Timer(timeInterval: 1.5, target: self, selector: #selector(resetFullPageTurningBlock), userInfo: nil, repeats: false)
             RunLoop.main.add(unlockTimer, forMode: .common)
@@ -350,7 +350,7 @@ extension TwoPartAnimationViewController : InitializationDelegate {
             print("initalized GazeTracker")
             self.seeSoTracker?.statusDelegate = self
             self.seeSoTracker?.gazeDelegate = self
-            _ = self.seeSoTracker?.setTrackingFPS(fps: 15)
+//            _ = self.seeSoTracker?.setTrackingFPS(fps: 15)
             self.seeSoTracker?.startTracking()
         }else{
             print("init failed : \(error.description)")
@@ -373,7 +373,10 @@ extension TwoPartAnimationViewController : GazeDelegate {
         if (gazeInfo.trackingState == SeeSo.TrackingState.SUCCESS) {
             self.isFaceVisible = true
             let (predX, predY) = PredictionUtilities.boundPredictionToScreen(prediction: (gazeInfo.x, gazeInfo.y))
-            self.currAvgGazeEst = CGPoint(x: predX, y: predY)
+            print("Current prediction: (\(predX), \(predY))")
+            updateRollingAverage(gazePrediction: (predX, predY))
+            print("Rolling average: \(self.currAvgGazeEst)")
+//            self.currAvgGazeEst = CGPoint(x: predX, y: predY)
             self.checkIfPageShouldTurn()
         } else {
             self.isFaceVisible = false

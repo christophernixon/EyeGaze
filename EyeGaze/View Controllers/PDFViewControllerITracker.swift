@@ -95,15 +95,21 @@ class PDFViewControllerITracker: UIViewController {
         //Initialize a new display link inside a displayLink variable, providing 'self'
         //as target object and a selector to be called when the screen is updated.
         if (pageTurningImplementation == .scrolling) {
-            self.displayLink = CADisplayLink(target: self, selector: #selector(autoScroll(displaylink:)))
-            // And add the displayLink variable to the current run loop with default mode.
-            self.displayLink?.add(to: .current, forMode: .common)
+            let timer = Timer(timeInterval: 3.0, target: self, selector: #selector(startScrolling), userInfo: nil, repeats: false)
+            RunLoop.current.add(timer, forMode: .common)
         }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.captureSession.stopRunning()
+    }
+    
+    @objc
+    func startScrolling() {
+        self.displayLink = CADisplayLink(target: self, selector: #selector(autoScroll(displaylink:)))
+        // And add the displayLink variable to the current run loop with default mode.
+        self.displayLink?.add(to: .current, forMode: .common)
     }
     
     @objc func autoScroll(displaylink: CADisplayLink) {

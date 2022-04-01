@@ -226,9 +226,9 @@ extension AnimatedPDFViewControllerITracker: AVCaptureVideoDataOutputSampleBuffe
         if (self.canTurnPage && self.pageTurningImplementation == .singleAnimation && self.currAvgGazeEst.x > self.bottomRightCornerThreshold.x && self.currAvgGazeEst.y > self.bottomRightCornerThreshold.y && self.isFaceDetected) {
             // Prevent page being turning more than once
             self.canTurnPage = false
-            let timer = Timer(timeInterval: 0.5, target: self, selector: #selector(turnPage), userInfo: nil, repeats: false)
+            let timer = Timer(timeInterval: 1.0, target: self, selector: #selector(turnPage), userInfo: nil, repeats: false)
             RunLoop.main.add(timer, forMode: .common)
-            let unlockTimer = Timer(timeInterval: 2.5, target: self, selector: #selector(resetPageTurningBlock), userInfo: nil, repeats: false)
+            let unlockTimer = Timer(timeInterval: 3.0, target: self, selector: #selector(resetPageTurningBlock), userInfo: nil, repeats: false)
             RunLoop.main.add(unlockTimer, forMode: .common)
         }
         
