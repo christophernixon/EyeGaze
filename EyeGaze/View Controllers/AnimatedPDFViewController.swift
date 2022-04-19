@@ -42,9 +42,9 @@ class AnimatedPDFViewController: UIPageViewController {
                 cornerAnchors.append(NSCoder.cgPoint(for: point))
             }
             let bottomScreenWidth = cornerAnchors[2].x - cornerAnchors[3].x
-            let bottomRightThresholdX = cornerAnchors[2].x - bottomScreenWidth/5
+            let bottomRightThresholdX = cornerAnchors[2].x - bottomScreenWidth/3
             let rightScreenHeight = cornerAnchors[2].y - cornerAnchors[1].y
-            let bottomRightThresholdY = cornerAnchors[2].y - rightScreenHeight/8
+            let bottomRightThresholdY = cornerAnchors[2].y - rightScreenHeight/5
             print("Previous threshold: \(self.bottomRightCornerThreshold)")
             self.bottomRightCornerThreshold = CGPoint(x: bottomRightThresholdX, y: bottomRightThresholdY)
             print("Updated threshold: \(self.bottomRightCornerThreshold)")

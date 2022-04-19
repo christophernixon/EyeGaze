@@ -114,7 +114,7 @@ class CalibrationViewController: UIViewController {
         self.averagedGazePredictions.append(averagePoint)
         // Convert the ground truth and gaze prediction points to CM to calculate distance in CM
         self.pointDistances.append(PredictionUtilities.euclideanDistance(from: PredictionUtilities.screenToPredictionCoordsCG(screenPoint: averagePoint, orientation: CGImagePropertyOrientation.up), to: PredictionUtilities.screenToPredictionCoordsCG(screenPoint: previousRedDot, orientation: CGImagePropertyOrientation.up)))
-        drawGreenDot(location: averagePoint)
+//        drawGreenDot(location: averagePoint)
     }
     
     func calculatePredictionResults() {
@@ -218,7 +218,7 @@ class CalibrationViewController: UIViewController {
     @objc
     func testDotLocation() {
         let nextDotLocation = self.dotLocations[self.dotLocationIndex]
-        self.dotLayers.forEach({ drawing in drawing.removeFromSuperlayer() })
+//        self.dotLayers.forEach({ drawing in drawing.removeFromSuperlayer() })
         if self.currentDotPredictions.isEmpty { // When drawing first dot
             self.calibrationInProgress = true // This will start gaze predictions being stored
             drawRedDot(location: nextDotLocation)
@@ -246,7 +246,7 @@ class CalibrationViewController: UIViewController {
     func finishTest() {
         self.calibrationInProgress = false
         // Remove last red dot
-        self.dotLayers.forEach({ drawing in drawing.removeFromSuperlayer() })
+//        self.dotLayers.forEach({ drawing in drawing.removeFromSuperlayer() })
         updateDotData()
         calculatePredictionResults()
         saveUserCalibrations()
