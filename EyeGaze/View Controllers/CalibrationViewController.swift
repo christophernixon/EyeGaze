@@ -65,12 +65,12 @@ class CalibrationViewController: UIViewController {
             setupCamera()
         } else {
             if AVCaptureDevice .authorizationStatus(for: .video) == .authorized {
-                GazeTracker.initGazeTracker(license: "dev_43fxidsg5vglj0ufxnt0j94ybvo8sxs59p5yvm1u", delegate: self)
+                GazeTracker.initGazeTracker(license: "INSERT_SEESO_LICENSE_HERE", delegate: self)
             }else{
                 AVCaptureDevice.requestAccess(for: .video, completionHandler: {
                     response in
                     if response {
-                        GazeTracker.initGazeTracker(license: "dev_43fxidsg5vglj0ufxnt0j94ybvo8sxs59p5yvm1u", delegate: self)
+                        GazeTracker.initGazeTracker(license: "INSERT_SEESO_LICENSE_HERE", delegate: self)
                     }
                 })
             }
