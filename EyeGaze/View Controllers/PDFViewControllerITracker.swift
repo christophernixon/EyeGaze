@@ -162,7 +162,6 @@ class PDFViewControllerITracker: UIViewController {
         let yOffset = self.scrollSpeed * CGFloat(seconds) * 100
         self.currScrollYOffset += yOffset
         self.scrollView!.setContentOffset(CGPoint(x: 0, y: self.currScrollYOffset), animated: false)
-//        print("Seconds: \(seconds), yOffset: \(yOffset), contentOffset: \(self.scrollView!.contentOffset.y), currScrollYOffset: \(self.currScrollYOffset)")
     }
 }
 

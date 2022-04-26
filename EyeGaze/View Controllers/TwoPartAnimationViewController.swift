@@ -133,19 +133,9 @@ class TwoPartAnimationViewController: UIViewController {
             pdfView.displayMode = .singlePage
             pdfView.go(to: page)
             pdfView.autoScales = true
-            //            let vc = UIViewController()
-            //            vc.view = pdfView
-            //            self.pages.append(vc)
             self.pages.append(pdfView)
             self.view.addSubview(pdfView)
         }
-        //        self.pages.last?.mask = MaskView(frame: self.view.frame)
-        
-        //        let timer = Timer(timeInterval: 2.0, target: self, selector: #selector(halfTurnPage), userInfo: nil, repeats: true)
-        //        RunLoop.current.add(timer, forMode: .common)
-        //
-        //        let secondTimer = Timer(timeInterval: 3.0, target: self, selector: #selector(fullyTurnPage), userInfo: nil, repeats: true)
-        //        RunLoop.current.add(secondTimer, forMode: .common)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -213,15 +203,11 @@ extension TwoPartAnimationViewController {
             //            currPage.mask = MaskView(frame: self.view.frame)
             
             let maskLayer = CAShapeLayer()
-//            maskLayer.fillRule = .evenOdd
             maskLayer.fillColor = UIColor.white.withAlphaComponent(1.0).cgColor
             maskLayer.strokeColor = UIColor.clear.cgColor
-//            maskLayer.contents = UIImage(named: "AppStoreIconImage")?.cgImage
             let currPDFView = self.pages[currPageIndex] as? PDFView
             maskLayer.contents = currPDFView?.currentPage?.thumbnail(of: CGSize(width: self.view.frame.width, height: self.view.frame.height), for: .mediaBox).cgImage
             maskLayer.frame = CGRect(x: self.view.frame.minX, y: self.view.frame.minY, width: self.view.frame.width, height: self.view.frame.height)
-//            maskLayer.path = maskPath(cornerRadius: 20).cgPath
-//            maskLayer.opacity = 1.0
             currPage.layer.mask = maskLayer
             
             let oldBounds = maskLayer.bounds
@@ -231,28 +217,12 @@ extension TwoPartAnimationViewController {
             // Animation
             print(maskLayer.position.debugDescription)
             let animation = CABasicAnimation(keyPath: "position")
-//            animation.fromValue = NSValue(cgRect: oldBounds)
-//            animation.toValue = NSValue(cgRect: newBounds)
             animation.fromValue = maskLayer.position
             animation.toValue = [maskLayer.position.x, maskLayer.position.y+self.view.frame.height/2]
             animation.duration = 3.0
-//            animation.isRemovedOnCompletion = false
-//            animation.fillMode = .forwards
-//            maskLayer.bounds = newBounds
-//            maskLayer.frame = newFrame
             maskLayer.position = CGPoint(x: maskLayer.position.x, y: maskLayer.position.y+self.view.frame.height/2)
             
             maskLayer.add(animation, forKey: nil)
-            
-            
-//            CATransaction.begin()
-//            CATransaction.setDisableActions(true)
-//            currPage.layer.mask?.opacity = 1.0
-//            CATransaction.commit()
-            //            currPage.mask?.alpha = 1
-            //            UIView.animate(withDuration: 1.0) {
-            //                currPage.mask?.alpha = 0
-            //            }
         }
     }
     
@@ -270,7 +240,6 @@ extension TwoPartAnimationViewController {
             animation.fillMode = .forwards
             currPage.layer.mask?.add(animation, forKey: nil)
             
-//            currPage.mask = FullMaskView(frame: self.view.frame)
             self.currentPageNumber += 1
         }
     }
@@ -350,7 +319,6 @@ extension TwoPartAnimationViewController : InitializationDelegate {
             print("initalized GazeTracker")
             self.seeSoTracker?.statusDelegate = self
             self.seeSoTracker?.gazeDelegate = self
-//            _ = self.seeSoTracker?.setTrackingFPS(fps: 15)
             self.seeSoTracker?.startTracking()
         }else{
             print("init failed : \(error.description)")
@@ -376,7 +344,6 @@ extension TwoPartAnimationViewController : GazeDelegate {
             print("Current prediction: (\(predX), \(predY))")
             updateRollingAverage(gazePrediction: (predX, predY))
             print("Rolling average: \(self.currAvgGazeEst)")
-//            self.currAvgGazeEst = CGPoint(x: predX, y: predY)
             self.checkIfPageShouldTurn()
         } else {
             self.isFaceVisible = false

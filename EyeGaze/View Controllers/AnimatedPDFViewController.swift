@@ -78,9 +78,6 @@ class AnimatedPDFViewController: UIPageViewController {
         {
             setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
         }
-        
-//        let timer = Timer(timeInterval: 1.0, target: self, selector: #selector(changeSlide), userInfo: nil, repeats: true)
-//        RunLoop.current.add(timer, forMode: .common)
     }
     
     func updateRollingAverage(gazePrediction: (Double, Double)) {
@@ -140,9 +137,6 @@ extension AnimatedPDFViewController: UIPageViewControllerDataSource
 }
 
 extension AnimatedPDFViewController: UIPageViewControllerDelegate {
-//    func pageViewController(_ pageViewController: UIPageViewController, spineLocationFor orientation: UIInterfaceOrientation) -> UIPageViewController.SpineLocation {
-//        return .max
-//    }
 }
 
 // Gaze tracking stuff
@@ -214,8 +208,6 @@ extension AnimatedPDFViewController : GazeDelegate {
             let unlockTimer = Timer(timeInterval: 3.0, target: self, selector: #selector(resetPageTurningBlock), userInfo: nil, repeats: false)
             RunLoop.current.add(unlockTimer, forMode: .common)
         }
-//        print("\(self.bottomRightCornerThreshold.x), \(self.bottomRightCornerThreshold.y)")
-//        print("timestamp : \(gazeInfo.timestamp), (x , y) : (\(gazeInfo.x), \(gazeInfo.y)) , (x , y) : (\(predictSpacePointX), \(predictSpacePointY)) state : \(gazeInfo.trackingState.description)")
     }
     
     @objc

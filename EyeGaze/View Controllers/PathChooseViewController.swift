@@ -29,9 +29,6 @@ class PathChooseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        guard container != nil else {
-//            fatalError("This view needs a persistent container.")
-//        }
         do {
             self.iTrackerModel = try iTracker_v2(configuration: MLModelConfiguration())
         } catch {

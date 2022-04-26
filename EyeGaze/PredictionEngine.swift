@@ -40,7 +40,6 @@ class PredictionEngine {
     }
     
     func predictGaze(image: CGImage, completion: @escaping (GazeDetectionResult) -> Void) {
-//        let flippedImage = UIImage(cgImage: image).withHorizontallyFlippedOrientation().cgImage!
         
         let imageRequestHandler = VNImageRequestHandler(cgImage: image, orientation: .up, options: [:])
         let faceDetectionRequest = VNDetectFaceLandmarksRequest(completionHandler: { (request: VNRequest, error: Error?) in

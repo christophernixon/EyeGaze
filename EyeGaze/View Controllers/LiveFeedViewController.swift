@@ -126,7 +126,6 @@ extension LiveFeedViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
             print("Automated Gaze Prediction: [\(result[0]),\(result[1])]")
             let (screenX, screenY) = PredictionUtilities.predictionToScreenCoords(xPrediction: Double(result[0]), yPrediction: Double(result[1]), orientation: CGImagePropertyOrientation.up)
             let shapeLayer = CAShapeLayer()
-//            let center = view.center
             let circulPath = UIBezierPath(arcCenter: CGPoint(x: screenX, y: screenY), radius: 12, startAngle: 0, endAngle: 2.0 * CGFloat.pi, clockwise: true)
 
             shapeLayer.path = circulPath.cgPath

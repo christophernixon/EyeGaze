@@ -150,7 +150,6 @@ class StaticViewController: UIViewController {
                     x: eyePoint.x * faceBoundingBox.width + faceBoundingBox.origin.x,
                     y: (1-eyePoint.y) * faceBoundingBox.height + faceBoundingBox.origin.y)
             })
-//        let landmarkPathPoints = eye.normalizedPoints.map { VNImagePointForFaceLandmarkPoint(vector2(Float($0.x),Float($0.y)), faceBoundingBox, Int(self.scaledImageRect!.size.width), Int(self.scaledImageRect!.size.height)) }
         landmarkPath.addLines(between: landmarkPathPoints)
         landmarkPath.closeSubpath()
         let landmarkLayer = CAShapeLayer()

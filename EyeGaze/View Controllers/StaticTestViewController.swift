@@ -22,12 +22,6 @@ class StaticTestViewController: UIViewController {
     private var xTranslation = 1.5
     private var yTranslation = 9.0
     
-//    private var xScaling = 1.0
-//    private var yScaling = 1.0
-//    // Translations in cm, converted to screen points in utility function
-//    private var xTranslation = 0.0
-//    private var yTranslation = 0.0
-    
     private static let dotLocations: [CGPoint] = [CGPoint(x: 200, y: 200), CGPoint(x: 600, y: 200), CGPoint(x: 120, y: 450), CGPoint(x: 400, y: 450), CGPoint(x: 680, y: 450), CGPoint(x: 200, y: 700), CGPoint(x: 600, y: 700), CGPoint(x: 120, y: 950), CGPoint(x: 400, y: 950), CGPoint(x: 680, y: 950)]
     private static let initialDelay: Double = 0.5
     private let dotDelay: Double = 2.0
@@ -88,9 +82,6 @@ class StaticTestViewController: UIViewController {
     
     @objc
     func testDotLocation() {
-//        for gazePrediction in self.gazePredictions {
-//            drawBlueDot(location: PredictionUtilities.cgPointFromDoubleTuple(doubleTuple: gazePrediction))
-//        }
         let dotLocation = Self.dotLocations[self.dotLocationIndex]
         if self.gazePredictions.isEmpty { // When drawing first dot
             self.testInProgress = true // This will start gaze predictions being stored
@@ -239,7 +230,6 @@ extension StaticTestViewController: AVCaptureVideoDataOutputSampleBufferDelegate
                 self.drawBlueDot(location: PredictionUtilities.cgPointFromDoubleTuple(doubleTuple: transformedPrediction))
             }
         }
-//        print(self.gazePredictions)
     }
     
     // Transform prediction from prediction space to screen space

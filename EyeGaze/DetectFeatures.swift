@@ -11,7 +11,6 @@ import CoreGraphics
 
 class DetectFeatures {
     
-//    static var faceDetectionRequest = VNDetectFaceRectanglesRequest(completionHandler: handleDetectedFaces)
     var image: CGImage?
     
     func predictGaze(model: iTracker, image: CGImage) -> (Double, Double) {
@@ -49,8 +48,6 @@ class DetectFeatures {
             }) {
             let partsWidth =  Maxx.x - Minx.x
             let partsHeight = Maxy.y - Miny.y
-//            let originX = CGFloat(self.image!.width) - Minx.x
-//            let originY = CGFloat(self.image!.height)-Miny.y
             let originX = Minx.x
             let originY = Miny.y
             let gRect = CGRect(x: originX - (partsWidth * hPadding), y: originY - (partsHeight * vPadding), width: partsWidth + (partsWidth * hPadding * 2), height: partsHeight + (partsHeight * vPadding * 2))
@@ -78,10 +75,6 @@ class DetectFeatures {
     
     // Landmark coord points are definitely normalized to the bounding box they are within.
     func convertCGPointToImageCoords(point: CGPoint, boundingBox: CGRect) -> CGPoint {
-//        let xValue = point.x * CGFloat(self.image!.width)
-//        let boundingBoxHeight = boundingBox.height * CGFloat(self.image!.height)
-        
-//        let testPoint = point.absolutePoint(in: boundingBox)
         let xValue = point.x * boundingBox.width + boundingBox.origin.x
         let yValue = (1-point.y) * boundingBox.height + boundingBox.origin.y
         return CGPoint(x: xValue, y: yValue)
@@ -112,7 +105,6 @@ class DetectFeatures {
             let firstResult = results[0]
             print("bounding box width: \(firstResult.boundingBox.width),Height: \(firstResult.boundingBox.height)")
             print("Original image width: \(image.width),Height: \(image.height)")
-//            print(firstResult.boundingBox)
             let w = firstResult.boundingBox.width * CGFloat(self.image!.width)
             let h = firstResult.boundingBox.height * CGFloat(self.image!.height)
             let x = firstResult.boundingBox.origin.x * CGFloat(self.image!.width)
@@ -186,7 +178,6 @@ class DetectFeatures {
                                 x: eyePoint.y * gRect.height + gRect.origin.x,
                                 y: eyePoint.x * gRect.width + gRect.origin.y)
                         })
-//            let mouthPoints = mouthLandmark.normalizedPoints.map { VNImagePointForFaceLandmarkPoint(vector2(Float($0.x),Float($0.y)), firstResult.boundingBox, self.image!.width, self.image!.height) }
             let mouthImage = self.cropParts(partsPoints: mouthPoints, horizontalSpacing: CGFloat(1), verticalSpacing: CGFloat(1))
             
             // Test facegrid function

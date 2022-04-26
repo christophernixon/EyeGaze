@@ -29,7 +29,6 @@ class CalibrationViewController: UIViewController {
     private var rawGazeEst: (Double, Double) = (0,0)
     private var isFaceVisible: Bool = false
     private var currAcceptableCalibrationFramesCount: Int = 0
-//    private var timerHasBeenTriggered: Bool = true
     private var timers: [Timer] = []
     
     private var dotLocationIndex: Int = 0
@@ -114,7 +113,6 @@ class CalibrationViewController: UIViewController {
         self.averagedGazePredictions.append(averagePoint)
         // Convert the ground truth and gaze prediction points to CM to calculate distance in CM
         self.pointDistances.append(PredictionUtilities.euclideanDistance(from: PredictionUtilities.screenToPredictionCoordsCG(screenPoint: averagePoint, orientation: CGImagePropertyOrientation.up), to: PredictionUtilities.screenToPredictionCoordsCG(screenPoint: previousRedDot, orientation: CGImagePropertyOrientation.up)))
-//        drawGreenDot(location: averagePoint)
     }
     
     func calculatePredictionResults() {
@@ -170,43 +168,16 @@ class CalibrationViewController: UIViewController {
     
     func writeCalibrationsToFile() {
         let calibrationData = CalibrationData(averagedGazepredictions: self.averagedGazePredictions, pointDistances: self.pointDistances, cornerGazePredictions: self.cornerGazePredictions, dotError: self.dotError, xRange: self.xRange, yRange: self.yRange, xRangeGroundTruth: self.xRangeGroundTruth, yRangeGrountTruth: self.yRangeGroundTruth, meanXDeviation: self.meanXDeviation, meanYDeviation: self.meanYDeviation, allGazePredictions: self.allGazePredictions)
-//        calibrationData.averagedGazePredictions = self.averagedGazePredictions
-//        calibrationData.pointDistances = self.pointDistances
-//        calibrationData.cornerGazePredictions = self.cornerGazePredictions
-//        calibrationData.dotError = self.dotError
-//        calibrationData.xRange = self.xRange
-//        calibrationData.yRange = self.yRange
-//        calibrationData.xRangeGroundTruth = self.xRangeGroundTruth
-//        calibrationData.yRangeGroundTruth = self.yRangeGroundTruth
-//        calibrationData.meanXDeviation = self.meanXDeviation
-//        calibrationData.meanYDeviation = self.meanYDeviation
-//        
-//        calibrationData.formatDataStores()
         
         if self.isUsingiTrackerModel {
             calibrationData.writeCalibrationsToFile(toDocumentNamed: "averagedGazePredictions.csv", forGazeImplementation: .iTracker)
         } else {
             calibrationData.writeCalibrationsToFile(toDocumentNamed: "averagedGazePredictions.csv", forGazeImplementation: .SeeSo)
         }
-//        let fileIOController = FileIOController()
-//        do {
-//            var dict4 = [String:[[CGPoint]]]()
-//            dict4["averagedGazePredictions"] = [self.averagedGazePredictions]
-////            try fileIOController.write(self.averagedGazePredictions, toDocumentNamed: "calibrationData.csv")
-//            try fileIOController.write(self.averagedGazePredictions, toDocumentNamed: "averagedGazePredictions.csv")
-//            try fileIOController.write(self.cornerGazePredictions, toDocumentNamed: "cornerGazePredictions.csv")
-//        } catch let error {
-//            print("File writing error: \(error)")
-//        }
-        
     }
     
     @objc
     func displayNextDot() {
-//        self.timerHasBeenTriggered = true
-//        if self.currAcceptableCalibrationFramesCount < Constants.gazeCalibrationFrameCount {
-//            return
-//        }
         self.currAcceptableCalibrationFramesCount = 0
         if self.dotLocationIndex < self.dotLocations.count {
             testDotLocation()
@@ -218,7 +189,6 @@ class CalibrationViewController: UIViewController {
     @objc
     func testDotLocation() {
         let nextDotLocation = self.dotLocations[self.dotLocationIndex]
-//        self.dotLayers.forEach({ drawing in drawing.removeFromSuperlayer() })
         if self.currentDotPredictions.isEmpty { // When drawing first dot
             self.calibrationInProgress = true // This will start gaze predictions being stored
             drawRedDot(location: nextDotLocation)
@@ -229,24 +199,11 @@ class CalibrationViewController: UIViewController {
         }
         
         self.dotLocationIndex += 1
-//        if self.dotLocationIndex < self.dotLocations.count {
-//            let dotTimer = Timer(timeInterval: self.timeDelayBetweenDots, target: self, selector: #selector(displayNextDot), userInfo: nil, repeats: false)
-//            self.timers.append(dotTimer)
-//            self.timerHasBeenTriggered = false
-//            RunLoop.current.add(dotTimer, forMode: .common)
-//        } else {
-//            let finishTestTimer = Timer(timeInterval: self.timeDelayBetweenDots, target: self, selector: #selector(displayNextDot), userInfo: nil, repeats: false)
-//            self.timers.append(finishTestTimer)
-//            self.timerHasBeenTriggered = false
-//            RunLoop.current.add(finishTestTimer, forMode: .common)
-//        }
     }
     
     @objc
     func finishTest() {
         self.calibrationInProgress = false
-        // Remove last red dot
-//        self.dotLayers.forEach({ drawing in drawing.removeFromSuperlayer() })
         updateDotData()
         calculatePredictionResults()
         saveUserCalibrations()
@@ -402,7 +359,6 @@ extension CalibrationViewController : StatusDelegate {
 extension CalibrationViewController : GazeDelegate {
     
     func onGaze(gazeInfo : GazeInfo) {
-//        print("timestamp : \(gazeInfo.timestamp), (x , y) : (\(gazeInfo.x), \(gazeInfo.y)) , state : \(gazeInfo.trackingState.description)")
         if self.calibrationInProgress {
             if (gazeInfo.trackingState == SeeSo.TrackingState.SUCCESS) {
                 self.currAcceptableCalibrationFramesCount += 1

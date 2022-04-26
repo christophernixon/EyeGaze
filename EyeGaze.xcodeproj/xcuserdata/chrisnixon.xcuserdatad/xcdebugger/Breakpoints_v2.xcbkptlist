@@ -53,8 +53,8 @@
             filePath = "EyeGaze/DetectFeatures.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
             landmarkName = "detectFeatures(model:image:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -69,8 +69,8 @@
             filePath = "EyeGaze/DetectFeatures.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
             landmarkName = "detectFeatures(model:image:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -85,8 +85,8 @@
             filePath = "EyeGaze/DetectFeatures.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
             landmarkName = "detectFeatures(model:image:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -101,8 +101,8 @@
             filePath = "EyeGaze/DetectFeatures.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
             landmarkName = "detectFeatures(model:image:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -117,8 +117,8 @@
             filePath = "EyeGaze/DetectFeatures.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
             landmarkName = "detectFeatures(model:image:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -133,8 +133,8 @@
             filePath = "EyeGaze/DetectFeatures.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
             landmarkName = "detectFeatures(model:image:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -149,8 +149,8 @@
             filePath = "EyeGaze/DetectFeatures.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
             landmarkName = "detectFeatures(model:image:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -165,8 +165,8 @@
             filePath = "EyeGaze/DetectFeatures.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "detectFeatures(model:image:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -181,8 +181,8 @@
             filePath = "EyeGaze/DetectFeatures.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "convertCGPointToImageCoords(point:boundingBox:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -197,8 +197,8 @@
             filePath = "EyeGaze/DetectFeatures.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
             landmarkName = "detectFeatures(model:image:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -213,8 +213,8 @@
             filePath = "EyeGaze/DetectFeatures.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
             landmarkName = "detectFeatures(model:image:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -229,8 +229,8 @@
             filePath = "EyeGaze/DetectFeatures.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
             landmarkName = "convertCGPointToImageCoords(point:boundingBox:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -245,8 +245,8 @@
             filePath = "EyeGaze/DetectFeatures.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
             landmarkName = "detectFeatures(model:image:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -261,24 +261,8 @@
             filePath = "EyeGaze/DetectFeatures.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
-            landmarkName = "detectFeatures(model:image:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "5B2AA6EA-C391-45BC-960E-5F4E129536AA"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EyeGaze/DetectFeatures.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "190"
-            endingLineNumber = "190"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
             landmarkName = "detectFeatures(model:image:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -309,9 +293,9 @@
             filePath = "EyeGaze/PredictionUtilities.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "388"
-            endingLineNumber = "388"
-            landmarkName = "faceGridFromFaceRect(originalImage:detectedFaceRect:gridW:gridH:)"
+            startingLineNumber = "384"
+            endingLineNumber = "384"
+            landmarkName = "convertCGPointToImageCoords(point:boundingBox:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -325,8 +309,8 @@
             filePath = "EyeGaze/DetectFeatures.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "cropParts(partsPoints:horizontalSpacing:verticalSpacing:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -396,8 +380,8 @@
             filePath = "EyeGaze/PredictionUtilities.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "421"
-            endingLineNumber = "421"
+            startingLineNumber = "408"
+            endingLineNumber = "408"
             landmarkName = "faceGridFromFaceRect(originalImage:detectedFaceRect:gridW:gridH:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -428,25 +412,9 @@
             filePath = "EyeGaze/View Controllers/AnimatedPDFViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
             landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "7269A243-9D82-46EB-B4A5-F0079AFF70DA"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EyeGaze/View Controllers/ModelPDFViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "viewDidLayoutSubviews()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -460,8 +428,8 @@
             filePath = "EyeGaze/View Controllers/ModelPDFViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
             landmarkName = "changeSlide()"
             landmarkType = "7">
          </BreakpointContent>
@@ -476,8 +444,8 @@
             filePath = "EyeGaze/View Controllers/AnimatedPDFViewControllerITracker.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
+            startingLineNumber = "223"
+            endingLineNumber = "223"
             landmarkName = "captureOutput(_:didOutput:from:)"
             landmarkType = "7">
          </BreakpointContent>

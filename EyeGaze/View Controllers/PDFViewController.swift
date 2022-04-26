@@ -79,11 +79,6 @@ class PDFViewController: UIViewController {
         view.addSubview(pdfView)
         pdfView.document = pdf?.document
         pdfView.autoScales = true
-        
-//        pdfView.usePageViewController(true, withViewOptions: nil)
-//        let timer = Timer(timeInterval: 0.5, target: self, selector: #selector(printContentOffset), userInfo: nil, repeats: false)
-//        RunLoop.current.add(timer, forMode: .common)
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -96,13 +91,6 @@ class PDFViewController: UIViewController {
         pdfView.scrollView!.delegate = self
         self.scrollView = scrollView
         self.maxScrollOffset = self.scrollView!.contentSize.height - self.scrollView!.bounds.size.height
-        //        let timer = Timer(timeInterval: 0.5, target: self, selector: #selector(printContentOffset), userInfo: nil, repeats: false)
-        //        RunLoop.current.add(timer, forMode: .common)
-//        let scrollTimer = Timer(timeInterval: 1.5, target: self, selector: #selector(scrollToEnd), userInfo: nil, repeats: false)
-//        RunLoop.current.add(scrollTimer, forMode: .common)
-        //        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
-        //            self.autoScroll()
-        //        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -180,32 +168,18 @@ class PDFViewController: UIViewController {
         let yOffset = self.scrollSpeed * CGFloat(seconds) * 100
         self.currScrollYOffset += yOffset
         self.scrollView!.setContentOffset(CGPoint(x: 0, y: self.currScrollYOffset), animated: false)
-//        print("Seconds: \(seconds), yOffset: \(yOffset), contentOffset: \(self.scrollView!.contentOffset.y), currScrollYOffset: \(self.currScrollYOffset)")
     }
     
     @objc
     func scrollToEnd() {
         let maxOffset = CGPoint(x: .zero, y: self.maxScrollOffset)
         let duration = 60.0
-//        self.scrollView!.setValue(5.0, forKeyPath: "contentOffsetAnimationDuration")
-//        self.scrollView!.setContentOffset(maxOffset, animated: true)
-        //        let animator = UIViewPropertyAnimator(duration: duration, curve: .linear) {
-        //            self.scrollView!.setContentOffset(maxOffset, animated: true)
-        //        }
-//        UIView.animate(withDuration: 50.0, animations: {
-//            self.scrollView!.setContentOffset(maxOffset, animated: false)
-//        })
-        //        animator.startAnimation()
-        //        self.scrollAnimator = animator
     }
     
     @objc
     func autoScroll() {
         self.scrollOffset.y += 50
         self.scrollView!.setContentOffset(self.scrollOffset, animated: true)
-        //        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
-        //            self.autoScroll()
-        //        }
     }
     
     @objc
@@ -224,14 +198,7 @@ extension PDFViewController : UIScrollViewDelegate {
         self.canScroll = false
     }
     
-//    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-//        self.scrollView!.setContentOffset(self.scrollView!.contentOffset, animated: true)
-//    }
-    
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        //      if !decelerate {
-        //         endOfScroll()
-        //      }
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -241,12 +208,9 @@ extension PDFViewController : UIScrollViewDelegate {
     }
     
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        //        endOfScroll()
     }
     
     func endOfScroll() {
-        //        self.scrollOffset.y += 15
-        //        self.scrollView!.setContentOffset(self.scrollOffset, animated: true)
     }
 }
 
@@ -296,11 +260,7 @@ extension PDFViewController : GazeDelegate {
             let unlockTimer = Timer(timeInterval: 1.5, target: self, selector: #selector(resetPageTurningBlock), userInfo: nil, repeats: false)
             RunLoop.current.add(unlockTimer, forMode: .common)
         }
-//        print("timestamp : \(gazeInfo.timestamp), (x , y) : (\(gazeInfo.x), \(gazeInfo.y)) , (x , y) : (\(predictSpacePointX), \(predictSpacePointY)) state : \(gazeInfo.trackingState.description), speed : \(self.currSpeed)")
         self.currGazePrediction = CGPoint(x: predX, y: predY)
-//        if (!gazeInfo.x.isNaN) {
-//            drawGreenDot(location: CGPoint(x: gazeInfo.x, y: gazeInfo.y))
-//        }
     }
     
     @objc

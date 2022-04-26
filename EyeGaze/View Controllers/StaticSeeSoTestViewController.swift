@@ -62,7 +62,6 @@ class StaticSeeSoTestViewController: UIViewController {
                 }
             })
         }
-//        setupCamera()
         startTest()
     }
     
@@ -88,16 +87,12 @@ class StaticSeeSoTestViewController: UIViewController {
     }
     
     func startTest() {
-//        captureSession.startRunning()
         let firstDotTimer = Timer(timeInterval: Self.initialDelay, target: self, selector: #selector(testDotLocation), userInfo: nil, repeats: false)
         RunLoop.current.add(firstDotTimer, forMode: .common)
     }
     
     @objc
     func testDotLocation() {
-//        for gazePrediction in self.gazePredictions {
-//            drawBlueDot(location: PredictionUtilities.cgPointFromDoubleTuple(doubleTuple: gazePrediction))
-//        }
         let dotLocation = Self.dotLocations[self.dotLocationIndex]
         if self.gazePredictions.isEmpty { // When drawing first dot
             self.testInProgress = true // This will start gaze predictions being stored
@@ -253,7 +248,6 @@ extension StaticSeeSoTestViewController: AVCaptureVideoDataOutputSampleBufferDel
                 self.drawBlueDot(location: PredictionUtilities.cgPointFromDoubleTuple(doubleTuple: transformedPrediction))
             }
         }
-//        print(self.gazePredictions)
     }
     
     // Transform prediction from prediction space to screen space
@@ -298,29 +292,7 @@ extension StaticSeeSoTestViewController : GazeDelegate {
             let transformedPrediction = transformPrediction(prediction: gazePrediction)
             self.gazePredictions.append(gazePrediction)
             self.gazePredictionsCM.append(PredictionUtilities.screenToPredictionCoords(xScreen: gazePrediction.0, yScreen: gazePrediction.1, orientation: .up))
-    //        if (!gazeInfo.x.isNaN) {
-    //            drawGreenDot(location: CGPoint(x: gazeInfo.x, y: gazeInfo.y))
-    //        }
             self.drawBlueDot(location: CGPoint(x: gazeInfo.x, y: gazeInfo.y))
         }
     }
-    
-//    func drawGreenDot(location: CGPoint) {
-//        self.testCurrGazeLocLayers.forEach({ drawing in drawing.removeFromSuperlayer() })
-//        let outerDot = UIBezierPath(arcCenter: location, radius: CGFloat(20), startAngle: CGFloat(0), endAngle: CGFloat(Double.pi * 2), clockwise: true)
-//        var shapeLayer = CAShapeLayer()
-//        shapeLayer.path = outerDot.cgPath
-//        shapeLayer.fillColor = UIColor.clear.cgColor
-//        shapeLayer.strokeColor = UIColor.green.cgColor
-//        shapeLayer.lineWidth = CGFloat(3)
-//        view.layer.addSublayer(shapeLayer)
-//        self.testCurrGazeLocLayers.append(shapeLayer)
-//
-//        let innerDot = UIBezierPath(arcCenter: location, radius: CGFloat(3), startAngle: CGFloat(0), endAngle: CGFloat(Double.pi * 2), clockwise: true)
-//        shapeLayer = CAShapeLayer()
-//        shapeLayer.path = innerDot.cgPath
-//        shapeLayer.fillColor = UIColor.green.cgColor
-//        view.layer.addSublayer(shapeLayer)
-//        self.testCurrGazeLocLayers.append(shapeLayer)
-//    }
 }

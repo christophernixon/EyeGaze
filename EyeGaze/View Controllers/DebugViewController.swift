@@ -12,7 +12,6 @@ import UIKit
 
 class DebugViewController: UIViewController {
     private let captureSession = AVCaptureSession()
-//    private lazy var previewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
     
     @IBOutlet var faceImageView: UIImageView!
     @IBOutlet var leftEyeImageView: UIImageView!
@@ -37,7 +36,6 @@ class DebugViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-//        self.previewLayer.frame = self.view.frame
     }
     
     private func setupCamera() {
@@ -54,9 +52,6 @@ class DebugViewController: UIViewController {
     }
     
     private func setupPreview() {
-//        self.previewLayer.videoGravity = .resizeAspectFill
-//        self.view.layer.addSublayer(self.previewLayer)
-//        self.previewLayer.frame = self.view.frame
 
         self.videoDataOutput.videoSettings = [(kCVPixelBufferPixelFormatTypeKey as NSString) : NSNumber(value: kCVPixelFormatType_32BGRA)] as [String : Any]
 
@@ -109,7 +104,6 @@ extension DebugViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
             
             let gRect = CGRect(x: x, y: y, width: w, height: h)
         
-//            guard let croppedFace = image.cropping(to: gRect) else { return }
             guard let croppedFace = PredictionUtilities.cropParts(originalImage: image, partRect: gRect, horizontalSpacing: 0, verticalSpacing: 0) else { return }
             
             guard let leftEyeLandmark = firstResult.landmarks?.leftEye else { return }
@@ -127,12 +121,6 @@ extension DebugViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
             let rightEye = PredictionUtilities.buffer(from: UIImage(cgImage: rightEyeImage).resized(to: targetSize), isGreyscale: false)
             let face = PredictionUtilities.buffer(from: UIImage(cgImage: croppedFace).resized(to: targetSize), isGreyscale: false)
             
-//            print("Boundingbox width: \(firstResult.boundingBox.width),Height: \(firstResult.boundingBox.height)")
-//            print("original image width: \(image.width),Height: \(image.height)")
-//            print("Face width: \(croppedFace.width),Height: \(croppedFace.height)")
-//            print("LeftEye width: \(leftEyeImage.width),Height: \(leftEyeImage.height)")
-//            print("RightEye width: \(rightEyeImage.width),Height: \(rightEyeImage.height)")
-            
             self.faceImageView.image = UIImage(cgImage: croppedFace)
             self.leftEyeImageView.image = UIImage(cgImage: leftEyeImage).resized(to: targetSize)
             self.rightEyeImageView.image = UIImage(cgImage: rightEyeImage).resized(to: targetSize)
@@ -143,10 +131,8 @@ extension DebugViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
                 return
             }
             let result = gazePredictionOutput.fc3
-//            print("Automated Gaze Prediction: [\(result[0]),\(result[1])]")
             let (screenX, screenY) = PredictionUtilities.predictionToScreenCoords(xPrediction: Double(truncating: result[0]), yPrediction: Double(truncating: result[1]), orientation: CGImagePropertyOrientation.up)
             let shapeLayer = CAShapeLayer()
-//            let center = view.center
             let circulPath = UIBezierPath(arcCenter: CGPoint(x: screenX, y: screenY), radius: 12, startAngle: 0, endAngle: 2.0 * CGFloat.pi, clockwise: true)
 
             shapeLayer.path = circulPath.cgPath
@@ -157,7 +143,6 @@ extension DebugViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
             // Calculate rolling average
             var lastThreeAverageX = 0.0
             var lastThreeAverageY = 0.0
-//            DispatchQueue.main.sync {
             var lastThreeSumX = 0.0
             var lastThreeSumY = 0.0
             for i in 0..<predictionQueue.count {
@@ -175,11 +160,9 @@ extension DebugViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
             returnQueue[3] = (predictionQueue[4])
             returnQueue[4] = (screenX, screenY)
             self.predictionQueue = returnQueue
-//            }
 
             // Draw average dot
             let shapeLayer2 = CAShapeLayer()
-//            let center = view.center
             let circulPath2 = UIBezierPath(arcCenter: CGPoint(x: lastThreeAverageX, y: lastThreeAverageY), radius: 12, startAngle: 0, endAngle: 2.0 * CGFloat.pi, clockwise: true)
 
             shapeLayer2.path = circulPath2.cgPath
@@ -188,49 +171,7 @@ extension DebugViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
             self.view.layer.addSublayer(shapeLayer2)
             
             let duration = time.distance(to: .now())
-//            print(duration)
         }
-        
-        // Normal stuff
-//        for observation in observations {
-//            let faceRectConverted = self.previewLayer.layerRectConverted(fromMetadataOutputRect: observation.boundingBox)
-//            let faceRectanglePath = CGPath(rect: faceRectConverted, transform: nil)
-//
-//            let faceLayer = CAShapeLayer()
-//            faceLayer.path = faceRectanglePath
-//            faceLayer.fillColor = UIColor.clear.cgColor
-//            faceLayer.strokeColor = UIColor.yellow.cgColor
-//
-//            self.faceLayers.append(faceLayer)
-//            self.view.layer.addSublayer(faceLayer)
-//
-//            //FACE LANDMARKS
-//            if let landmarks = observation.landmarks {
-//                if let leftEye = landmarks.leftEye {
-//                    self.handleLandmark(leftEye, faceBoundingBox: faceRectConverted)
-//                }
-//                if let leftEyebrow = landmarks.leftEyebrow {
-//                    self.handleLandmark(leftEyebrow, faceBoundingBox: faceRectConverted)
-//                }
-//                if let rightEye = landmarks.rightEye {
-//                    self.handleLandmark(rightEye, faceBoundingBox: faceRectConverted)
-//                }
-//                if let rightEyebrow = landmarks.rightEyebrow {
-//                    self.handleLandmark(rightEyebrow, faceBoundingBox: faceRectConverted)
-//                }
-//
-//                if let nose = landmarks.nose {
-//                    self.handleLandmark(nose, faceBoundingBox: faceRectConverted)
-//                }
-//
-//                if let outerLips = landmarks.outerLips {
-//                    self.handleLandmark(outerLips, faceBoundingBox: faceRectConverted)
-//                }
-//                if let innerLips = landmarks.innerLips {
-//                    self.handleLandmark(innerLips, faceBoundingBox: faceRectConverted)
-//                }
-//            }
-//        }
     }
     
     private func handleLandmark(_ eye: VNFaceLandmarkRegion2D, faceBoundingBox: CGRect) {

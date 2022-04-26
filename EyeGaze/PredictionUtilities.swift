@@ -311,10 +311,6 @@ class PredictionUtilities {
             let partsWidth =  Maxx.x - Minx.x
             let partsHeight = Maxy.y - Miny.y
             var heightPadding = vPadding
-            //            if partsHeight < 18 {
-            ////                heightPadding += 2.5
-            ////                print("height padding increased")
-            //            }
             let originX = Minx.x
             let originY = Miny.y
             let gRect = CGRect(x: originX - (partsWidth * hPadding), y: originY - (partsHeight * heightPadding), width: partsWidth + (partsWidth * hPadding * 2), height: partsHeight + (partsHeight * heightPadding * 2))
@@ -403,26 +399,13 @@ class PredictionUtilities {
         xHigh = min(gridW-1, max(0, xHigh))
         yHigh = min(gridH-1, max(0, yHigh))
         
-        //        print("Original width: \(detectedFaceRect.width), Original height: \(detectedFaceRect.height)")
-        //        print("xLow: \(xLow), yLow: \(yLow), xHigh: \(xHigh), yHigh: \(yHigh)")
-        
         for x in xLow...xHigh {
             for y in yLow...yHigh {
                 facegrid[y][gridW-1-x] = 1
             }
         }
         
-        //        Self.printFaceGrid(facegrid: facegrid, gridW: gridW, gridH: gridH)
-        
-        //        let facegridTransposed = facegrid.transposed()
-        //        let facegridFlattened2 = facegridTransposed.reduce([], +)
-        //        let facegridFlattened2 = facegrid.flatMap{ $0 }
-        
         let facegridFlattened = facegrid.reduce([], +)
-        //        print("FaceGrid flattened")
-        //        print(facegridFlattened)
-        //        print("FaceGrid flattened2")
-        //        print(facegridFlattened2)
         
         let shape = [625, 1, 1] as [NSNumber]
         guard let doubleMultiarray = try? MLMultiArray(shape: shape, dataType: .double) else {

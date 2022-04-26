@@ -83,14 +83,6 @@ class CalibrationData {
             } else {
                 try writeFieldsSeeSo(writer: writer)
             }
-        
-//                try data.write(to: fileURL)
-//            let fileIOController = FileIOController()
-//            var dict4 = [String:[[CGPoint]]]()
-//            dict4["averagedGazePredictions"] = [self.averagedGazePredictions]
-//            //            try fileIOController.write(self.averagedGazePredictions, toDocumentNamed: "calibrationData.csv")
-//            try fileIOController.write(self.averagedGazePredictions, toDocumentNamed: "averagedGazePredictions.csv")
-//            try fileIOController.write(self.cornerGazePredictions, toDocumentNamed: "cornerGazePredictions.csv")
         } catch let error {
             print("File writing error: \(error)")
         }

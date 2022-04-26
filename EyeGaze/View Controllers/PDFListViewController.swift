@@ -63,7 +63,6 @@ class PDFListViewController: UITableViewController {
         super.viewDidLoad()
         pdfListDataSource = PDFListDataSource()
         tableView.dataSource = pdfListDataSource
-//        navigationItem.title = NSLocalizedString("Sheet Music Library", comment: "PDFList nav title")
         do {
             self.iTrackerModel = try iTracker_v2(configuration: MLModelConfiguration())
         } catch {
@@ -73,15 +72,10 @@ class PDFListViewController: UITableViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "calibrationDescriptionModalVC")
         self.present(vc, animated: true)
-        //        navigationItem.leftBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(segueToLiveFeed)), UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(segueToDebugView))]
-        //        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(segueToStaticFeed))
-        //        predict()
+
     }
     
     func predict() {
-        //        let faceGridInput = UIImage(named: "sample_data_face_grid")
-        //        let faceGrid = PredictionUtilities.buffer(from: faceGridInput!, isGreyscale: true)
-        
         // Load eye and face images, convert to CVPixelBuffer
         let leftEyeInput = UIImage(named: "sample2_data_left_eye")
         let rightEyeInput = UIImage(named: "sample2_data_right_eye")
@@ -111,54 +105,14 @@ class PDFListViewController: UITableViewController {
             }
             let result = gazePredictionOutput.fc3
             print("Manual Gaze Prediction: [\(result[0]),\(result[1])]")
-            //            if let b = try? UnsafeBufferPointer<Double>(result) {
-            //              let c = Array(b)
-            //              print(c)
-            //            }
         } catch {
             fatalError("Error while initialising iTracker model")
         }
         
         // Detect Features
         guard let imageForDetection = UIImage(named: "sample2_data") else { return }
-        // Test facegrid function
-        //        PredictionUtilities.faceGridFromFaceRect(originalImage: imageForDetection, detectedFaceRect: <#T##CGRect#>, gridW: <#T##Int#>, gridH: <#T##Int#>)
-        
-        //        testImage.image = imageForDetection
         
         let predictionEngine = PredictionEngine(model: iTrackerModel)
-//        let gazePrediction = predictionEngine.predictGaze(image: imageForDetection.cgImage!) { [weak self] result in
-//            switch result {
-//                case
-//            }
-//        }
-//        print(gazePrediction)
-//        print(predictionEngine.currentGazePredictionCM)
-//        DispatchQueue.main.async {
-//            if let faceCGImage = predictionEngine.faceCGImage {
-//                self.testImage.image = UIImage(cgImage: faceCGImage)
-//            } else {
-//                self.testImage.image = imageForDetection
-//            }
-//        }
-        //        let featureDetector = DetectFeatures()
-        //        featureDetector.detectFeatures(model: iTrackerModel, image: (imageForDetection?.cgImage)!) { [weak self] result in
-        //            switch result {
-        //            case .success(let (xPos, yPos, rawImages)):
-        //                DispatchQueue.main.async {
-        ////                    self?.testImage.image = UIImage(cgImage: rawImages[1])
-        ////                    self?.faceRect = detectedFaceRect
-        //                    self?.currentGazeEstimate = (xPos, yPos)
-        //                    print(self?.currentGazeEstimate)
-        //                }
-        //            case .notFound:
-        //                print("Face or facial features not found")
-        //                DispatchQueue.main.async { self?.testImage.image = imageForDetection }
-        //            case .failure(let error):
-        //                print("Unexpected error while trying to detect face and eyes: \(error).")
-        //                DispatchQueue.main.async { self?.testImage.image = imageForDetection }
-        //            }
-        //        }
     }
     
     @objc
